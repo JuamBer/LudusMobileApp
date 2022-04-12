@@ -6,6 +6,12 @@ import { LoginDTO } from 'src/models/dtos/LoginDTO.model';
 import { ToastController } from '@ionic/angular';
 import { ToastMessage } from 'src/models/resources/ToastMessage.model';
 
+//NGRX
+import { AppState } from 'src/app/app.reducer';
+import { Store } from '@ngrx/store';
+import * as userActions from '../state/auth.actions';
+import { Subscription } from 'rxjs';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -13,6 +19,7 @@ import { ToastMessage } from 'src/models/resources/ToastMessage.model';
 })
 export class LoginComponent implements OnInit {
 
+  userSuscription: Subscription
   form: FormGroup = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]]
@@ -23,7 +30,8 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private formBuilder: FormBuilder,
     private authService: AuthService,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private store: Store<AppState>
   ) {}
 
   ngOnInit() {
@@ -35,6 +43,7 @@ export class LoginComponent implements OnInit {
 
   login(LoginDTO: LoginDTO) {
     this.authService.login(LoginDTO);
+    this.store.dispatch(userActions.setUser({ user: { id: "", name: "", email: "" } }));
   }
 
   goToRegister(){
