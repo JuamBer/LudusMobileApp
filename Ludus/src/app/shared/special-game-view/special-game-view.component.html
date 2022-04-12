@@ -1,0 +1,31 @@
+<div class="special-game-view">
+  <div class="special-game-view-title">
+    <h2>{{ title }}</h2>
+  </div>
+    <div class="game" (click)="openGame(game)">
+      <div class="title">
+        <h4>{{ game.name }}</h4>
+      </div>
+      <hr>
+      <div class="info">
+        <div>
+          <p class="type">
+            <ion-icon name="extension-puzzle"></ion-icon>
+            {{ game.id_type | getTypeName | async}}
+          </p>
+          <p class="players">
+            <ion-icon name="man"></ion-icon>
+            {{ game.min_players + "-" +  game.max_players }}
+          </p>
+          <p class="time">
+            <ion-icon name="time"></ion-icon>
+            {{ game.min_time + "-" +  game.max_time }}
+          </p>
+        </div>
+      </div>
+      <hr>
+      <div class="summary">
+        <p>{{ game.summary }}</p>
+      </div>
+    </div>
+</div>

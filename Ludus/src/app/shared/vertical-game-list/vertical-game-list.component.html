@@ -1,0 +1,29 @@
+<div class="vertical-game-list">
+  <div class="list-title">
+    <h2>{{ title }}</h2>
+  </div>
+  <ul class="game-list" *ngIf="games.length">
+    <li class="game" *ngFor="let game of games" (click)="openGame(game)">
+      <div class="title">
+        <h4>{{ game.name }}</h4>
+      </div>
+      <hr>
+      <div class="info">
+        <div>
+          <p class="type">
+            <ion-icon name="extension-puzzle"></ion-icon>
+            {{ game.id_type | getTypeName | async}}
+          </p>
+          <p class="players">
+            <ion-icon name="man"></ion-icon>
+            {{ game.min_players + "-" +  game.max_players }}
+          </p>
+          <p class="time">
+            <ion-icon name="time"></ion-icon>
+            {{ game.min_time + "-" +  game.max_time }}
+          </p>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>

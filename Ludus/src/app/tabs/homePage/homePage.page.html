@@ -1,0 +1,40 @@
+
+
+<ion-content [fullscreen]="true">
+  <div class="main">
+
+  <app-seeker (resultGames)="search($event)"></app-seeker>
+
+  <app-horizontal-game-list
+    *ngIf="!resultGames && exploreGames.populars_games"
+    [title]="'Más Populares'"
+    [games]="exploreGames.populars_games"
+  ></app-horizontal-game-list>
+
+  <app-horizontal-game-list
+    *ngIf="!resultGames && exploreGames.fast_games"
+    [title]="'Rápidos'"
+    [games]="exploreGames.fast_games"
+  ></app-horizontal-game-list>
+
+  <app-horizontal-game-list
+    *ngIf="!resultGames && exploreGames.naipes_games"
+    [title]="'De Cartas'"
+    [games]="exploreGames.naipes_games"
+  ></app-horizontal-game-list>
+
+  <app-special-game-view
+    *ngIf="!resultGames && exploreGames.patrocinated_game"
+    [title]="'Patrocinado'"
+    [game]="exploreGames.patrocinated_game"
+  ></app-special-game-view>
+
+  <app-vertical-game-list
+    *ngIf="resultGames"
+    [title]="'Resultados'"
+    [games]="resultGames"
+  ></app-vertical-game-list>
+
+</div>
+
+

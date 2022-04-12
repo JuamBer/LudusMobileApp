@@ -1,0 +1,67 @@
+.vertical-game-list {
+
+
+  .list-title {
+
+  }
+
+  .game-list {
+
+    .game {
+      list-style: none;
+      padding: 1%;
+      background: #eee9e9;
+      border-radius: 5px;
+      margin-top: 2.5%;
+      .title {
+        width: 100%;
+        text-align: center;
+      }
+
+      hr {
+        margin: 1%;
+        background: rgb(160, 160, 160);
+      }
+
+      .info {
+        width: 100%;
+
+        div {
+          justify-content: space-around;
+          display: flex;
+          margin-top: 10px;
+
+          p {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 25%;
+            padding: 1.5%;
+            border-radius: 5px;
+            color: azure;
+            overflow: hidden;
+
+            ion-icon {
+              margin-right: 5%;
+            }
+          }
+
+          .type {
+            background: #69c495;
+          }
+
+          .players {
+            background: #a18785;
+          }
+
+          .time {
+            background: #f0d560;
+          }
+
+        }
+
+
+      }
+    }
+  }
+}

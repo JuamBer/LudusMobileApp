@@ -1,0 +1,22 @@
+[   
+    {
+        "id": "1",
+        "name": "Baja",
+        "description": ""
+    },
+    {
+        "id": "2",
+        "name": "Media",
+        "description": ""
+    },
+    {
+        "id": "3",
+        "name": "Alta",
+        "description": ""
+    },
+    {
+        "id": "4",
+        "name": "Muy Alta",
+        "description": ""
+    }
+]

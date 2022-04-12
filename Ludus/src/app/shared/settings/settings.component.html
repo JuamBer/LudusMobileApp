@@ -1,0 +1,33 @@
+<ion-content [fullscreen]="true">
+  <ion-header [translucent]="true">
+    <ion-toolbar>
+      <ion-title>
+        <app-ludus-header type="back"></app-ludus-header>
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+
+  <div class="settings">
+    <ion-list>
+      <ion-item>
+        <ion-label>Cambiar Nickname</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Cambiar Nombre</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Cambiar Email</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-label>Cambiar Contraseña</ion-label>
+      </ion-item>
+    </ion-list>
+    <div class="exit">
+      <ion-button expand="block" (click)="logOut()">
+        Log Out
+        <ion-icon name="exit-outline"></ion-icon>
+      </ion-button>
+    </div>
+  </div>
+</ion-content>

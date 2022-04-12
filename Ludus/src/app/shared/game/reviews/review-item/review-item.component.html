@@ -1,0 +1,11 @@
+<li class="review">
+  <div class="top">
+    <h4>{{review.id_user | getUserName | async}}</h4>
+    <span>
+      <ion-icon name="star" *ngFor="let x of [].constructor(review.rating)"></ion-icon>
+    </span>
+  </div>
+  <div class="bottom">
+    <p>{{review.text}}</p>
+  </div>
+</li>

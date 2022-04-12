@@ -1,0 +1,13 @@
+    <div class="seeker">
+      <ion-button color="primary" (click)="toggleFilterModal()">
+        <ion-icon name="filter-outline"></ion-icon>
+      </ion-button>
+
+      <ion-searchbar (ionChange)="search($event)"></ion-searchbar>
+    </div>
+
+    <ion-modal [isOpen]="isFilterModalOpen" [breakpoints]="[0.1, 0.8, 1]" [initialBreakpoint]="0.8">
+      <ng-template>
+        <app-filter-modal></app-filter-modal>
+      </ng-template>
+    </ion-modal>

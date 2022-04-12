@@ -1,0 +1,32 @@
+.profile {
+  width: 100%;
+  padding: 5%;
+
+
+
+  .info {
+    width: 100%;
+    padding: 10%;
+    padding-top: 5%;
+
+    .top {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      h4 {
+        font-size: 26px;
+      }
+
+      ion-icon {
+        width: 25px;
+        height: 25px;
+      }
+    }
+
+    .bottom {
+    }
+  }
+
+}

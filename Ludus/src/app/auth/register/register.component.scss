@@ -1,0 +1,29 @@
+.main {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .register {
+    width: 80%;
+
+    .title {
+      padding-bottom: 5%;
+      text-align: center;
+    }
+
+    .form {
+      width: 100%;
+      padding-bottom: 10%;
+
+      ion-item {
+        margin-bottom: 10%;
+      }
+    }
+
+    .login {
+      text-align: center;
+    }
+  }
+}

@@ -1,0 +1,22 @@
+.settings {
+  padding: 5%;
+
+  .change-form {
+    border: 2px solid black;
+    border-radius: 10px;
+    padding: 5%;
+
+    ion-button {
+      margin-top: 10px;
+    }
+  }
+
+  ion-list {
+    padding-bottom: 10%;
+  }
+  .exit {
+    ion-icon {
+      padding-left: 2.5%;
+    }
+  }
+}

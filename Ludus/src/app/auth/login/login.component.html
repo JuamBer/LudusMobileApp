@@ -1,0 +1,45 @@
+  <div class="main">
+    <div class="login">
+      <div class="title">
+        <h2>Entrar</h2>
+      </div>
+
+      <form class="form" [formGroup]="form" (ngSubmit)="login(form.value)">
+        <ion-item>
+          <ion-label position="floating">Email</ion-label>
+          <ion-input type="text" formControlName="email"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Contraseña</ion-label>
+          <ion-input type="password" formControlName="password"></ion-input>
+        </ion-item>
+
+        <div>
+          <ion-button [disabled]="form.invalid" color="tertiary" shape="round" expand="full" type="submit">Entrar
+          </ion-button>
+        </div>
+      </form>
+
+      <div class="external-login">
+        <p>O entra con</p>
+        <ul>
+          <li>
+            <ion-button size="large" color="light" (click)="loginWithGoogle()">
+              <ion-icon name="logo-google"></ion-icon>
+            </ion-button>
+          </li>
+          <li>
+            <ion-button size="large" color="light" (click)="loginWithApple()">
+              <ion-icon name="logo-apple"></ion-icon>
+            </ion-button>
+          </li>
+        </ul>
+      </div>
+
+      <div class="register">
+        <span>¿ Todavía no tienes una cuenta ? <a (click)="goToRegister()">Regístrate</a></span>
+      </div>
+
+    </div>
+  </div>

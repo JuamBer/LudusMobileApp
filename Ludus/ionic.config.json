@@ -1,0 +1,7 @@
+{
+  "name": "LudusChatarum",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

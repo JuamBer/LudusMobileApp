@@ -1,0 +1,58 @@
+<ion-content [fullscreen]="true">
+  <ion-header [translucent]="true">
+    <ion-toolbar>
+      <ion-title>
+        <app-ludus-header type="back"></app-ludus-header>
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div class="gameView">
+    <div class="title">
+      <h3>{{ game.name }}</h3>
+    </div>
+    <div class="info">
+      <div class="duration">
+        <ion-icon name="time"></ion-icon>
+        {{ game.min_time + "min - " + game.max_time+ "min"}}
+      </div>
+      <div class="players">
+        <ion-icon name="man" class="manIcon"></ion-icon>
+        {{ game.min_players + "-" +  game.max_players }}
+      </div>
+    </div>
+    <div class="genders">
+      <ul>
+        <li *ngFor="let id_gender of game.ids_genders " class="gender">
+          {{ id_gender | getGenderName | async}}
+        </li>
+      </ul>
+    </div>
+    <div class="summary">
+      <p>{{ game.summary }}</p>
+    </div>
+    <div *ngIf="game.video_url" class="video">
+      <iframe [src]="'https://www.youtube.com/embed/'+game.video_url | safe" title="YouTube video player"
+        frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen></iframe>
+    </div>
+    <div class="description">
+      <p>{{ game.description }}</p>
+    </div>
+  </div>
+
+  <div class="toggleComments">
+    <ion-segment (ionChange)="toggleComments($event)" value="reviews">
+      <ion-segment-button value="reviews">
+        <ion-label>Opiniones</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="questions">
+        <ion-label>Preguntas</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+
+  </div>
+  <app-review-list *ngIf="reviewsVisible" [gameId]="gameId"></app-review-list>
+  <app-question-list *ngIf="questionsVisible" [gameId]="gameId"></app-question-list>
+
+</ion-content>

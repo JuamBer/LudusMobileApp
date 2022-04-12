@@ -1,0 +1,127 @@
+[
+    {
+        "id": "1",
+        "ids_genders": [
+            "1",
+            "2"
+        ],
+        "id_type": "1",
+        "name": "Los Colonos de Catán",
+        "min_players": 3,
+        "max_players": 4,
+        "min_time": 45,
+        "max_time": 60,
+        "age": "10+",
+        "preparation": 10,
+        "complexity": "media",
+        "strategy": "mediana",
+        "random": "infinito",
+        "video_url": "3t0BVFjhhCA",
+        "summary": "",
+        "description": "Los colonos de Catán (en alemán Die Siedler von Catan), Los descubridores de Catán,o simplemente Catán,es un juego de mesa multijugador inventado por Klaus Teuber.El objetivo del juego es construir pueblos,ciudades y caminos sobre un tablero que es distinto cada vez,mientras se van acumulando varios tipos de cartas.Todos estos elementos proporcionan distintas puntuaciones,ganando la partida el primer jugador que llega a los diez puntos.Existen varias expansiones del juego,que fue publicado originalmente en Alemania por la empresa Kosmos."
+    },
+    {
+        "id": "2",
+        "ids_genders": [
+            "1",
+            "2"
+        ],
+        "id_type": "1",
+        "name": "Monopoly",
+        "min_players": 2,
+        "max_players": 8,
+        "min_time": 45,
+        "max_time": 999,
+        "age": "10+",
+        "preparation": 7,
+        "complexity": "baja",
+        "strategy": "muy baja",
+        "random": "alto",
+        "video_url": "3t0BVFjhhCA",
+        "summmary": "",
+        "description": "Monopoly (Monopolio en algunas versiones al español), Los descubridores de Catán,o simplemente Catán,es un juego de mesa multijugador inventado por Klaus Teuber.El objetivo del juego es construir pueblos,ciudades y caminos sobre un tablero que es distinto cada vez,mientras se van acumulando varios tipos de cartas.Todos estos elementos proporcionan distintas puntuaciones,ganando la partida el primer jugador que llega a los diez puntos.Existen varias expansiones del juego,que fue publicado originalmente en Alemania por la empresa Kosmos."
+    },
+    {
+        "id": "3",
+        "ids_genders": [
+            "1",
+            "2"
+        ],
+        "id_type": "1",
+        "name": "Carcassonne",
+        "min_players": 2,
+        "max_players": 5,
+        "min_time": 10,
+        "max_time": 30,
+        "age": "10+",
+        "preparation": 2,
+        "complexity": "media-baja",
+        "strategy": "medio",
+        "random": "medio",
+        "video_url": "3t0BVFjhhCA",
+        "summary": "",
+        "description": "Los colonos de Catán (en alemán Die Siedler von Catan), Los descubridores de Catán,o simplemente Catán,es un juego de mesa multijugador inventado por Klaus Teuber.El objetivo del juego es construir pueblos,ciudades y caminos sobre un tablero que es distinto cada vez,mientras se van acumulando varios tipos de cartas.Todos estos elementos proporcionan distintas puntuaciones,ganando la partida el primer jugador que llega a los diez puntos.Existen varias expansiones del juego,que fue publicado originalmente en Alemania por la empresa Kosmos."
+    },
+    {
+        "id": "4",
+        "ids_genders": [
+            "2",
+            "3"
+        ],
+        "id_type": "1",
+        "name": "Risk",
+        "min_players": 4,
+        "max_players": 8,
+        "min_time": 60,
+        "max_time": 480,
+        "age": "10+",
+        "preparation": 7,
+        "complexity": "baja",
+        "strategy": "medio",
+        "random": "medio",
+        "video_url": "b6M3tKSzhag",
+        "summary": "Risk (en inglés, riesgo) es un juego de mesa de carácter estratégico, creado por Albert Lamorisse en 1950 y comercializado desde 1958 por la empresa Parker Brothers (actualmente, parte de Hasbro).",
+        "description": "Tan pronto como se elimina a la última armada enemiga en un territorio, se considera capturado ese territorio y será ocuparlo inmediatamente. Para hacer esto se debe mover tantas o más armadas como dados usados durante la última batalla menos el número de armadas perdidas en el último combate. En la mayoría de los casos mover tantas armadas como se pueda es lo más ventajoso, porque las armadas dejadas atrás no pueden ayudar en un nuevo ataque. Finalmente, durante el juego todos los territorios deben estar ocupados al menos por una armada.Se puede terminar el ataque de un jugador en cualquier momento, si así lo desea.Si se capturó al menos un territorio, el jugador tomará una carta RISK de la baraja(sin importar cuantos territorios hayas capturado, siempre tomarás sólo una carta).Después se fortificarán las posiciones y, finalmente, se pasarán los dados al siguiente jugador.Si durante el turno de un jugador se elimina a un oponente al quitar todas sus armadas del tablero, dicho jugador se gana todas las tarjetas RISK que él tenía;sin embargo, si al ganar las cartas el jugador queda con 6 o más cartas tiene que cambiarlas inmediatamente hasta quedar con menos de 5 cartas en la mano.Si después de cambiar el jugador queda con 4 o menos cartas debe dejar de cambiar.Si al ganar las cartas quedan menos de 6, se deberá esperar al siguiente turno si se desea cambiar.Para terminar, si al robar una carta al final del turno se juntan 6, se deberá esperar al siguiente turno si se desea cambiar.Fortificación de posiciones Antes de terminar su turno, un jugador puede fortificar sus posiciones sobre el campo de batalla, moviendo tantas armadas como desee desde un territorio de origen hacia un territorio adyacente(colindante).Una vez hecho esto, este jugador le entregará los dados(y el turno) al jugador que está a su derecha.Al no haber territorios ocupados hay dos opciones: 1) se recorren ejércitos adyacentes de algún territorio colindante, perdiendo el turno de ataque.2) se reconquistan los territorios no ocupados con soldados externos al juego, 'caídos en combate', o por cambio de tarjetas, perdiendo el turno de ataque.Ejército Neutral Siendo está la única diferencia entre el juego de Dominación Global para dos personas y el mismo juego para más de tres personas, el Ejército Neutral sirve como obstáculo estratégico para los jugadores haciendo de un 'tercer jugador ausente'.Y, como tal, este ejército no invadirá territorios, por lo que no se verá beneficiado con refuerzos militares o tarjetas RISK, ni tampoco podrá fortificar posiciones.Su única labor será defensiva, deteniendo los avances de uno u otro jugador.Para ello, si un territorio a ser atacado pertenece a dicho ejército, el oponente del jugador atacante actuará como el 'defensor', usando los dados de defensa para ese fin.Por último, la victoria en este juego llega cuando un jugador ha aniquilado al otro, por lo que no es necesario apropiarse de los territorios que están en manos de dicho ejército."
+    }, 
+    {
+        "id": "5",
+        "ids_genders": [
+            "11",
+            "10"
+        ],
+        "id_type": "2",
+        "name": "El Culo",
+        "min_players": 4,
+        "max_players": 6,
+        "min_time": 10,
+        "max_time": 20,
+        "age": "10+",
+        "preparation": 2,
+        "complexity": "baja",
+        "strategy": "medio",
+        "random": "medio",
+        "video_url": "b6M3tKSzhag",
+        "summary": "El objetivo del juego es deshacerse de todas las cartas. Al primero que lo haga se le llama Presidente, y al siguiente Vicepresidente. Análogamente el último que lo haga será el Culo, y el penúltimo el Viceculo. Si hay gente en medio (por ejemplo cuando hay 5 o 6 jugadores), a estos se les denomina Neutros o Pueblos. Empezando a jugar ",
+        "description": "Se reparten todas las cartas, y el situado a la derecha de quien ha repartido (también llamado mano) comienza a tirar. Puede lanzar una carta sola, o bien una pareja, trío o cuarteto siempre y cuando se trate de cartas con el mismo número (por ejemplo un trío de doses, o una pareja de sotas). El siguiente jugador tiene que superar esa tirada lanzando el mismo numero de cartas que su antecesor (si el primero lanzo una pareja, este también tiene que hacerlo, y análogamente si es trío, cuarteto o una única carta) pero siempre de mayor valor, teniendo en cuenta lo indicado en la introducción en cuanto al valor de las cartas. Por ejemplo dos sotas superan a dos cincos, o tres reyes superan a tres caballos, pero un caballo no supera a dos doses, por que un caballo es una carta sola y dos doses es pareja)."
+    }, 
+    {
+        "id": "6",
+        "ids_genders": [
+            "10"
+        ],
+        "id_type": "2",
+        "name": "El Burro",
+        "min_players": 3,
+        "max_players": 10,
+        "min_time": 5,
+        "max_time": 10,
+        "age": "6+",
+        "preparation": 2,
+        "complexity": "baja",
+        "strategy": "baja",
+        "random": "alta",
+        "video_url": "b6M3tKSzhag",
+        "summary": "El objetivo del juego es deshacerse de todas las cartas. Al primero que lo haga se le llama Presidente, y al siguiente Vicepresidente. Análogamente el último que lo haga será el Culo, y el penúltimo el Viceculo. Si hay gente en medio (por ejemplo cuando hay 5 o 6 jugadores), a estos se les denomina Neutros o Pueblos. Empezando a jugar ",
+        "description": "Se reparten todas las cartas, y el situado a la derecha de quien ha repartido (también llamado mano) comienza a tirar. Puede lanzar una carta sola, o bien una pareja, trío o cuarteto siempre y cuando se trate de cartas con el mismo número (por ejemplo un trío de doses, o una pareja de sotas). El siguiente jugador tiene que superar esa tirada lanzando el mismo numero de cartas que su antecesor (si el primero lanzo una pareja, este también tiene que hacerlo, y análogamente si es trío, cuarteto o una única carta) pero siempre de mayor valor, teniendo en cuenta lo indicado en la introducción en cuanto al valor de las cartas. Por ejemplo dos sotas superan a dos cincos, o tres reyes superan a tres caballos, pero un caballo no supera a dos doses, por que un caballo es una carta sola y dos doses es pareja)."
+    }
+    ]

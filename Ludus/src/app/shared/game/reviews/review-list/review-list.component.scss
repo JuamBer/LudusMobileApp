@@ -1,0 +1,33 @@
+
+
+.review-form {
+  padding: 2.5%;
+  width: 95%;
+
+  .star-rating {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  .review {
+    width: 100%;
+
+    ion-item {
+      width: 100%;
+    }
+  }
+
+  .buttons {
+    display: flex;
+    justify-content: flex-end;
+
+    ion-button {
+      margin-top: 10px;
+      margin-left: 10px;
+    }
+  }
+
+}
+.reviews {
+  padding: 5%;
+}

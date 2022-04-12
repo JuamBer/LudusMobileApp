@@ -1,0 +1,30 @@
+
+.review {
+  margin-top: 10px;
+  padding: 5%;
+  list-style: none;
+  background: #e7e8e9fb;
+  border-radius: 5px;
+
+  .top {
+    display: inline-block;
+    width: 100%;
+
+    h4 {
+      margin: 0px;
+      font-size: 15px;
+      display: inline-block;
+      width: 50%;
+    }
+    span {
+      width: 50%;
+      text-align: end;
+      display: inline-block;
+    }
+  }
+
+  .bottom {
+    padding-top: 10px;
+    font-size: 14px;
+  }
+}

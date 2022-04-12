@@ -1,0 +1,35 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      <app-ludus-header titleHeader="Profile"></app-ludus-header>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="profile">
+
+    <div class="info">
+      <div class="top">
+        <h4>{{ user.name }}</h4>
+        <ion-icon name="settings-outline" (click)="settings()"></ion-icon>
+      </div>
+      <div class="bottom">
+        <h5>{{ user.email }}</h5>
+      </div>
+    </div>
+    <div class="main">
+      <ion-segment color="secondary">
+        <ion-segment-button value="standard">
+          <ion-label>Favoritos</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="hybrid">
+          <ion-label>Comentarios</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="sat">
+          <ion-label>Preguntas</ion-label>
+        </ion-segment-button>
+      </ion-segment>
+    </div>
+  </div>
+</ion-content>
