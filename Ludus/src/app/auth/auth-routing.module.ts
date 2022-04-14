@@ -2,14 +2,23 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from 'src/guards/auth.guard';
 import { LoggedGuard } from 'src/guards/logged.guard';
-import { RegisterComponent } from './register.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
 
 const routes: Routes = [
   {
+    path: 'login',
+    component: LoginComponent
+  },
+  {
+    path: 'register',
+    component: RegisterComponent
+  },
+  {
     path: '',
-    component: RegisterComponent,
-    //canActivate: [LoggedGuard]
-  }
+    redirectTo: 'login',
+    pathMatch: 'full'
+  },
 ];
 @NgModule({
   imports: [
@@ -17,4 +26,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class RegisterRoutingModule {}
+export class AuthRoutingModule {}

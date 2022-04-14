@@ -17,11 +17,11 @@ export const loginUserFail = createAction(
 
 //LOGOUT
 export const logoutUser = createAction(
-  '[Auth] loginUserFail'
+  '[Auth] logoutUser'
 );
 export const logoutUserSuccess = createAction(
-  '[Auth] loginUserFail'
+  '[Auth] logoutUserSuccess'
 );
 export const logoutUserFail = createAction(
-  '[Auth] loginUserFail'
+  '[Auth] logoutUserFail'
 );

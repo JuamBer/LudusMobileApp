@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { ModalController } from '@ionic/angular';
+import { SettingsModalComponent } from 'src/app/shared/settings-modal/settings-modal.component';
 import { environment } from 'src/environments/environment';
 import { User } from 'src/models/User';
 import { AuthService } from 'src/services/auth.service';
@@ -17,14 +19,23 @@ export class ProfilePage {
     name: '',
     email: ''
   };
+  isSettingsModalOpen: boolean = false;
 
   constructor(
     private router: Router,
+    private modalController: ModalController
   ) {}
 
-  settings(){
-    this.router.navigate([environment.routes.profile_settings])
+  toggleFilterModal() {
+    this.isSettingsModalOpen = !this.isSettingsModalOpen;
   }
 
+  async presentModal() {
+    const modal = await this.modalController.create({
+      component: SettingsModalComponent,
+      cssClass: 'my-custom-class'
+    });
+    return await modal.present();
+  }
 
 }

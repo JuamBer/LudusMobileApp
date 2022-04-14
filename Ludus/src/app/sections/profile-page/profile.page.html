@@ -12,7 +12,7 @@
     <div class="info">
       <div class="top">
         <h4>{{ user.name }}</h4>
-        <ion-icon name="settings-outline" (click)="settings()"></ion-icon>
+        <ion-icon name="settings-outline" (click)="toggleFilterModal()"></ion-icon>
       </div>
       <div class="bottom">
         <h5>{{ user.email }}</h5>
@@ -33,3 +33,9 @@
     </div>
   </div>
 </ion-content>
+
+<ion-modal [isOpen]="isSettingsModalOpen" [breakpoints]="[0.1, 0.8, 1]" [initialBreakpoint]="0.8">
+  <ng-template>
+    <app-settings-modal></app-settings-modal>
+  </ng-template>
+</ion-modal>

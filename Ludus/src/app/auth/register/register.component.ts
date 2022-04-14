@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { PasswordValidator } from 'src/app/providers/PasswordValidator';
+import { environment } from 'src/environments/environment';
 import { RegisterDTO } from 'src/models/dtos/RegisterDTO.model';
 import { ToastMessage } from 'src/models/resources/ToastMessage.model';
 import { AuthService } from 'src/services/auth.service';
@@ -46,7 +47,7 @@ export class RegisterComponent implements OnInit {
   }
 
   goToLogin() {
-    this.router.navigate(['/login'])
+    this.router.navigate([environment.routes.login])
   }
 
   async presentToast(header: string, message: string, icon: string, position: "top" | "bottom" | "middle", color: string) {

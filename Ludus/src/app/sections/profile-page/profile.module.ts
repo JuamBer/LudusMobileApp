@@ -10,7 +10,7 @@ import { LudusHeaderModule } from '../../shared/ludus-header/ludus-header.module
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { SettingsComponent } from 'src/app/shared/settings/settings.component';
+import { SettingsModalComponent } from 'src/app/shared/settings-modal/settings-modal.component';
 import { LudusHeaderComponent } from 'src/app/shared/ludus-header/ludus-header.component';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -28,7 +28,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   ],
   declarations: [
     ProfilePage,
-    SettingsComponent
+    SettingsModalComponent
   ]
 })
 export class ProfilePageModule {}

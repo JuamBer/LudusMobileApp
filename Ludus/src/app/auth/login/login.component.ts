@@ -11,6 +11,7 @@ import { AppState } from 'src/app/state/app.state';
 import { Store } from '@ngrx/store';
 import * as userActions from 'src/app/state/auth/auth.actions';
 import { Subscription } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -46,7 +47,7 @@ export class LoginComponent implements OnInit {
   }
 
   goToRegister(){
-    this.router.navigate(['/register'])
+    this.router.navigate([environment.routes.register])
   }
 
   loginWithGoogle() {

@@ -12,6 +12,9 @@ import { User } from 'src/models/User';
 import { environment } from '../environments/environment';
 import { GoogleAuthProvider } from 'firebase/auth';
 import { LoggedGuard } from 'src/guards/logged.guard';
+import { AppState } from '@capacitor/app';
+import { Store } from '@ngrx/store';
+import * as authActions from 'src/app/state/auth/auth.actions';
 
 @Injectable({
   providedIn: 'root'
@@ -24,9 +27,10 @@ export class AuthService {
   currentMessage: Observable<ToastMessage> = this.toastMessage.asObservable();
 
   constructor(
-    public auth: AngularFireAuth,
+    private auth: AngularFireAuth,
     private firestore: AngularFirestore,
-    private router: Router
+    private router: Router,
+    private store: Store<AppState>
   ) {
     this.auth.authState.subscribe(
       (user) => {
@@ -102,7 +106,7 @@ export class AuthService {
 
   login(LoginDTO: LoginDTO) {
     this.auth.signInWithEmailAndPassword(LoginDTO.email, LoginDTO.password).then(
-      (res) => {
+      (res: any) => {
         const toastMessage: ToastMessage = {
           header: "Perfecto",
           message: "Entrando...",
@@ -111,6 +115,14 @@ export class AuthService {
           color: "success",
         }
         this.toastMessage.next(toastMessage);
+
+        const user: User = {
+          id: res.user.uid,
+          name: res.user.displayName,
+          email: res.user.email
+        }
+
+        this.store.dispatch(authActions.loginUser({ user: user}));
         this.router.navigate([environment.routes.home])
       }
     ).catch(
@@ -175,7 +187,7 @@ export class AuthService {
       color: "success",
     }
     this.toastMessage.next(toastMessage);
-
+    this.store.dispatch(authActions.logoutUser());
     return this.auth.signOut();
   }
 
