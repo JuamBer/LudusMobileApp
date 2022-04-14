@@ -12,6 +12,26 @@ export const environment = {
     messagingSenderId: "1045763538471",
     appId: "1:1045763538471:web:a918b002e20f9104085802"
   },
+
+  routes: {
+    login: 'auth/login',
+    register: 'auth/register',
+
+    home: 'sections/home',
+    home_game: 'sections/home/game',
+
+    favs: 'sections/favs',
+    profile: 'sections/profile',
+    profile_settings: 'sections/profile/settings',
+  },
+
+  db_tables: {
+    games: 'games',
+    users: 'users',
+    reviews: 'reviews',
+    genders: 'genders',
+    types: 'types',
+  }
 };
 
 /*

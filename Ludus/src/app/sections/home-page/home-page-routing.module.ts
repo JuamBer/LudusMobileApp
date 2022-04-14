@@ -4,7 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 //COMOPONETS AND MODULES
 import { GameComponent } from '../../shared/game/game.component';
-import { HomePage } from './homePage.page';
+import { HomePage } from './home.page';
 
 const routes: Routes = [
   {

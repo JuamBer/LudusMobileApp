@@ -3,9 +3,9 @@ import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { PublicatePage } from './publicatePage.page';
+import { FavsPage } from './favs.page';
 
-import { PublicatePageRoutingModule } from './publicatePage-routing.module';
+import { FavsPageRoutingModule } from './favs-page-routing.module';
 import { LudusHeaderModule } from '../../shared/ludus-header/ludus-header.module';
 
 @NgModule({
@@ -13,11 +13,11 @@ import { LudusHeaderModule } from '../../shared/ludus-header/ludus-header.module
     IonicModule,
     CommonModule,
     FormsModule,
-    PublicatePageRoutingModule,
+    FavsPageRoutingModule,
     LudusHeaderModule,
     FormsModule,
     ReactiveFormsModule,
   ],
-  declarations: [PublicatePage]
+  declarations: [FavsPage]
 })
-export class PublicatePageModule {}
+export class FavsPageModule {}

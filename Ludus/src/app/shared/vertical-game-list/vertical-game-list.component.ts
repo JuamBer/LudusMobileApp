@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 import { Game } from 'src/models/Game';
 
 @Component({
@@ -19,6 +20,6 @@ export class VerticalGameListComponent implements OnInit {
   ngOnInit() {}
 
   openGame(game: Game) {
-    this.router.navigate(['tabs/home/game', game.id]);
+    this.router.navigate([environment.routes.home_game, game.id]);
   }
 }

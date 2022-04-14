@@ -2,9 +2,9 @@ import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ProfilePage } from './profilePage.page';
+import { ProfilePage } from './profile.page';
 
-import { ProfilePageRoutingModule } from './profilePage-routing.module';
+import { ProfilePageRoutingModule } from './profile-page-routing.module';
 import { LudusHeaderModule } from '../../shared/ludus-header/ludus-header.module';
 
 import { MatFormFieldModule } from '@angular/material/form-field';

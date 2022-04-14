@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { SettingsComponent } from 'src/app/shared/settings/settings.component';
-import { ProfilePage } from './profilePage.page';
+import { ProfilePage } from './profile.page';
 
 const routes: Routes = [
   {

@@ -13,9 +13,9 @@ import { SwiperModule } from 'swiper/angular';
 import { NgxStarRatingModule } from 'ngx-star-rating';
 
 //COMOPONETS AND MODULES
-import { HomePageRoutingModule } from './homePage-routing.module';
+import { HomePageRoutingModule } from './home-page-routing.module';
 import { LudusHeaderModule } from '../../shared/ludus-header/ludus-header.module';
-import { HomePage } from './homePage.page';
+import { HomePage } from './home.page';
 import { FilterModalComponent } from '../../shared/filter-modal/filter-modal.component';
 import { ReviewListComponent } from '../../shared/game/reviews/review-list/review-list.component';
 import { ReviewItemComponent } from '../../shared/game/reviews/review-item/review-item.component';

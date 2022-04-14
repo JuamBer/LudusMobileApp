@@ -19,9 +19,9 @@ import * as gamesActions from 'src/app/state/games/games.actions';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-homePage',
-  templateUrl: 'homePage.page.html',
-  styleUrls: ['homePage.page.scss']
+  selector: 'app-home-page',
+  templateUrl: 'home.page.html',
+  styleUrls: ['home.page.scss']
 })
 export class HomePage {
   exploreGames: any = {

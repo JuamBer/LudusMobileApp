@@ -63,7 +63,7 @@ export class AuthService {
           color: "success",
         }
         this.toastMessage.next(toastMessage);
-        this.router.navigate(['/tabs/home'])
+        this.router.navigate([environment.routes.home])
       }
     ).catch(
       (err) => {
@@ -90,7 +90,7 @@ export class AuthService {
         email: result.user.email
       };
 
-      this.firestore.collection('users').doc(`${result.user.uid}`).set({
+      this.firestore.collection(environment.db_tables.users).doc(`${result.user.uid}`).set({
         ...newUser
       });
 
@@ -111,7 +111,7 @@ export class AuthService {
           color: "success",
         }
         this.toastMessage.next(toastMessage);
-        this.router.navigate(['/tabs/home'])
+        this.router.navigate([environment.routes.home])
       }
     ).catch(
       (err) => {
@@ -138,7 +138,7 @@ export class AuthService {
           email: registerDTO.email
         };
 
-        this.firestore.collection('users').doc(`${user.uid}`).set({
+        this.firestore.collection(environment.db_tables.users).doc(`${user.uid}`).set({
           ...newUser
         });
 
@@ -150,7 +150,7 @@ export class AuthService {
           color: "success",
         }
         this.toastMessage.next(toastMessage);
-        this.router.navigate(['/tabs/home'])
+        this.router.navigate([environment.routes.home])
       }
     ).catch(
       (err) => {

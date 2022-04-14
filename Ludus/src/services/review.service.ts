@@ -4,6 +4,7 @@ import { Game } from 'src/models/Game';
 import { Review } from 'src/models/Review';
 import { User } from 'src/models/User';
 import { doc, query, collection, where, getDocs } from "firebase/firestore";
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -11,11 +12,11 @@ import { doc, query, collection, where, getDocs } from "firebase/firestore";
 export class ReviewService {
 
   constructor(
-    private ngFirestore: AngularFirestore,
+    private firestore: AngularFirestore,
   ) { }
 
   create(id_game: string, id_user:string, rating: number, text: string){
-    this.ngFirestore.collection('reviews').add(
+    this.firestore.collection(environment.db_tables.reviews).add(
       {
         rating: rating,
         text: text,
@@ -26,8 +27,8 @@ export class ReviewService {
   }
 
   getReviewsByGameId(id: string) {
-    return this.ngFirestore.collection<Review[]>(
-      'reviews', (ref) => {
+    return this.firestore.collection<Review[]>(
+      environment.db_tables.reviews, (ref) => {
         return ref.where('id_game', '==', id)
       })
       .snapshotChanges()
