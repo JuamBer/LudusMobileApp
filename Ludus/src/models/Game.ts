@@ -15,4 +15,5 @@ export interface Game {
   video_url: string;
   summary: string;
   description: string;
+  average_rating: number;
 }

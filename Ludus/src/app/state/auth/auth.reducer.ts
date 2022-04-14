@@ -7,12 +7,12 @@ export interface State {
 }
 
 export const initialState: State = {
-   user: null,
+  user: null,
 }
 
 export const authReducer = createReducer(initialState,
 
-  on(authActions.setUser, (state, { user }) => ({ ...state, user: user})),
-  on(authActions.unSetUser, (state) => ({ ...state, user: null })),
+  on(authActions.loginUserSuccess, (state, { user }) => ({ ...state, user: user})),
+  on(authActions.logoutUserSuccess, (state) => ({ ...state, user: null })),
 
 );

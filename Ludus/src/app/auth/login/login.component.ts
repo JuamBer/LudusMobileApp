@@ -7,9 +7,9 @@ import { ToastController } from '@ionic/angular';
 import { ToastMessage } from 'src/models/resources/ToastMessage.model';
 
 //NGRX
-import { AppState } from 'src/app/app.reducer';
+import { AppState } from 'src/app/state/app.state';
 import { Store } from '@ngrx/store';
-import * as userActions from '../state/auth.actions';
+import * as userActions from 'src/app/state/auth/auth.actions';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -43,7 +43,6 @@ export class LoginComponent implements OnInit {
 
   login(LoginDTO: LoginDTO) {
     this.authService.login(LoginDTO);
-    this.store.dispatch(userActions.setUser({ user: { id: "", name: "", email: "" } }));
   }
 
   goToRegister(){

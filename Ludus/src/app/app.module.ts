@@ -21,8 +21,10 @@ import { MatButtonModule } from '@angular/material/button';
 
 //NGRX
 import { StoreModule } from '@ngrx/store';
-import { appReducers } from './app.reducer';
+import { appReducers } from './state/app.reducer';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { EffectsModule } from '@ngrx/effects';
+import { GamesEffects } from './state/games/games.effects';
 
 @NgModule({
   declarations: [AppComponent],
@@ -43,7 +45,8 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     StoreModule.forRoot(appReducers),
     StoreDevtoolsModule.instrument({
       maxAge: 25
-    })
+    }),
+    EffectsModule.forRoot([GamesEffects])
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

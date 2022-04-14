@@ -6,6 +6,12 @@ import { GameService } from 'src/services/game.service';
 //MODULES AND COMPONENTS
 import { FilterModalComponent } from '../../shared/filter-modal/filter-modal.component';
 
+//NGRX
+import { AppState } from 'src/app/state/app.state';
+import { Store } from '@ngrx/store';
+import * as gamesActions from 'src/app/state/games/games.actions';
+import { Subscription } from 'rxjs';
+
 @Component({
   selector: 'app-seeker',
   templateUrl: './seeker.component.html',
@@ -14,11 +20,10 @@ import { FilterModalComponent } from '../../shared/filter-modal/filter-modal.com
 export class SeekerComponent implements OnInit {
 
   isFilterModalOpen: boolean = false;
-  @Output() resultGames: EventEmitter<Game[]> = new EventEmitter<Game[]>();
 
   constructor(
     private modalController: ModalController,
-    private gameService: GameService
+    private store: Store<AppState>
   ) { }
 
   ngOnInit() { }
@@ -30,21 +35,10 @@ export class SeekerComponent implements OnInit {
   search(event: any) {
     const search: string = event.detail.value;
 
-    if (search == "") {
-      this.resultGames.emit([]);
-    } else {
-      this.gameService.getGamesBySearch(search).subscribe(
-        (results: any) => {
-
-          console.log(results)
-          this.resultGames.emit(results.map((game: any) => {
-            return {
-              id: game.payload.doc.id,
-              ...game.payload.doc.data()
-            };
-          }))
-        }
-      )
+    if (search != "") {
+      this.store.dispatch(gamesActions.loadSearchResultsGames({ search: search }));
+    }else{
+      this.store.dispatch(gamesActions.unSetSearchResultsGames());
     }
   }
 

@@ -30,7 +30,8 @@ export class GameComponent implements OnInit {
     strategy: '',
     random: '',
     video_url: '',
-    summary: ''
+    summary: '',
+    average_rating: 0
   };
   genders: string[] = [];
   reviews: any[];

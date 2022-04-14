@@ -12,6 +12,11 @@ import { GameService } from 'src/services/game.service';
 //MODELS
 import { Game } from '../../../models/Game';
 
+//NGRX
+import { AppState } from 'src/app/state/app.state';
+import { Store } from '@ngrx/store';
+import * as gamesActions from 'src/app/state/games/games.actions';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-homePage',
@@ -19,61 +24,22 @@ import { Game } from '../../../models/Game';
   styleUrls: ['homePage.page.scss']
 })
 export class HomePage {
-  exploreGames: ExploreGames = {
-    populars_games: [],
-    new_games: [],
-    patrocinated_game: null,
-    naipes_games: [],
-    fast_games: [],
-    recomendeds_games: []
+  exploreGames: any = {
+    popular_games$: this.store.select(store => store.games.popular_games),
+    card_games$: this.store.select(store => store.games.card_games),
+    quick_games$: this.store.select(store => store.games.quick_games),
   };
 
-  resultGames: Game[] | undefined = undefined;
-
+  searchResultsGames$: Observable<Game[] | null> = this.store.select(store => store.games.search_results_games);
 
   constructor(
-    private router: Router,
-    private gameService: GameService,
+    private store: Store<AppState>
   ) {}
 
 
   ngOnInit(){
-    this.gameService.getGames().subscribe((games) => {
-      this.exploreGames.populars_games = games.map((game: any) => {
-        return {
-          id: game.payload.doc.id,
-          ...game.payload.doc.data()
-        };
-      })
-    });
-
-    this.gameService.getCartasGames().subscribe((games) => {
-      this.exploreGames.naipes_games = games.map((game: any) => {
-        return {
-          id: game.payload.doc.id,
-          ...game.payload.doc.data()
-        };
-      })
-    });
-
-    this.gameService.getShortsGames().subscribe((games) => {
-      this.exploreGames.fast_games = games.map((game: any) => {
-        return {
-          id: game.payload.doc.id,
-          ...game.payload.doc.data()
-        };
-      })
-    });
-
+    this.store.dispatch(gamesActions.loadCardGames());
+    this.store.dispatch(gamesActions.loadQuickGames());
+    this.store.dispatch(gamesActions.loadPopularGames());
   }
-
-  search(event){
-    if (event.length > 0){
-      this.resultGames = event;
-    }else{
-      this.resultGames = undefined;
-    }
-  }
-
-
 }

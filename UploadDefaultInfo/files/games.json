@@ -6,6 +6,7 @@
             "2"
         ],
         "id_type": "1",
+        "average_rating": 0,
         "name": "Los Colonos de Catán",
         "min_players": 3,
         "max_players": 4,
@@ -27,6 +28,7 @@
             "2"
         ],
         "id_type": "1",
+        "average_rating": 0,
         "name": "Monopoly",
         "min_players": 2,
         "max_players": 8,
@@ -48,6 +50,7 @@
             "2"
         ],
         "id_type": "1",
+        "average_rating": 0,
         "name": "Carcassonne",
         "min_players": 2,
         "max_players": 5,

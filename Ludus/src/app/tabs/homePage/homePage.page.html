@@ -3,36 +3,30 @@
 <ion-content [fullscreen]="true">
   <div class="main">
 
-  <app-seeker (resultGames)="search($event)"></app-seeker>
+  <app-seeker></app-seeker>
 
-  <app-horizontal-game-list
-    *ngIf="!resultGames && exploreGames.populars_games"
+   <app-horizontal-game-list
+    *ngIf="(!(searchResultsGames$ | async ) && exploreGames.popular_games$ | async)"
     [title]="'Más Populares'"
-    [games]="exploreGames.populars_games"
+    [games]="exploreGames.popular_games$ | async"
   ></app-horizontal-game-list>
 
   <app-horizontal-game-list
-    *ngIf="!resultGames && exploreGames.fast_games"
+    *ngIf="(!(searchResultsGames$ | async ) && exploreGames.quick_games$ | async)"
     [title]="'Rápidos'"
-    [games]="exploreGames.fast_games"
+    [games]="exploreGames.quick_games$ | async"
   ></app-horizontal-game-list>
 
   <app-horizontal-game-list
-    *ngIf="!resultGames && exploreGames.naipes_games"
+    *ngIf="(!(searchResultsGames$ | async ) && exploreGames.card_games$) | async"
     [title]="'De Cartas'"
-    [games]="exploreGames.naipes_games"
+    [games]="exploreGames.card_games$ | async"
   ></app-horizontal-game-list>
-
-  <app-special-game-view
-    *ngIf="!resultGames && exploreGames.patrocinated_game"
-    [title]="'Patrocinado'"
-    [game]="exploreGames.patrocinated_game"
-  ></app-special-game-view>
 
   <app-vertical-game-list
-    *ngIf="resultGames"
+    *ngIf="searchResultsGames$ | async"
     [title]="'Resultados'"
-    [games]="resultGames"
+    [games]="searchResultsGames$ | async"
   ></app-vertical-game-list>
 
 </div>

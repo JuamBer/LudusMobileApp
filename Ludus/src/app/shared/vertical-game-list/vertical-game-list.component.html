@@ -1,8 +1,8 @@
 <div class="vertical-game-list">
-  <div class="list-title">
+  <div class="list-title" *ngIf="games.length > 0">
     <h2>{{ title }}</h2>
   </div>
-  <ul class="game-list" *ngIf="games.length">
+  <ul class="game-list" *ngIf="games.length > 0; else elseBlock">
     <li class="game" *ngFor="let game of games" (click)="openGame(game)">
       <div class="title">
         <h4>{{ game.name }}</h4>
@@ -26,4 +26,16 @@
       </div>
     </li>
   </ul>
+  <ng-template #elseBlock>
+    <div class="any-result">
+      <div class="message-box">
+        <div class="icon">
+          <ion-icon name="library-outline"></ion-icon>
+        </div>
+        <div class="message">
+          <h2>Nigun Resultado Coincide Con Su Búsqueda</h2>
+        </div>
+      </div>
+    </div>
+  </ng-template>
 </div>
