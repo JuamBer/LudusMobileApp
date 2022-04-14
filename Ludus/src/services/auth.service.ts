@@ -21,100 +21,26 @@ import * as authActions from 'src/app/state/auth/auth.actions';
 })
 export class AuthService {
 
-  public user;
-
-  private toastMessage: BehaviorSubject<ToastMessage> = new BehaviorSubject({} as ToastMessage);
-  currentMessage: Observable<ToastMessage> = this.toastMessage.asObservable();
-
   constructor(
     private auth: AngularFireAuth,
-    private firestore: AngularFirestore,
     private router: Router,
     private store: Store<AppState>
-  ) {
-    this.auth.authState.subscribe(
-      (user) => {
-        this.user = user;
-      }
-    )
-  }
+  ) {}
 
   isAuth() {
     return this.auth.authState.pipe(
       map(user => user != null)
     );
   }
-  isLogged() {
-    return this.auth.authState.pipe(
-      map(user => user == null)
-    );
-  }
 
   getUser() {
-    return this.auth.currentUser;
+    return this.auth.authState
   }
 
-  GoogleAuth() {
-    return this.AuthLogin(new GoogleAuthProvider()).then(
-      (res) => {
-        console.log(res);
-
-        const toastMessage: ToastMessage = {
-          header: "Perfecto",
-          message: "Entrando...",
-          icon: "alert-circle",
-          position: "top",
-          color: "success",
-        }
-        this.toastMessage.next(toastMessage);
-        this.router.navigate([environment.routes.home])
-      }
-    ).catch(
-      (err) => {
-        const toastMessage: ToastMessage = {
-          header: "Error",
-          message: err.message,
-          icon: "alert-circle",
-          position: "top",
-          color: "danger",
-        }
-        this.toastMessage.next(toastMessage);
-      }
-    );
-  }
-  async AuthLogin(provider: firebase.auth.AuthProvider) {
-    try {
-      const result = await this.auth
-        .signInWithPopup(provider);
-      console.log(result);
-      this.user = result;
-      const newUser: User = {
-        id: result.user.uid,
-        name: result.user.displayName,
-        email: result.user.email
-      };
-
-      this.firestore.collection(environment.db_tables.users).doc(`${result.user.uid}`).set({
-        ...newUser
-      });
-
-      console.log('You have been successfully logged in!');
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
+  // EMAIL AND PASSWORD AUTH
   login(LoginDTO: LoginDTO) {
     this.auth.signInWithEmailAndPassword(LoginDTO.email, LoginDTO.password).then(
       (res: any) => {
-        const toastMessage: ToastMessage = {
-          header: "Perfecto",
-          message: "Entrando...",
-          icon: "alert-circle",
-          position: "top",
-          color: "success",
-        }
-        this.toastMessage.next(toastMessage);
 
         const user: User = {
           id: res.user.uid,
@@ -127,68 +53,80 @@ export class AuthService {
       }
     ).catch(
       (err) => {
-        const toastMessage: ToastMessage = {
-          header: "Error",
-          message: err.message,
-          icon: "alert-circle",
-          position: "top",
-          color: "danger",
-        }
-        this.toastMessage.next(toastMessage);
+        console.error(err);
       }
     );
   }
 
   register(registerDTO: RegisterDTO) {
-    console.log("register()")
     this.auth.createUserWithEmailAndPassword(registerDTO.email, registerDTO.password).then(
-      ({ user }) => {
+      (res: any) => {
+        console.log("register");
+        this.updateProfile(registerDTO.name).then(
+          (res)=>{
+            console.log("updateProfile");
+          }
+        ).catch(
+          (err)=>{
+            console.error(err);
+          }
+        )
 
         const newUser: User = {
-          id: user.uid,
+          id: res.user.uid,
           name: registerDTO.name,
           email: registerDTO.email
         };
 
-        this.firestore.collection(environment.db_tables.users).doc(`${user.uid}`).set({
-          ...newUser
-        });
-
-        const toastMessage: ToastMessage = {
-          header: "Usuario Registrado",
-          message: "Entrando...",
-          icon: "alert-circle",
-          position: "top",
-          color: "success",
-        }
-        this.toastMessage.next(toastMessage);
+        this.store.dispatch(authActions.loginUser({ user: newUser }));
         this.router.navigate([environment.routes.home])
       }
     ).catch(
       (err) => {
-        const toastMessage: ToastMessage = {
-          header: "Error",
-          message: err.message,
-          icon: "alert-circle",
-          position: "top",
-          color: "danger",
-        }
-        this.toastMessage.next(toastMessage);
+        console.error(err);
       }
     );
   }
 
+  //LOG OUT
   logOut() {
-    const toastMessage: ToastMessage = {
-      header: "Saliendo",
-      message: "Espera un segundo...",
-      icon: "alert-circle",
-      position: "top",
-      color: "success",
-    }
-    this.toastMessage.next(toastMessage);
     this.store.dispatch(authActions.logoutUser());
     return this.auth.signOut();
+  }
+
+  //GOOGLE AUTH
+  async googleAuth() {
+    try {
+      const res = await this.authLogin(new GoogleAuthProvider());
+      this.router.navigate([environment.routes.home]);
+    } catch (err) {
+      console.error(err);
+    }
+  }
+  async authLogin(provider: firebase.auth.AuthProvider) {
+    try {
+      const result = await this.auth.signInWithPopup(provider);
+
+      const user: User = {
+        id: result.user.uid,
+        name: result.user.displayName,
+        email: result.user.email
+      };
+
+
+      this.store.dispatch(authActions.loginUser({ user: user }));
+
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  //UPDATE
+  async updateProfile(displayName: string) {
+    const updatedProfile = {
+      displayName: displayName,
+    }
+    return (await this.auth.currentUser).updateProfile(updatedProfile);
   }
 
 

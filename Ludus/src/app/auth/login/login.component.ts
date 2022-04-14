@@ -36,10 +36,10 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.authService.currentMessage.subscribe(toastMessage => {
-      this.toastMessage = toastMessage;
-      this.presentToast(toastMessage.header, toastMessage.message, toastMessage.icon, toastMessage.position, toastMessage.color);
-    });
+    //this.authService.currentMessage.subscribe(toastMessage => {
+    //  this.toastMessage = toastMessage;
+    //  this.presentToast(toastMessage.header, toastMessage.message, toastMessage.icon, toastMessage.position, toastMessage.color);
+    //});
   }
 
   login(LoginDTO: LoginDTO) {
@@ -51,11 +51,7 @@ export class LoginComponent implements OnInit {
   }
 
   loginWithGoogle() {
-    this.authService.GoogleAuth();
-  }
-
-  loginWithApple(){
-
+    this.authService.googleAuth();
   }
 
   async presentToast(header: string, message: string, icon: string, position: "top" | "bottom" | "middle", color: string) {

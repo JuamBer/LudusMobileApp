@@ -36,10 +36,10 @@ export class RegisterComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.authService.currentMessage.subscribe(toastMessage => {
-      this.toastMessage = toastMessage;
-      this.presentToast(toastMessage.header, toastMessage.message, toastMessage.icon, toastMessage.position, toastMessage.color);
-    });
+    //this.authService.currentMessage.subscribe(toastMessage => {
+    //  this.toastMessage = toastMessage;
+    //  this.presentToast(toastMessage.header, toastMessage.message, toastMessage.icon, toastMessage.position, toastMessage.color);
+    //});
   }
 
   register(registerDTO: RegisterDTO) {

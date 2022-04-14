@@ -13,8 +13,8 @@ export class LoggedGuard implements CanActivate {
     private authService: AuthService,
   ){}
 
-  canActivate(): Observable<boolean> {
-    return this.authService.isLogged();
+  canActivate(): boolean {
+    return false
   }
 
 }
