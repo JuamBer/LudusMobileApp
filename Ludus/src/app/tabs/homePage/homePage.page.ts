@@ -33,13 +33,13 @@ export class HomePage {
   searchResultsGames$: Observable<Game[] | null> = this.store.select(store => store.games.search_results_games);
 
   constructor(
-    private store: Store<AppState>
+    private store: Store<AppState>,
   ) {}
 
 
   ngOnInit(){
-    this.store.dispatch(gamesActions.loadCardGames());
-    this.store.dispatch(gamesActions.loadQuickGames());
-    this.store.dispatch(gamesActions.loadPopularGames());
+    //this.store.dispatch(gamesActions.loadCardGames());
+    //this.store.dispatch(gamesActions.loadQuickGames());
+    //this.store.dispatch(gamesActions.loadPopularGames());
   }
 }
