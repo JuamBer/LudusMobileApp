@@ -19,8 +19,6 @@ import { HomePage } from './home.page';
 import { FilterModalComponent } from '../../shared/filter-modal/filter-modal.component';
 import { ReviewListComponent } from '../../shared/game/reviews/review-list/review-list.component';
 import { ReviewItemComponent } from '../../shared/game/reviews/review-item/review-item.component';
-import { QuestionListComponent } from '../../shared/game/questions/question-list/question-list.component';
-import { QuestionItemComponent } from '../../shared/game/questions/question-item/question-item.component';
 import { GameComponent } from '../../shared/game/game.component';
 import { SeekerComponent } from '../../shared/seeker/seeker.component';
 import { HorizontalGameListComponent } from '../../shared/horizontal-game-list/horizontal-game-list.component';
@@ -59,8 +57,6 @@ import { GetUserNamePipe } from '../../../pipes/get-user-name.pipe';
     GameComponent,
     ReviewListComponent,
     ReviewItemComponent,
-    QuestionListComponent,
-    QuestionItemComponent,
     FilterModalComponent,
     SeekerComponent,
     HorizontalGameListComponent,
