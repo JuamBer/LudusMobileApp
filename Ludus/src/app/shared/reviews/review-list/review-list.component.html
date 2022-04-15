@@ -20,6 +20,6 @@
   </div>
   <div class="reviews">
     <ul>
-      <app-review-item *ngFor="let review of reviews" [review]="review"></app-review-item>
+      <app-review-item *ngFor="let review of reviews$ | async" [review]="review"></app-review-item>
     </ul>
   </div>

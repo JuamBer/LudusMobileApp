@@ -22,10 +22,12 @@
       </ion-segment>
     </div>
   </div>
+
+  <app-review-list [gameId]="null" [userId]="user.id"></app-review-list>
 </ion-content>
 
 <ion-modal [isOpen]="isSettingsModalOpen" [breakpoints]="[0.1, 0.8, 1]" [initialBreakpoint]="0.8">
   <ng-template>
-    <app-settings-modal></app-settings-modal>
+    <app-settings-modal ></app-settings-modal>
   </ng-template>
 </ion-modal>

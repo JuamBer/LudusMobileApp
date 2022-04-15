@@ -5,6 +5,7 @@ import { Review } from 'src/models/Review';
 import { User } from 'src/models/User';
 import { doc, query, collection, where, getDocs } from "firebase/firestore";
 import { environment } from 'src/environments/environment';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -15,15 +16,13 @@ export class ReviewService {
     private firestore: AngularFirestore,
   ) { }
 
-  create(id_game: string, id_user:string, rating: number, text: string){
-    this.firestore.collection(environment.db_tables.reviews).add(
-      {
-        rating: rating,
-        text: text,
-        id_game: id_game,
-        id_user: id_user,
-      }
-    )
+  async create(review: Review): Promise<any>{
+    try {
+      const res = await this.firestore.collection(environment.db_tables.reviews).add({...review});
+      return res;
+    } catch (err) {
+      return err;
+    }
   }
 
   getReviewsByGameId(id: string) {
@@ -31,6 +30,14 @@ export class ReviewService {
       environment.db_tables.reviews, (ref) => {
         return ref.where('id_game', '==', id)
       })
-      .snapshotChanges()
+      .valueChanges()
+  }
+
+  getReviewsByUserId(id: string) {
+    return this.firestore.collection<Review[]>(
+      environment.db_tables.reviews, (ref) => {
+        return ref.where('id_user', '==', id)
+      })
+      .valueChanges()
   }
 }

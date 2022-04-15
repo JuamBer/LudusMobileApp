@@ -17,6 +17,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ChangeNameModalComponent } from 'src/app/shared/change-name-modal/change-name-modal.component';
 import { ChangeEmailModalComponent } from 'src/app/shared/change-email-modal/change-email-modal.component';
 import { ChangePasswordModalComponent } from 'src/app/shared/change-password-modal/change-password-modal.component';
+import { ReviewsModule } from 'src/app/shared/reviews/reviews.module';
 
 @NgModule({
   imports: [
@@ -27,14 +28,15 @@ import { ChangePasswordModalComponent } from 'src/app/shared/change-password-mod
     ProfilePageRoutingModule,
     LudusHeaderModule,
     MatButtonModule,
-    LudusHeaderModule
+    LudusHeaderModule,
+    ReviewsModule
   ],
   declarations: [
     ProfilePage,
     SettingsModalComponent,
     ChangeNameModalComponent,
     ChangeEmailModalComponent,
-    ChangePasswordModalComponent
+    ChangePasswordModalComponent,
   ]
 })
 export class ProfilePageModule {}

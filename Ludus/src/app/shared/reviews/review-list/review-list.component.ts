@@ -6,10 +6,11 @@ import { ReviewService } from 'src/services/review.service';
 //NGRX
 import { AppState } from 'src/app/state/app.state';
 import { Store } from '@ngrx/store';
-import * as userActions from 'src/app/state/auth/auth.actions';
-import { Subscription } from 'rxjs';
+import * as reviewsActions from 'src/app/state/reviews/reviews.actions';
+import { Observable, Subscription } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { User } from 'src/models/User';
+import { Review } from 'src/models/Review';
 
 @Component({
   selector: 'app-review-list',
@@ -26,7 +27,8 @@ export class ReviewListComponent implements OnInit {
   });
 
   @Input() gameId: string;
-  reviews: any[]
+  @Input() userId: string;
+  reviews$: Observable<Review[]> = this.store.select(store => store.reviews.game_reviews);
 
   constructor(
     private authService: AuthService,
@@ -38,20 +40,25 @@ export class ReviewListComponent implements OnInit {
   ngOnInit() {
     this.store.select(store => store.auth.user).subscribe(user => this.user = user)
 
-    this.reviewService.getReviewsByGameId(this.gameId).subscribe(
-      (reviews) => {
-        this.reviews = reviews.map((t: any) => {
-          return {
-            id: t.payload.doc.id,
-            ...t.payload.doc.data()
-          };
-        })
-      }
-    )
+    if (this.gameId){
+      this.store.dispatch(reviewsActions.loadReviewsByGameId({ id: this.gameId }));
+    }
+
+    if(this.userId){
+      this.store.dispatch(reviewsActions.loadReviewsByUserId({ id: this.userId }));
+    }
+
+
   }
 
   sendReview(formValue: any){
-    this.reviewService.create(this.gameId, this.user.id, formValue.rating, formValue.review);
+    const review: Review = {
+      text: formValue.review,
+      rating: formValue.rating,
+      id_user: this.user.id,
+      id_game: this.gameId
+    }
+    this.store.dispatch(reviewsActions.createReview({ review: review }))
   }
 
 }

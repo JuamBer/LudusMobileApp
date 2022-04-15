@@ -19,7 +19,7 @@ export class UserService {
   }
 
   getUserName(id: string): Observable<string> {
-    return this.firestore.collection(environment.db_tables.users).doc(id).valueChanges().pipe(map((user: any) => user.nickname));
+    return this.firestore.collection(environment.db_tables.users).doc(id).valueChanges().pipe(map((user: any) => user.name));
   }
 
 }

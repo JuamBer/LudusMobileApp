@@ -9,16 +9,13 @@ import { IonicModule } from '@ionic/angular';
 //SWIPERJS
 import { SwiperModule } from 'swiper/angular';
 
-//STAR RATING
-import { NgxStarRatingModule } from 'ngx-star-rating';
+
 
 //COMOPONETS AND MODULES
 import { HomePageRoutingModule } from './home-page-routing.module';
 import { LudusHeaderModule } from '../../shared/ludus-header/ludus-header.module';
 import { HomePage } from './home.page';
 import { FilterModalComponent } from '../../shared/filter-modal/filter-modal.component';
-import { ReviewListComponent } from '../../shared/game/reviews/review-list/review-list.component';
-import { ReviewItemComponent } from '../../shared/game/reviews/review-item/review-item.component';
 import { GameComponent } from '../../shared/game/game.component';
 import { SeekerComponent } from '../../shared/seeker/seeker.component';
 import { HorizontalGameListComponent } from '../../shared/horizontal-game-list/horizontal-game-list.component';
@@ -30,6 +27,8 @@ import { SafePipe } from '../../../pipes/safe.pipe';
 import { GetTypeNamePipe } from '../../../pipes/get-type-name.pipe';
 import { GetGenderNamePipe } from '../../../pipes/get-gender-name.pipe';
 import { GetUserNamePipe } from '../../../pipes/get-user-name.pipe';
+import { ReviewsModule } from 'src/app/shared/reviews/reviews.module';
+import { GameModule } from 'src/app/shared/game/game.module';
 
 @NgModule({
   imports: [
@@ -39,14 +38,11 @@ import { GetUserNamePipe } from '../../../pipes/get-user-name.pipe';
     FormsModule,
     ReactiveFormsModule,
 
-    //STAR RATING
-    NgxStarRatingModule,
-
     //SWIPERJS
     SwiperModule,
 
     //MODULES
-    LudusHeaderModule,
+    GameModule,
 
     //ROUTING
     HomePageRoutingModule,
@@ -54,20 +50,14 @@ import { GetUserNamePipe } from '../../../pipes/get-user-name.pipe';
   declarations: [
     //COMPONENTS
     HomePage,
-    GameComponent,
-    ReviewListComponent,
-    ReviewItemComponent,
     FilterModalComponent,
     SeekerComponent,
     HorizontalGameListComponent,
     VerticalGameListComponent,
     SpecialGameViewComponent,
 
-    //PIPES
-    SafePipe,
+
     GetTypeNamePipe,
-    GetGenderNamePipe,
-    GetUserNamePipe
   ]
 })
 export class HomePageModule {}
