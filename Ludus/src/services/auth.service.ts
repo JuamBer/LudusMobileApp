@@ -12,6 +12,7 @@ import { User } from 'src/models/User';
 import { environment } from '../environments/environment';
 import { GoogleAuthProvider } from 'firebase/auth';
 import { LoggedGuard } from 'src/guards/logged.guard';
+//NGRX
 import { AppState } from '@capacitor/app';
 import { Store } from '@ngrx/store';
 import * as authActions from 'src/app/state/auth/auth.actions';
@@ -23,6 +24,7 @@ export class AuthService {
 
   constructor(
     private auth: AngularFireAuth,
+    private firestore: AngularFirestore,
     private router: Router,
     private store: Store<AppState>
   ) {}
@@ -68,17 +70,11 @@ export class AuthService {
           name: res.user.displayName,
           email: res.user.email
         }
+
+        this.updateMyUserTable(newUser);
         this.store.dispatch(authActions.loginUser({ user: newUser }));
 
-        this.updateName(registerDTO.name).then(
-          (res)=>{
-            console.log("updateProfile");
-          }
-        ).catch(
-          (err)=>{
-            console.error(err);
-          }
-        )
+        this.updateName(registerDTO.name);
 
         this.router.navigate([environment.routes.home])
       }
@@ -114,6 +110,14 @@ export class AuthService {
         email: result.user.email
       };
 
+      this.firestore.collection(environment.db_tables.users).doc(user.id).get().toPromise().then(
+        (res) => {
+          if (!res.exists) {
+            this.updateMyUserTable(user);
+          }
+        }
+      ).catch(err => console.error(err))
+
 
       this.store.dispatch(authActions.loginUser({ user: user }));
 
@@ -123,24 +127,54 @@ export class AuthService {
   }
 
   //UPDATE
-  async updateName(newName: string) {
-    const updatedProfile = {
-      displayName: newName,
-    }
-
-    this.store.dispatch(authActions.changeName({ name: newName }));
-
-    return (await this.auth.currentUser).updateProfile(updatedProfile);
+  updateMyUserTable(updatedUser: User){
+    this.firestore.collection(environment.db_tables.users).doc(updatedUser.id).set({ ...updatedUser });
   }
 
-  async updateEmail(newEmail: string) {
-    this.store.dispatch(authActions.changeEmail({ email: newEmail }));
+  updateName(newName: string) {
+    this.auth.currentUser.then(
+      (fUser)=>{
+        fUser.updateProfile({ displayName: newName }).then(
+            () => {
+              const updatedUser: User = {
+                id: fUser.uid,
+                name: newName,
+                email: fUser.email
+              }
+              this.updateMyUserTable(updatedUser);
+              this.store.dispatch(authActions.changeName({ name: newName }));
+            }
+          ).catch(err => console.error(err))
+      }
+    ).catch(err => console.error(err))
+  }
 
-    return (await this.auth.currentUser).updateEmail(newEmail);
+  updateEmail(newEmail: string) {
+    this.auth.currentUser.then(
+      (fUser) => {
+        fUser.updateEmail(newEmail).then(
+          () => {
+            const updatedUser: User = {
+              id: fUser.uid,
+              name: fUser.displayName,
+              email: newEmail
+            }
+            this.updateMyUserTable(updatedUser);
+            this.store.dispatch(authActions.changeEmail({ email: newEmail }));
+          }
+        ).catch(err => console.error(err))
+      }
+    ).catch(err => console.error(err))
   }
 
   async updatePassword(newPassword: string) {
-    return (await this.auth.currentUser).updatePassword(newPassword);
+    this.auth.currentUser.then(
+      (fUser) => {
+        fUser.updatePassword(newPassword).then(
+          () => {}
+        ).catch(err => console.error(err))
+      }
+    ).catch(err => console.error(err))
   }
 
 

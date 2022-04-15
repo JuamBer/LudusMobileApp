@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-ludus-header',
@@ -14,15 +15,7 @@ export class LudusHeaderComponent implements OnInit {
 
   ngOnInit() {}
 
-  public srcLogo: string = "./../../assets/img/logo.png";
-  public altLogo: string = "LogoLudus";
-  @Input() public type: string = "";
-
-  setTitle(type: string){
-    this.type = type;
-  }
-
   backToHome(){
-    this.router.navigate(['/tabs/home']);
+    this.router.navigate([environment.routes.home]);
   }
 }

@@ -41,13 +41,4 @@ export class SeekerComponent implements OnInit {
       this.store.dispatch(gamesActions.unSetSearchResultsGames());
     }
   }
-
-  async presentModal() {
-    const modal = await this.modalController.create({
-      component: FilterModalComponent,
-      cssClass: 'my-custom-class'
-    });
-    return await modal.present();
-  }
-
 }

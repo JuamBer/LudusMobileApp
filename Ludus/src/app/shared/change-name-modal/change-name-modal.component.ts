@@ -5,7 +5,10 @@ import { ModalController } from '@ionic/angular';
 import { environment } from 'src/environments/environment';
 import { ChangeNameDTO } from 'src/models/dtos/ChangeNameDTO.model';
 import { AuthService } from 'src/services/auth.service';
-
+//NGRX
+import { AppState } from '@capacitor/app';
+import { Store } from '@ngrx/store';
+import * as authActions from 'src/app/state/auth/auth.actions';
 @Component({
   selector: 'app-change-name-modal',
   templateUrl: './change-name-modal.component.html',
@@ -21,22 +24,15 @@ export class ChangeNameModalComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
-    private modalController: ModalController
+    private modalController: ModalController,
+    private store: Store<AppState>
   ) { }
 
   ngOnInit() {}
 
   send(changeNameDTO: ChangeNameDTO){
-    this.authService.updateName(changeNameDTO.name).then(
-      (res)=>{
-        this.dismiss();
-      }
-    ).catch(
-      (err)=>{
-        console.error(err);
-
-      }
-    )
+    this.authService.updateName(changeNameDTO.name);
+    this.dismiss();
   }
 
   dismiss() {

@@ -3,6 +3,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
 import { ChangeEmailDTO } from 'src/models/dtos/ChangeEmailDTO.model';
 import { AuthService } from 'src/services/auth.service';
+//NGRX
+import { AppState } from '@capacitor/app';
+import { Store } from '@ngrx/store';
+import * as authActions from 'src/app/state/auth/auth.actions';
 
 @Component({
   selector: 'app-change-email-modal',
@@ -19,22 +23,15 @@ export class ChangeEmailModalComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
-    private modalController: ModalController
+    private modalController: ModalController,
+    private store: Store<AppState>
   ) { }
 
   ngOnInit() {}
 
   send(changeEmailDTO: ChangeEmailDTO){
-    this.authService.updateEmail(changeEmailDTO.email).then(
-      (res)=>{
-        this.dismiss();
-      }
-    ).catch(
-      (err)=>{
-        console.error(err);
-
-      }
-    )
+    this.authService.updateEmail(changeEmailDTO.email);
+    this.dismiss();
   }
 
   dismiss() {
