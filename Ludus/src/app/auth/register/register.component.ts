@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
-import { PasswordValidator } from 'src/app/providers/PasswordValidator';
+import { PasswordValidator } from 'src/utils/PasswordValidator';
 import { environment } from 'src/environments/environment';
 import { RegisterDTO } from 'src/models/dtos/RegisterDTO.model';
 import { ToastMessage } from 'src/models/resources/ToastMessage.model';

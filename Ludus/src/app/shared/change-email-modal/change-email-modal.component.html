@@ -1,0 +1,19 @@
+<div class="change-email-modal">
+  <h1>{{title}}</h1>
+
+  <form [formGroup]="form" (ngSubmit)="send(form.value)">
+    <div class="inputs">
+      <ion-item>
+        <ion-label position="floating">Nuevo Nombre</ion-label>
+        <ion-input type="text" formControlName="email"></ion-input>
+      </ion-item>
+    </div>
+
+    <div class="save">
+      <ion-button expand="block" type="submit" [disabled]="form.invalid">
+        Guardar
+        <ion-icon name="save-outline"></ion-icon>
+      </ion-button>
+    </div>
+  </form>
+</div>

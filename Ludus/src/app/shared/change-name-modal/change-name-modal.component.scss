@@ -1,0 +1,23 @@
+.change-name-modal {
+  padding: 5%;
+
+  h1 {
+    text-align: center;
+  }
+
+  form {
+    .inputs {
+      padding-bottom: 15%;
+      padding-top: 15%;
+    }
+    .save {
+      padding-top: 5%;
+
+      ion-button {
+        ion-icon {
+          margin-left: 2.5%;
+        }
+      }
+    }
+  }
+}

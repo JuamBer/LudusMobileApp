@@ -62,7 +62,15 @@ export class AuthService {
     this.auth.createUserWithEmailAndPassword(registerDTO.email, registerDTO.password).then(
       (res: any) => {
         console.log("register");
-        this.updateProfile(registerDTO.name).then(
+
+        const newUser: User = {
+          id: res.user.uid,
+          name: res.user.displayName,
+          email: res.user.email
+        }
+        this.store.dispatch(authActions.loginUser({ user: newUser }));
+
+        this.updateName(registerDTO.name).then(
           (res)=>{
             console.log("updateProfile");
           }
@@ -72,13 +80,6 @@ export class AuthService {
           }
         )
 
-        const newUser: User = {
-          id: res.user.uid,
-          name: registerDTO.name,
-          email: registerDTO.email
-        };
-
-        this.store.dispatch(authActions.loginUser({ user: newUser }));
         this.router.navigate([environment.routes.home])
       }
     ).catch(
@@ -122,11 +123,24 @@ export class AuthService {
   }
 
   //UPDATE
-  async updateProfile(displayName: string) {
+  async updateName(newName: string) {
     const updatedProfile = {
-      displayName: displayName,
+      displayName: newName,
     }
+
+    this.store.dispatch(authActions.changeName({ name: newName }));
+
     return (await this.auth.currentUser).updateProfile(updatedProfile);
+  }
+
+  async updateEmail(newEmail: string) {
+    this.store.dispatch(authActions.changeEmail({ email: newEmail }));
+
+    return (await this.auth.currentUser).updateEmail(newEmail);
+  }
+
+  async updatePassword(newPassword: string) {
+    return (await this.auth.currentUser).updatePassword(newPassword);
   }
 
 

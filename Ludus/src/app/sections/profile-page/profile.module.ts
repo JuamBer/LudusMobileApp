@@ -14,6 +14,9 @@ import { SettingsModalComponent } from 'src/app/shared/settings-modal/settings-m
 import { LudusHeaderComponent } from 'src/app/shared/ludus-header/ludus-header.component';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ChangeNameModalComponent } from 'src/app/shared/change-name-modal/change-name-modal.component';
+import { ChangeEmailModalComponent } from 'src/app/shared/change-email-modal/change-email-modal.component';
+import { ChangePasswordModalComponent } from 'src/app/shared/change-password-modal/change-password-modal.component';
 
 @NgModule({
   imports: [
@@ -28,7 +31,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   ],
   declarations: [
     ProfilePage,
-    SettingsModalComponent
+    SettingsModalComponent,
+    ChangeNameModalComponent,
+    ChangeEmailModalComponent,
+    ChangePasswordModalComponent
   ]
 })
 export class ProfilePageModule {}

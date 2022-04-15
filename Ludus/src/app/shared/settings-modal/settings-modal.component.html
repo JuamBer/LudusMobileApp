@@ -1,13 +1,13 @@
 <ion-content [fullscreen]="true">
   <div class="settings">
     <ion-list>
-      <ion-item>
+      <ion-item (click)="toggleModal('change-name')">
         <ion-label>Cambiar Nombre</ion-label>
       </ion-item>
-      <ion-item>
+      <ion-item (click)="toggleModal('change-email')">
         <ion-label>Cambiar Email</ion-label>
       </ion-item>
-      <ion-item>
+      <ion-item (click)="toggleModal('change-password')">
         <ion-label>Cambiar Contraseña</ion-label>
       </ion-item>
     </ion-list>
@@ -19,3 +19,21 @@
     </div>
   </div>
 </ion-content>
+
+<ion-modal [isOpen]="isChangeNameModalOpen" [breakpoints]="[0.1, 0.8, 1]" [initialBreakpoint]="0.8">
+  <ng-template>
+    <app-change-name-modal></app-change-name-modal>
+  </ng-template>
+</ion-modal>
+
+<ion-modal [isOpen]="isChangeEmailModalOpen" [breakpoints]="[0.1, 0.8, 1]" [initialBreakpoint]="0.8">
+  <ng-template>
+    <app-change-email-modal></app-change-email-modal>
+  </ng-template>
+</ion-modal>
+
+<ion-modal [isOpen]="isChangePasswordModalOpen" [breakpoints]="[0.1, 0.8, 1]" [initialBreakpoint]="0.8">
+  <ng-template>
+    <app-change-password-modal></app-change-password-modal>
+  </ng-template>
+</ion-modal>

@@ -25,3 +25,14 @@ export const logoutUserSuccess = createAction(
 export const logoutUserFail = createAction(
   '[Auth] logoutUserFail'
 );
+
+
+//CHNAGE NAME
+export const changeName = createAction(
+  '[Auth] changeName',
+  props<{ name: string }>()
+);
+export const changeEmail = createAction(
+  '[Auth] changeEmail',
+  props<{ email: string }>()
+);

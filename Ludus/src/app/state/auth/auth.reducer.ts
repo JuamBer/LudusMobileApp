@@ -14,5 +14,6 @@ export const authReducer = createReducer(initialState,
 
   on(authActions.loginUser, (state, { user }) => ({ ...state, user: user})),
   on(authActions.logoutUser, (state) => ({ ...state, user: null })),
-
+  on(authActions.changeName, (state, { name }) => ({ ...state, user: { ...state.user, name: name} })),
+  on(authActions.changeEmail, (state, { email }) => ({ ...state, user: { ...state.user, email: email } })),
 );
