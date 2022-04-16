@@ -15,8 +15,8 @@ export class GenderService {
   ) { }
 
 
-  getGender(id) {
-    return this.firestore.collection<Gender>(environment.db_tables.genders).doc(id).valueChanges();
+  getGender(id: string) {
+    return this.firestore.collection<Gender>(environment.db_tables.genders).doc(id).valueChanges({ idField: 'id' });
   }
 
   getGenderName(id: string): Observable<string> {

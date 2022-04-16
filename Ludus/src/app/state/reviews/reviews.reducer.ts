@@ -20,4 +20,14 @@ export const reviewsReducer = createReducer(initialState,
   on(reviewsActions.loadReviewsByGameIdSuccess, (state, { reviews }) => ({ ...state, game_reviews: reviews})),
   on(reviewsActions.loadReviewsByUserIdSuccess, (state, { reviews }) => ({ ...state, user_reviews: reviews })),
   on(reviewsActions.createReviewSuccess, (state, { review }) => ({ ...state, game_reviews: [...state.game_reviews, review] })),
+  on(reviewsActions.deleteReviewSuccess, (state, { id }) => {
+    console.log(id);
+    console.log(state);
+
+    return {
+      ...state,
+      game_reviews: state.game_reviews.filter(review => review.id != id),
+      user_reviews: state.user_reviews.filter(review => review.id != id)
+    }
+  }),
 );

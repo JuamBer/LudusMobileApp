@@ -14,7 +14,7 @@
         <ion-icon name="build-outline" *ngIf="imTheOwnerOfTheReview" (click)="editReview(review.id_game)"></ion-icon>
       </div>
       <div class="icon">
-        <ion-icon name="trash-outline" *ngIf="imTheOwnerOfTheReview" (click)="deleteReview(review.id_game)">
+        <ion-icon name="trash-outline" *ngIf="imTheOwnerOfTheReview" (click)="presentConfirmDeleteToast(review.id)">
         </ion-icon>
       </div>
     </div>

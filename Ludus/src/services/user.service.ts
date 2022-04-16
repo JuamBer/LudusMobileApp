@@ -15,7 +15,7 @@ export class UserService {
   ) { }
 
   getUser(id: string) {
-    return this.firestore.collection<any>(environment.db_tables.users).doc(id).valueChanges();
+    return this.firestore.collection<any>(environment.db_tables.users).doc(id).valueChanges({ idField: 'id' });
   }
 
   getUserName(id: string): Observable<string> {

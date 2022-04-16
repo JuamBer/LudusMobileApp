@@ -48,13 +48,26 @@ export class ReviewsEffects {
     this.actions$.pipe(
       ofType(reviewsActions.createReview),
       mergeMap((res) => {
-        console.log(res);
         return from(this.reviewService.create(res.review))
           .pipe(
             map(() => reviewsActions.createReviewSuccess({ review: res.review })),
             catchError(err => of(reviewsActions.createReviewFail({ error: err })))
           )
         }
+      )
+    )
+  );
+
+  deleteReview$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(reviewsActions.deleteReview),
+      mergeMap((res) => {
+        return from(this.reviewService.delete(res.id))
+          .pipe(
+            map(() => reviewsActions.deleteReviewSuccess({ id: res.id })),
+            catchError(err => of(reviewsActions.deleteReviewFail({ error: err })))
+          )
+      }
       )
     )
   );

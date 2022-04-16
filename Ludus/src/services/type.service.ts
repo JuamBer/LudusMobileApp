@@ -14,11 +14,7 @@ export class TypeService {
   ) { }
 
   getType(id: string) {
-    return this.firestore.collection(environment.db_tables.types).doc(id).valueChanges();
-  }
-
-  getTypePromise(id: string) {
-    return this.firestore.collection(environment.db_tables.types).doc(id).valueChanges().toPromise();
+    return this.firestore.collection(environment.db_tables.types).doc(id).valueChanges({ idField: 'id' });
   }
 
   getTypeName(id: string): Observable<string> {

@@ -26,12 +26,23 @@ export class ReviewService {
     }
   }
 
+  async delete(id: string){
+    try {
+      const res = await this.firestore.collection(environment.db_tables.reviews).doc(id).delete();
+
+      return res;
+    } catch (err) {
+      return err;
+    }
+  }
+
+
   getReviewsByGameId(id: string) {
     return this.firestore.collection<Review[]>(
       environment.db_tables.reviews, (ref) => {
         return ref.where('id_game', '==', id)
       })
-      .valueChanges()
+      .valueChanges({ idField: 'id' })
   }
 
   getReviewsByUserId(id: string) {
@@ -39,7 +50,7 @@ export class ReviewService {
       environment.db_tables.reviews, (ref) => {
         return ref.where('id_user', '==', id)
       })
-      .valueChanges()
+      .valueChanges({ idField: 'id' })
   }
 
   getIfIHaveDoneAReview(user_id: string, game_id: string) {

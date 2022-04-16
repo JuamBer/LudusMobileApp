@@ -17,19 +17,19 @@ export class GameService {
 
 
   getCardGames() {
-    return this.firestore.collection<Game[]>(environment.db_tables.games, ref => ref.where('id_type', '==', '2')).valueChanges();
+    return this.firestore.collection<Game[]>(environment.db_tables.games, ref => ref.where('id_type', '==', '2')).valueChanges({ idField: 'id' });
   }
   getQuickGames() {
-    return this.firestore.collection<Game[]>(environment.db_tables.games, ref => ref.orderBy('min_time')).valueChanges();
+    return this.firestore.collection<Game[]>(environment.db_tables.games, ref => ref.orderBy('min_time')).valueChanges({ idField: 'id' });
   }
   getPopularGames() {
-    return this.firestore.collection<Game[]>(environment.db_tables.games, ref => ref.orderBy('average_rating', 'desc')).valueChanges();
+    return this.firestore.collection<Game[]>(environment.db_tables.games, ref => ref.orderBy('average_rating', 'desc')).valueChanges({ idField: 'id' });
   }
   getGames() {
-    return this.firestore.collection<Game[]>(environment.db_tables.games).valueChanges();
+    return this.firestore.collection<Game[]>(environment.db_tables.games).valueChanges({ idField: 'id' });
   }
   getSearchResultsGames(search: string) {
-    return this.firestore.collection<Game[]>(environment.db_tables.games, ref => ref.orderBy('name').startAt(search).endAt(search + '\uf8ff')).valueChanges();
+    return this.firestore.collection<Game[]>(environment.db_tables.games, ref => ref.orderBy('name').startAt(search).endAt(search + '\uf8ff')).valueChanges({ idField: 'id' });
   }
 
   getGamesPage(pageFilter: PageFilter) {
@@ -56,7 +56,7 @@ export class GameService {
 
 
   getGame(id: string) {
-    return this.firestore.collection<Game>(environment.db_tables.games).doc(id).valueChanges();
+    return this.firestore.collection<Game>(environment.db_tables.games).doc(id).valueChanges({ idField: 'id' });
   }
 
 
