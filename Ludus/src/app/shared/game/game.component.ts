@@ -6,6 +6,12 @@ import { GameService } from 'src/services/game.service';
 import { GenderService } from 'src/services/gender.service';
 import { ReviewService } from 'src/services/review.service';
 
+//NGRX
+import { AppState } from 'src/app/state/app.state';
+import { Store } from '@ngrx/store';
+import * as gamesActions from 'src/app/state/games/games.actions';
+import { Observable, Subscription } from 'rxjs';
+
 @Component({
   selector: 'app-game',
   templateUrl: './game.component.html',
@@ -14,44 +20,20 @@ import { ReviewService } from 'src/services/review.service';
 export class GameComponent implements OnInit {
 
   gameId: string;
-  game: Game = {
-    id: '',
-    name: '',
-    ids_genders: [],
-    id_type: '',
-    min_players: 0,
-    max_players: 0,
-    min_time: 0,
-    max_time: 0,
-    description: "",
-    age: '',
-    preparation: '',
-    complexity: '',
-    strategy: '',
-    random: '',
-    video_url: '',
-    summary: '',
-    average_rating: 0
-  };
-  genders: string[] = [];
-  reviews: any[];
-
+  game: Game;
   questionsVisible: boolean = false;
   reviewsVisible: boolean = true;
+  iHaveDoneAReview: boolean = true;
 
   constructor(
     private activateRoute: ActivatedRoute,
-    private gameService: GameService,
+    private store: Store<AppState>
   ) { }
 
   ngOnInit() {
     this.gameId = this.activateRoute.snapshot.paramMap.get('id');
-
-    this.gameService.getGame(this.gameId).subscribe(
-      (game)=>{
-        this.game = game;
-      }
-    )
+    this.store.dispatch(gamesActions.loadGame({ id: this.gameId}));
+    this.store.select(store => store.games.game).subscribe(game=> this.game = game);
   }
 
   toggleComments(event: any) {

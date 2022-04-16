@@ -10,11 +10,13 @@ import { GetUserNamePipe } from 'src/pipes/get-user-name.pipe';
 //STAR RATING
 import { NgxStarRatingModule } from 'ngx-star-rating';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AddReviewComponent } from './add-review/add-review.component';
 
 @NgModule({
   declarations: [
     ReviewItemComponent,
     ReviewListComponent,
+    AddReviewComponent,
 
     GetUserNamePipe,
   ],
@@ -30,8 +32,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
   ],
   exports: [
-    ReviewItemComponent,
     ReviewListComponent,
+    AddReviewComponent
   ]
 })
 export class ReviewsModule { }

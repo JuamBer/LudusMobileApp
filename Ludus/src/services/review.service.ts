@@ -6,6 +6,7 @@ import { User } from 'src/models/User';
 import { doc, query, collection, where, getDocs } from "firebase/firestore";
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -39,5 +40,18 @@ export class ReviewService {
         return ref.where('id_user', '==', id)
       })
       .valueChanges()
+  }
+
+  getIfIHaveDoneAReview(user_id: string, game_id: string) {
+    return this.firestore.collection<Game>(environment.db_tables.reviews, ref => ref.where('id_game', '==', game_id).where('id_user', '==', user_id)).valueChanges().pipe(
+      map((res)=>{
+
+        if(res.length > 0){
+          return true
+        }else {
+          return false
+        }
+      })
+    );
   }
 }

@@ -7,7 +7,7 @@
     </ion-toolbar>
   </ion-header>
 
-  <div class="gameView">
+  <div class="gameView" *ngIf="game">
     <div class="title">
       <h3>{{ game.name }}</h3>
     </div>
@@ -50,8 +50,10 @@
         <ion-label>Preguntas</ion-label>
       </ion-segment-button>
     </ion-segment>
-
   </div>
+  <app-add-review *ngIf="reviewsVisible" [gameId]="gameId"></app-add-review>
   <app-review-list *ngIf="reviewsVisible" [gameId]="gameId" ></app-review-list>
-
+  <div *ngIf="questionsVisible" style="padding-bottom: 15%; padding-top: 15%;text-align: center;">
+    <h3>Próximamente</h3>
+  </div>
 </ion-content>

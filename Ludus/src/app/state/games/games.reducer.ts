@@ -3,6 +3,7 @@ import { Game } from 'src/models/Game';
 import * as authActions from './games.actions';
 
 export interface State {
+  game: Game,
   games: Game[],
   card_games: Game[],
   popular_games: Game[],
@@ -11,15 +12,18 @@ export interface State {
 }
 
 export const initialState: State = {
+  game: null,
   games: [],
   card_games: [],
   popular_games: [],
   quick_games: [],
-  search_results_games: null
+  search_results_games: null,
 }
 
 export const gamesReducer = createReducer(initialState,
 
+  on(authActions.loadGameSuccess, (state, { game }) => ({ ...state, game: game })),
+  on(authActions.loadGameSuccess, (state, { game }) => ({ ...state, game: game })),
   on(authActions.loadGamesSuccess, (state, { games }) => ({ ...state, games: games})),
   on(authActions.loadCardGamesSuccess, (state, { games }) => ({ ...state, card_games: games })),
   on(authActions.loadPopularGamesSuccess, (state, { games }) => ({ ...state, popular_games: games })),

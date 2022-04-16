@@ -1,6 +1,20 @@
 import { createAction, props } from '@ngrx/store';
 import { Review } from 'src/models/Review';
 
+//LOAD GAME
+export const getIfIHaveDoneAReview = createAction(
+  '[Games] get If I Have Done A Review',
+  props<{ user_id: string, game_id: string }>()
+);
+export const getIfIHaveDoneAReviewSuccess = createAction(
+  '[Games] get If I Have Done A Review Success',
+  props<{ iHaveDoneAReview: boolean }>()
+);
+export const getIfIHaveDoneAReviewFail = createAction(
+  '[Games] get If I Have Done A Review Fail',
+  props<{ error: any }>()
+);
+
 //LOAD REVIEWS BY GAME ID
 export const loadReviewsByGameId = createAction(
   '[Reviews] load Reviews By Game Id',

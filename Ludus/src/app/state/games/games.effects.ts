@@ -10,6 +10,18 @@ import { Game } from 'src/models/Game';
 @Injectable()
 export class GamesEffects {
 
+  loadGame$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(gamesActions.loadGame),
+      mergeMap((res) => this.gameService.getGame(res.id)
+        .pipe(
+          map((game: any) => gamesActions.loadGameSuccess({ game: game })),
+          catchError(err => of(gamesActions.loadGameFail({ error: err })))
+        )
+      )
+    )
+  );
+
   loadGames$ = createEffect(() =>
     this.actions$.pipe(
       ofType(gamesActions.loadGames),

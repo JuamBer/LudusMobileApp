@@ -12,18 +12,21 @@
       </div>
     </div>
     <div class="main">
-      <ion-segment color="secondary">
-        <ion-segment-button value="hybrid">
-          <ion-label>Comentarios</ion-label>
+      <ion-segment (ionChange)="toggleComments($event)" value="reviews">
+        <ion-segment-button value="reviews">
+          <ion-label>Opiniones</ion-label>
         </ion-segment-button>
-        <ion-segment-button value="sat">
+        <ion-segment-button value="questions">
           <ion-label>Preguntas</ion-label>
         </ion-segment-button>
       </ion-segment>
     </div>
   </div>
 
-  <app-review-list [gameId]="null" [userId]="user.id"></app-review-list>
+  <app-review-list *ngIf="isReviewsVisible" [userId]="user.id"></app-review-list>
+  <div *ngIf="isQuestionsVisible" style="padding-bottom: 15%; padding-top: 15%;text-align: center;">
+    <h3>Próximamente</h3>
+  </div>
 </ion-content>
 
 <ion-modal [isOpen]="isSettingsModalOpen" [breakpoints]="[0.1, 0.8, 1]" [initialBreakpoint]="0.8">

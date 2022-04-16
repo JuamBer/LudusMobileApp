@@ -59,5 +59,7 @@ export class GameService {
     return this.firestore.collection<Game>(environment.db_tables.games).doc(id).valueChanges();
   }
 
+
+
 }
 

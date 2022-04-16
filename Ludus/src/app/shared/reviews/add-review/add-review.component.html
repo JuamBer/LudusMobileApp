@@ -1,0 +1,21 @@
+  <div class="add-review" *ngIf="!iHaveDoneAReview">
+    <form [formGroup]="form" (ngSubmit)="sendReview(form.value)">
+
+      <div class="review">
+        <ion-item>
+          <ion-textarea [placeholder]="placeholder" formControlName="review"></ion-textarea>
+        </ion-item>
+      </div>
+      <div class="star-rating">
+        <ngx-star-rating formControlName="rating"></ngx-star-rating>
+      </div>
+      <div class="buttons">
+        <ion-button type="reset" color="dark">
+          Cancelar
+        </ion-button>
+        <ion-button [disabled]="form.invalid" type="submit" color="primary">
+          Enviar
+        </ion-button>
+      </div>
+    </form>
+  </div>

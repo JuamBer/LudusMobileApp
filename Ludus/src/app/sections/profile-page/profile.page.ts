@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { Observable } from 'rxjs';
@@ -22,16 +22,18 @@ import { Subscription } from 'rxjs';
   templateUrl: 'profile.page.html',
   styleUrls: ['profile.page.scss']
 })
-export class ProfilePage implements OnInit{
+export class ProfilePage implements OnInit, OnDestroy{
 
   user: User = {
     id: '',
     name: '',
     email: ''
   };
-  isSettingsModalOpen: boolean = false;
-
   reviews$: Observable<Review[]> = this.store.select(store => store.reviews.user_reviews);
+  isSettingsModalOpen: boolean = false;
+  isReviewsVisible: boolean = true;
+  isQuestionsVisible: boolean = false;
+  suscriptions: Subscription[] = [];
 
   constructor(
     private router: Router,
@@ -41,24 +43,37 @@ export class ProfilePage implements OnInit{
 
   ngOnInit(): void {
 
-    this.store.select(store => store.auth.user).subscribe(
+    let userSuscription: Subscription = this.store.select(store => store.auth.user).subscribe(
       (user)=>{
         this.user = user;
         this.store.dispatch(reviewsActions.loadReviewsByUserId({ id: this.user.id }));
       }
     )
+    this.suscriptions.push(userSuscription);
   }
+
+  ngOnDestroy(): void {
+    this.suscriptions.forEach((suscription)=>{
+      suscription.unsubscribe();
+    })
+  }
+
 
   toggleFilterModal() {
     this.isSettingsModalOpen = !this.isSettingsModalOpen;
   }
 
-  async presentModal() {
-    const modal = await this.modalController.create({
-      component: SettingsModalComponent,
-      cssClass: 'my-custom-class'
-    });
-    return await modal.present();
+  toggleComments(event: any) {
+    switch (event.detail.value) {
+      case 'questions':
+        this.isQuestionsVisible = true;
+        this.isReviewsVisible = false;
+        break;
+      case 'reviews':
+        this.isQuestionsVisible = false;
+        this.isReviewsVisible = true;
+        break;
+    }
   }
 
 }

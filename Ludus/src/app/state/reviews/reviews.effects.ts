@@ -8,6 +8,18 @@ import { ReviewService } from 'src/services/review.service';
 @Injectable()
 export class ReviewsEffects {
 
+  iHaveDoneAReview$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(reviewsActions.getIfIHaveDoneAReview),
+      mergeMap((res) => this.reviewService.getIfIHaveDoneAReview(res.user_id, res.game_id)
+        .pipe(
+          map((iHaveDoneAReview: any) => reviewsActions.getIfIHaveDoneAReviewSuccess({ iHaveDoneAReview: iHaveDoneAReview })),
+          catchError(err => of(reviewsActions.getIfIHaveDoneAReviewFail({ error: err })))
+        )
+      )
+    )
+  );
+
   loadReviewsByGameId$ = createEffect(() =>
     this.actions$.pipe(
       ofType(reviewsActions.loadReviewsByGameId),

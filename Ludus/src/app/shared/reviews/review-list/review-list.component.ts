@@ -19,46 +19,31 @@ import { Review } from 'src/models/Review';
 })
 export class ReviewListComponent implements OnInit {
 
-  user: User;
-  placeholder: string = "¡ Deja tu opinión aquí !";
-  form: FormGroup = this.formBuilder.group({
-    rating: ['', Validators.required],
-    review: ['', Validators.required]
-  });
-
   @Input() gameId: string;
   @Input() userId: string;
-  reviews$: Observable<Review[]> = this.store.select(store => store.reviews.game_reviews);
+  reviews$: Observable<Review[]>;
+  isOpenGameVisible: boolean = false;
 
   constructor(
-    private authService: AuthService,
-    private reviewService: ReviewService,
-    private formBuilder: FormBuilder,
     private store: Store<AppState>
   ) { }
 
   ngOnInit() {
-    this.store.select(store => store.auth.user).subscribe(user => this.user = user)
 
     if (this.gameId){
       this.store.dispatch(reviewsActions.loadReviewsByGameId({ id: this.gameId }));
+      this.reviews$ = this.store.select(store => store.reviews.game_reviews);
     }
 
     if(this.userId){
       this.store.dispatch(reviewsActions.loadReviewsByUserId({ id: this.userId }));
+      this.reviews$ = this.store.select(store => store.reviews.user_reviews);
+      this.isOpenGameVisible = true;
     }
 
 
   }
 
-  sendReview(formValue: any){
-    const review: Review = {
-      text: formValue.review,
-      rating: formValue.rating,
-      id_user: this.user.id,
-      id_game: this.gameId
-    }
-    this.store.dispatch(reviewsActions.createReview({ review: review }))
-  }
+
 
 }

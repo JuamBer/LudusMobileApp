@@ -2,6 +2,20 @@ import { createAction, props } from '@ngrx/store';
 import { Game } from 'src/models/Game';
 import { User } from 'src/models/User';
 
+//LOAD GAME
+export const loadGame = createAction(
+  '[Games] load Game',
+  props<{ id: string }>()
+);
+export const loadGameSuccess = createAction(
+  '[Games] load Game Success',
+  props<{ game: Game }>()
+);
+export const loadGameFail = createAction(
+  '[Games] load Game Fail',
+  props<{ error: any }>()
+);
+
 //LOAD GAMES
 export const loadGames = createAction(
   '[Games] loadGames',
