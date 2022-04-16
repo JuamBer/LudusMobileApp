@@ -11,7 +11,7 @@ import { ToastMessage } from 'src/models/resources/ToastMessage.model';
 import { User } from 'src/models/User';
 import { environment } from '../environments/environment';
 import { GoogleAuthProvider } from 'firebase/auth';
-import { LoggedGuard } from 'src/guards/logged.guard';
+
 //NGRX
 import { AppState } from '@capacitor/app';
 import { Store } from '@ngrx/store';

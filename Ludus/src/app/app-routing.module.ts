@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { LoggedGuard } from 'src/guards/logged.guard';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { environment } from 'src/environments/environment';
 import { AngularFireAuthGuard, hasCustomClaim, redirectUnauthorizedTo, redirectLoggedInTo } from '@angular/fire/compat/auth-guard';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo([environment.routes.login]);
+const redirectLoggedInToToHome = () => redirectLoggedInTo([environment.routes.home]);
 
 
 const routes: Routes = [
@@ -20,7 +20,11 @@ const routes: Routes = [
   },
   {
     path: 'auth',
-    loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
+    loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule),
+    canActivate: [AngularFireAuthGuard],
+    data: {
+      authGuardPipe: redirectLoggedInToToHome
+    },
   },
   {
     path: '',
