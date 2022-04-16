@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { SectionsPage } from './sections.page';
+import { environment } from 'src/environments/environment';
 
 const routes: Routes = [
   {
     path: '',
     component: SectionsPage,
+
     children: [
       {
         path: 'home',

@@ -26,12 +26,14 @@ export class AppComponent implements OnInit{
   ngOnInit(): void {
     this.authService.getUser().subscribe(
       (user)=>{
-        const userLogged: User = {
-          id: user.uid,
-          name: user.displayName,
-          email: user.email
+        if(user){
+          const userLogged: User = {
+            id: user.uid,
+            name: user.displayName,
+            email: user.email
+          }
+          this.store.dispatch(userActions.loginUser({ user: userLogged }))
         }
-        this.store.dispatch(userActions.loginUser({ user: userLogged }))
       }
     )
 

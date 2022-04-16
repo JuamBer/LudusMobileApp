@@ -27,13 +27,9 @@ export class AuthService {
     private firestore: AngularFirestore,
     private router: Router,
     private store: Store<AppState>
-  ) {}
-
-  isAuth() {
-    return this.auth.authState.pipe(
-      map(user => user != null)
-    );
+  ) {
   }
+
 
   getUser() {
     return this.auth.authState
