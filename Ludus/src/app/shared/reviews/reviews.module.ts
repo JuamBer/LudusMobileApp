@@ -4,6 +4,7 @@ import { ReviewListComponent } from './review-list/review-list.component';
 import { ReviewItemComponent } from './review-item/review-item.component';
 import { IonicModule } from '@ionic/angular';
 import { GetUserNamePipe } from 'src/pipes/get-user-name.pipe';
+import { GetGameNamePipe } from 'src/pipes/get-game-name.pipe';
 
 
 
@@ -19,6 +20,7 @@ import { AddReviewComponent } from './add-review/add-review.component';
     AddReviewComponent,
 
     GetUserNamePipe,
+    GetGameNamePipe
   ],
   imports: [
     CommonModule,

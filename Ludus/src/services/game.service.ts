@@ -59,7 +59,9 @@ export class GameService {
     return this.firestore.collection<Game>(environment.db_tables.games).doc(id).valueChanges({ idField: 'id' });
   }
 
-
+  getGameName(id: string): Observable<string> {
+    return this.firestore.collection(environment.db_tables.games).doc(id).valueChanges({ idField: 'id' }).pipe(map((game: any) => game.name));
+  }
 
 }
 

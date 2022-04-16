@@ -1,5 +1,10 @@
 <li class="review">
   <div class="top">
+    <h5 class="open-game" *ngIf="isOpenGameVisible" (click)="openGame(review.id_game)">
+      <ion-icon name="return-up-back-outline">
+      </ion-icon>{{ review.id_game | getGameName | async}}
+    </h5>
+
     <div class="info">
       <h4>{{review.id_user | getUserName | async}}</h4>
       <span>
@@ -7,9 +12,6 @@
       </span>
     </div>
     <div class="options" *ngIf="imTheOwnerOfTheReview">
-      <div class="icon">
-        <ion-icon name="return-up-back-outline" *ngIf="isOpenGameVisible" (click)="openGame(review.id_game)"></ion-icon>
-      </div>
       <div class="icon">
         <ion-icon name="build-outline" *ngIf="imTheOwnerOfTheReview" (click)="editReview(review.id_game)"></ion-icon>
       </div>
