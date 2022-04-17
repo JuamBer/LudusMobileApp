@@ -36,6 +36,16 @@ export class ReviewService {
     }
   }
 
+  async update(review: Review) {
+    try {
+      const res = await this.firestore.collection(environment.db_tables.reviews).doc(review.id).update({...review});
+
+      return res;
+    } catch (err) {
+      return err;
+    }
+  }
+
 
   getReviewsByGameId(id: string) {
     return this.firestore.collection<Review[]>(

@@ -1,0 +1,21 @@
+<div class="edit-review-modal">
+  <h1>{{title}}</h1>
+
+  <form [formGroup]="form" (ngSubmit)="send(form.value)">
+    <div class="review">
+      <ion-item>
+        <ion-textarea [(ngModel)]="review.text" formControlName="review"></ion-textarea>
+      </ion-item>
+    </div>
+    <div class="star-rating">
+      <ngx-star-rating [(ngModel)]='review.rating' formControlName="rating"></ngx-star-rating>
+    </div>
+
+    <div class="save">
+      <ion-button expand="block" type="submit" [disabled]="form.invalid">
+        Guardar
+        <ion-icon name="save-outline"></ion-icon>
+      </ion-button>
+    </div>
+  </form>
+</div>

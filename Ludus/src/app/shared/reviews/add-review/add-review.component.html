@@ -1,6 +1,5 @@
   <div class="add-review" *ngIf="!iHaveDoneAReview">
     <form [formGroup]="form" (ngSubmit)="sendReview(form.value)">
-
       <div class="review">
         <ion-item>
           <ion-textarea [placeholder]="placeholder" formControlName="review"></ion-textarea>

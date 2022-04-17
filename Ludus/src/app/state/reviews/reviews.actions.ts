@@ -71,3 +71,17 @@ export const deleteReviewFail = createAction(
   '[Reviews] delete Review Fail',
   props<{ error: any }>()
 );
+
+//UPDATE REVIEW
+export const updateReview = createAction(
+  '[Reviews] update Review',
+  props<{ review: Review }>()
+);
+export const updateReviewSuccess = createAction(
+  '[Reviews] update Review Success',
+  props<{ review: Review }>()
+);
+export const updateReviewFail = createAction(
+  '[Reviews] update Review Fail',
+  props<{ error: any }>()
+);

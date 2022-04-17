@@ -72,6 +72,20 @@ export class ReviewsEffects {
     )
   );
 
+  updateReview$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(reviewsActions.updateReview),
+      mergeMap((res) => {
+        return from(this.reviewService.update(res.review))
+          .pipe(
+            map(() => reviewsActions.updateReviewSuccess({ review: res.review })),
+            catchError(err => of(reviewsActions.updateReviewFail({ error: err })))
+          )
+      }
+      )
+    )
+  );
+
 
 
   constructor(

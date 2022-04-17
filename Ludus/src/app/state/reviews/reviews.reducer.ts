@@ -30,4 +30,26 @@ export const reviewsReducer = createReducer(initialState,
       user_reviews: state.user_reviews.filter(review => review.id != id)
     }
   }),
+  on(reviewsActions.updateReviewSuccess, (state, { review }) => {
+    console.log(review);
+    console.log(state);
+
+    return {
+      ...state,
+      game_reviews: state.game_reviews.map(item => {
+        if (item.id == review.id){
+          return review
+        }else{
+          return item
+        }
+      }),
+      user_reviews: state.user_reviews.map(item => {
+        if (item.id == review.id) {
+          return review
+        } else {
+          return item
+        }
+      }),
+    }
+  }),
 );

@@ -12,12 +12,14 @@ import { GetGameNamePipe } from 'src/pipes/get-game-name.pipe';
 import { NgxStarRatingModule } from 'ngx-star-rating';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddReviewComponent } from './add-review/add-review.component';
+import { EditReviewModalComponent } from './edit-review-modal/edit-review-modal.component';
 
 @NgModule({
   declarations: [
     ReviewItemComponent,
     ReviewListComponent,
     AddReviewComponent,
+    EditReviewModalComponent,
 
     GetUserNamePipe,
     GetGameNamePipe

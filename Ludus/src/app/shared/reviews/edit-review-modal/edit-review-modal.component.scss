@@ -1,4 +1,4 @@
-.change-name-modal {
+.edit-review-modal {
   padding: 5%;
 
   h1 {
@@ -6,9 +6,10 @@
   }
 
   form {
-    .inputs {
-      padding-bottom: 15%;
-      padding-top: 15%;
+    .star-rating {
+      display: flex;
+      justify-content: center;
+
     }
     .save {
       padding-top: 5%;
