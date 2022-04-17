@@ -3,6 +3,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { Filter } from 'src/models/Filter.moda';
 import { Game } from 'src/models/Game';
 import { Page, PageFilter } from 'src/models/Page.model';
 
@@ -30,6 +31,21 @@ export class GameService {
   }
   getSearchResultsGames(search: string) {
     return this.firestore.collection<Game[]>(environment.db_tables.games, ref => ref.orderBy('name').startAt(search).endAt(search + '\uf8ff')).valueChanges({ idField: 'id' });
+  }
+
+  getFilteredResultsGames(filter: Filter) {
+    return this.firestore.collection<Game[]>(environment.db_tables.games,
+      (ref) => {
+
+        if (filter.types.length > 0){
+          ref.where('id_type', 'in', filter.types)
+        }
+        if (filter.genders.length > 0) {
+          ref.where('ids_genders', 'array-contains-any', filter.genders)
+        }
+
+        return ref
+      }).valueChanges({ idField: 'id' });
   }
 
   getGamesPage(pageFilter: PageFilter) {

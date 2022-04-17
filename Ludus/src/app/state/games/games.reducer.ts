@@ -28,7 +28,7 @@ export const gamesReducer = createReducer(initialState,
   on(authActions.loadCardGamesSuccess, (state, { games }) => ({ ...state, card_games: games })),
   on(authActions.loadPopularGamesSuccess, (state, { games }) => ({ ...state, popular_games: games })),
   on(authActions.loadQuickGamesSuccess, (state, { games }) => ({ ...state, quick_games: games })),
-  on(authActions.loadSearchResultsGamesSuccess, (state, { games }) => ({ ...state, search_results_games: games })),
   on(authActions.unSetSearchResultsGames, (state) => ({ ...state, search_results_games: null })),
-
+  on(authActions.loadSearchResultsGamesSuccess, (state, { games }) => ({ ...state, search_results_games: games })),
+  on(authActions.loadFilteredGamesSuccess, (state, { games }) => ({ ...state, search_results_games: games })),
 );

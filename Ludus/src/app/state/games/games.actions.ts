@@ -1,4 +1,5 @@
 import { createAction, props } from '@ngrx/store';
+import { Filter } from 'src/models/Filter.moda';
 import { Game } from 'src/models/Game';
 import { User } from 'src/models/User';
 
@@ -85,3 +86,16 @@ export const unSetSearchResultsGames = createAction(
   '[Games] unSetSearchResultsGames',
 );
 
+//LOAD FILTERED GAMES
+export const loadFilteredGames = createAction(
+  '[Games] loadFilteredkGames',
+  props<{ filter: Filter }>()
+);
+export const loadFilteredGamesSuccess = createAction(
+  '[Games] loadFilteredGamesSuccess',
+  props<{ games: Game[] }>()
+);
+export const loadFilteredGamesFail = createAction(
+  '[Games] loadFilteredGamesFail',
+  props<{ error: any }>()
+);

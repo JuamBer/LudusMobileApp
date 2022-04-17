@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { IonRouterOutlet } from '@ionic/angular';
+import { IonRouterOutlet, ModalController } from '@ionic/angular';
 import { max } from 'rxjs/operators';
 import { Gender } from 'src/models/Gender';
 import { GenderService } from 'src/services/gender.service';
@@ -9,8 +9,12 @@ import { AppState } from 'src/app/state/app.state';
 import { Store } from '@ngrx/store';
 import * as gamesActions from 'src/app/state/games/games.actions';
 import * as gendersActions from 'src/app/state/genders/genders.actions';
+import * as typesActions from 'src/app/state/types/types.actions';
+
 import { Subscription } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Type } from 'src/models/Type.model';
+import { Filter } from 'src/models/Filter.moda';
 
 @Component({
   selector: 'app-filter-modal',
@@ -19,24 +23,29 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class FilterModalComponent implements OnInit, OnDestroy{
 
-  genders: Gender[] = [];
   form: FormGroup = this.formBuilder.group({
-    rating: ['', Validators.required],
-    review: ['', Validators.required]
+    genders: [[]],
+    types: [[]]
   });
+
+  types: Type[] = [];
+  genders: Gender[] = [];
+
   suscriptions: Subscription[] = [];
 
   constructor(
     private formBuilder: FormBuilder,
-    private routerOutlet: IonRouterOutlet,
-    private genderService: GenderService,
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    private modalController: ModalController
   ) { }
 
   ngOnInit() {
     this.store.dispatch(gendersActions.loadGenders());
-    let genderSuscription = this.store.select(store => store.genders.genders).subscribe(genders => this.genders = genders);
-    this.suscriptions.push(genderSuscription);
+    this.store.dispatch(typesActions.loadTypes());
+    let gendersSuscription = this.store.select(store => store.genders.genders).subscribe(genders => this.genders = genders);
+    this.suscriptions.push(gendersSuscription);
+    let typesSuscription = this.store.select(store => store.types.types).subscribe(types => this.types = types);
+    this.suscriptions.push(typesSuscription);
   }
   ngOnDestroy(): void {
     this.suscriptions.forEach((suscription) => {
@@ -44,16 +53,19 @@ export class FilterModalComponent implements OnInit, OnDestroy{
     })
   }
 
-  send(formValue: any){
-
+  send(filter: Filter){
+    console.log("send");
+    console.log(filter);
+    this.store.dispatch(gamesActions.loadFilteredGames({filter: filter}));
+    this.dismiss();
   }
 
-  public playersFormatter(value: number) {
-    return `${value}+`
+  dismiss() {
+    this.modalController.dismiss({
+      'dismissed': true
+    });
   }
 
-  public timeFormatter(value: number) {
-    return `${value} mins`
-  }
+
 
 }

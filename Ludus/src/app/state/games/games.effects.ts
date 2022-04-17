@@ -73,12 +73,27 @@ export class GamesEffects {
   loadSearchResultsGames$ = createEffect(() =>
     this.actions$.pipe(
       ofType(gamesActions.loadSearchResultsGames),
-      mergeMap((res) => { console.log(res);
+      mergeMap((res) => {
        return this.gameService.getSearchResultsGames(res.search)
         .pipe(
           map((games: any) => gamesActions.loadSearchResultsGamesSuccess({ games: games })),
           catchError(err => of(gamesActions.loadSearchResultsGamesFail({ error: err })))
         )
+      }
+      )
+    )
+  );
+
+  loadFilteredResultsGames$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(gamesActions.loadFilteredGames),
+      mergeMap((res) => {
+        console.log(res);
+        return this.gameService.getFilteredResultsGames(res.filter)
+          .pipe(
+            map((games: any) => gamesActions.loadFilteredGamesSuccess({ games: games })),
+            catchError(err => of(gamesActions.loadFilteredGamesFail({ error: err })))
+          )
       }
       )
     )

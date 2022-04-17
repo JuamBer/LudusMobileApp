@@ -8,31 +8,18 @@
   <form [formGroup]="form" (ngSubmit)="send(form.value)">
     <ion-item>
       <ion-label>Género</ion-label>
-      <ion-select multiple="true" cancelText="Cancelar" okText="OK">
-        <ion-select-option *ngFor="let gender of genders" value="{{gender}}">{{gender.name}}</ion-select-option>
+      <ion-select formControlName="genders" multiple="true" cancelText="Cancelar" okText="OK">
+        <ion-select-option *ngFor="let gender of genders" value="{{gender.id}}">{{gender.name}}</ion-select-option>
       </ion-select>
     </ion-item>
 
     <ion-item>
       <ion-label>Tipo</ion-label>
-      <ion-select multiple="true" cancelText="Cancelar" okText="OK">
-        <ion-select-option value="bird">Bird</ion-select-option>
-        <ion-select-option value="cat">Cat</ion-select-option>
-        <ion-select-option value="dog">Dog</ion-select-option>
-        <ion-select-option value="honeybadger">Honey Badger</ion-select-option>
+      <ion-select formControlName="types" multiple=" true" cancelText="Cancelar" okText="OK">
+        <ion-select-option *ngFor="let type of types" value="{{type.id}}">{{type.name}}</ion-select-option>
       </ion-select>
     </ion-item>
 
-    <ion-item>
-      <ion-label>Complejidad</ion-label>
-      <ion-select multiple="true" cancelText="Cancelar" okText="OK">
-        <ion-select-option value="bird">Bird</ion-select-option>
-        <ion-select-option value="cat">Cat</ion-select-option>
-        <ion-select-option value="dog">Dog</ion-select-option>
-        <ion-select-option value="honeybadger">Honey Badger</ion-select-option>
-      </ion-select>
-    </ion-item>
-
-    <ion-button expand="block">Filtrar</ion-button>
+    <ion-button expand="block" type="submit">Filtrar</ion-button>
   </form>
 </ion-list>
