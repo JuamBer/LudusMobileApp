@@ -5,43 +5,34 @@
     </ion-label>
   </ion-list-header>
 
-  <ion-item>
-    <ion-label>Género</ion-label>
-    <ion-select multiple="true" cancelText="Cancelar" okText="OK">
-      <ion-select-option *ngFor="let gender of genders" value="{{gender}}">{{gender.name}}</ion-select-option>
-    </ion-select>
-  </ion-item>
+  <form [formGroup]="form" (ngSubmit)="send(form.value)">
+    <ion-item>
+      <ion-label>Género</ion-label>
+      <ion-select multiple="true" cancelText="Cancelar" okText="OK">
+        <ion-select-option *ngFor="let gender of genders" value="{{gender}}">{{gender.name}}</ion-select-option>
+      </ion-select>
+    </ion-item>
 
-  <ion-item>
-    <ion-label>Tipo</ion-label>
-    <ion-select multiple="true" cancelText="Cancelar" okText="OK">
-      <ion-select-option value="bird">Bird</ion-select-option>
-      <ion-select-option value="cat">Cat</ion-select-option>
-      <ion-select-option value="dog">Dog</ion-select-option>
-      <ion-select-option value="honeybadger">Honey Badger</ion-select-option>
-    </ion-select>
-  </ion-item>
+    <ion-item>
+      <ion-label>Tipo</ion-label>
+      <ion-select multiple="true" cancelText="Cancelar" okText="OK">
+        <ion-select-option value="bird">Bird</ion-select-option>
+        <ion-select-option value="cat">Cat</ion-select-option>
+        <ion-select-option value="dog">Dog</ion-select-option>
+        <ion-select-option value="honeybadger">Honey Badger</ion-select-option>
+      </ion-select>
+    </ion-item>
 
-  <ion-item>
-    <ion-label>Complejidad</ion-label>
-    <ion-select multiple="true" cancelText="Cancelar" okText="OK">
-      <ion-select-option value="bird">Bird</ion-select-option>
-      <ion-select-option value="cat">Cat</ion-select-option>
-      <ion-select-option value="dog">Dog</ion-select-option>
-      <ion-select-option value="honeybadger">Honey Badger</ion-select-option>
-    </ion-select>
-  </ion-item>
+    <ion-item>
+      <ion-label>Complejidad</ion-label>
+      <ion-select multiple="true" cancelText="Cancelar" okText="OK">
+        <ion-select-option value="bird">Bird</ion-select-option>
+        <ion-select-option value="cat">Cat</ion-select-option>
+        <ion-select-option value="dog">Dog</ion-select-option>
+        <ion-select-option value="honeybadger">Honey Badger</ion-select-option>
+      </ion-select>
+    </ion-item>
 
-
-  <ion-item>
-    <ion-label>Jugadores</ion-label>
-    <ion-range [min]="jugadores.min" [max]="jugadores.max" [pinFormatter]="playersFormatter" [pin]="true"></ion-range>
-  </ion-item>
-  <ion-item>
-    <ion-label>Tiempo</ion-label>
-    <ion-range snaps="true" min="0" max="100" [pinFormatter]="timeFormatter" [pin]="true"></ion-range>
-  </ion-item>
-
-  <ion-button expand="block">Filtrar</ion-button>
-
+    <ion-button expand="block">Filtrar</ion-button>
+  </form>
 </ion-list>

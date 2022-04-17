@@ -24,6 +24,6 @@ export class GenderService {
   }
 
   getGenders() {
-    return this.firestore.collection<Gender[]>(environment.db_tables.genders).snapshotChanges();
+    return this.firestore.collection<Gender[]>(environment.db_tables.genders).valueChanges({ idField: 'id' });
   }
 }

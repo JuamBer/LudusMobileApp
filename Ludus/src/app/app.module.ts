@@ -26,6 +26,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 import { GamesEffects } from './state/games/games.effects';
 import { ReviewsEffects } from './state/reviews/reviews.effects';
+import { GendersEffects } from './state/genders/genders.effects';
 
 @NgModule({
   declarations: [AppComponent],
@@ -47,7 +48,7 @@ import { ReviewsEffects } from './state/reviews/reviews.effects';
     StoreDevtoolsModule.instrument({
       maxAge: 25
     }),
-    EffectsModule.forRoot([GamesEffects, ReviewsEffects])
+    EffectsModule.forRoot([GamesEffects, ReviewsEffects, GendersEffects])
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
