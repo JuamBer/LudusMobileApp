@@ -23,6 +23,7 @@ export class ReviewListComponent implements OnInit {
   @Input() userId: string;
   reviews$: Observable<Review[]>;
   isOpenGameVisible: boolean = false;
+  noRewviewsMessage: string = "";
 
   constructor(
     private store: Store<AppState>
@@ -33,12 +34,14 @@ export class ReviewListComponent implements OnInit {
     if (this.gameId){
       this.store.dispatch(reviewsActions.loadReviewsByGameId({ id: this.gameId }));
       this.reviews$ = this.store.select(store => store.reviews.game_reviews);
+      this.noRewviewsMessage = "Aún no hay ninguna opinión";
     }
 
     if(this.userId){
       this.store.dispatch(reviewsActions.loadReviewsByUserId({ id: this.userId }));
       this.reviews$ = this.store.select(store => store.reviews.user_reviews);
       this.isOpenGameVisible = true;
+      this.noRewviewsMessage = "Aún no has publicado ninguna opinión";
     }
 
 

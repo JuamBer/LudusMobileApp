@@ -1,6 +1,19 @@
+<div class="review-list" *ngIf="(reviews$ | async)?.length>0; else elseBlock">
+  <ul>
+    <app-review-item *ngFor="let review of reviews$ | async" [review]="review" [isOpenGameVisible]="isOpenGameVisible">
+    </app-review-item>
+  </ul>
+</div>
 
-  <div class="review-list">
-    <ul>
-      <app-review-item *ngFor="let review of reviews$ | async" [review]="review" [isOpenGameVisible]="isOpenGameVisible"></app-review-item>
-    </ul>
+<ng-template #elseBlock>
+  <div class="any-result">
+    <div class="message-box">
+      <div class="icon">
+        <ion-icon name="chatbox-outline"></ion-icon>
+      </div>
+      <div class="message">
+        <h2>{{ noRewviewsMessage }}</h2>
+      </div>
+    </div>
   </div>
+</ng-template>

@@ -2,3 +2,32 @@
 .review-list {
   padding: 5%;
 }
+
+  .any-result {
+    width: 100%;
+    height: 50vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .message-box {
+      padding: 5%;
+      width: 75%;
+
+      .icon {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+
+        ion-icon {
+          width: 30px;
+          height: 30px;
+        }
+      }
+
+      .message {
+        width: 100%;
+        text-align: center;
+      }
+    }
+  }
