@@ -4,19 +4,16 @@
   </div>
 
   <ul class="game-list" *ngIf="ids_games.length > 0; else elseBlock">
-    <li class="game" *ngFor="let id_game of ids_games">
+    <li class="game" *ngFor="let id_game of ids_games; index as i">
       <div *ngVar="(id_game | getGame) | async as game">
-        <div class="fav-game" *ngIf="game">
+        <div class="fav-game" *ngIf="game" (click)="openGame(game)">
           <div class="title">
             <h4>{{ game.name }}</h4>
+            <ion-icon name="bookmark" (click)="removeGameToFavs(game); $event.stopPropagation()"></ion-icon>
           </div>
           <hr>
           <div class="info">
             <div>
-              <p class="type">
-                <ion-icon name="extension-puzzle"></ion-icon>
-                {{ game.id_type | getTypeName | async}}
-              </p>
               <p class="players">
                 <ion-icon name="man"></ion-icon>
                 {{ game.min_players + "-" +  game.max_players }}
@@ -36,10 +33,10 @@
     <div class="any-result">
       <div class="message-box">
         <div class="icon">
-          <ion-icon name="library-outline"></ion-icon>
+          <ion-icon name="bookmark-outline"></ion-icon>
         </div>
         <div class="message">
-          <h2>Nigun Resultado Coincide Con Su Búsqueda</h2>
+          <h2>Aún no has añadido nindún juego a favoritos</h2>
         </div>
       </div>
     </div>

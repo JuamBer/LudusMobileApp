@@ -3,20 +3,32 @@
 
   .list-title {
     text-align: center;
-    padding: 5%;
+    padding: 2.5%;
   }
 
   .game-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
 
     .game {
       list-style: none;
-      padding: 1%;
+      padding: 2%;
+      margin: 2%;
       background: #eee9e9;
       border-radius: 5px;
       margin-top: 2.5%;
+
       .title {
-        width: 100%;
-        text-align: center;
+        width: 95%;
+        padding: 5%;
+        justify-content: space-between;
+        display: flex;
+        align-items: center;
+
+        ion-icon {
+          width: 20px;
+          height: 20px;
+        }
       }
 
       hr {
@@ -36,7 +48,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            width: 25%;
+            width: 45%;
             padding: 1.5%;
             border-radius: 5px;
             color: azure;
@@ -83,18 +95,14 @@
         justify-content: center;
 
         ion-icon {
-          width: 50px;
-          height: 50px;
+          width: 30px;
+          height: 30px;
         }
       }
 
       .message {
         width: 100%;
         text-align: center;
-
-        h2 {
-          font-weight: bold;
-        }
       }
     }
   }
