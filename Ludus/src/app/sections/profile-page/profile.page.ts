@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { Observable } from 'rxjs';
 
-import { SettingsModalComponent } from 'src/app/shared/settings-modal/settings-modal.component';
+import { SettingsModalComponent } from 'src/app/shared/settings/settings-modal/settings-modal.component';
 import { environment } from 'src/environments/environment';
 import { Review } from 'src/models/Review';
 import { User } from 'src/models/User';
