@@ -17,7 +17,7 @@ export const initialState: State = {
   card_games: [],
   popular_games: [],
   quick_games: [],
-  search_results_games: null,
+  search_results_games: null
 }
 
 export const gamesReducer = createReducer(initialState,

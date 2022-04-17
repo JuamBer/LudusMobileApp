@@ -1,0 +1,47 @@
+<div class="grid-game-list">
+  <div class="list-title" *ngIf="ids_games.length > 0">
+    <h2>{{ title }}</h2>
+  </div>
+
+  <ul class="game-list" *ngIf="ids_games.length > 0; else elseBlock">
+    <li class="game" *ngFor="let id_game of ids_games">
+      <div *ngVar="(id_game | getGame) | async as game">
+        <div class="fav-game" *ngIf="game">
+          <div class="title">
+            <h4>{{ game.name }}</h4>
+          </div>
+          <hr>
+          <div class="info">
+            <div>
+              <p class="type">
+                <ion-icon name="extension-puzzle"></ion-icon>
+                {{ game.id_type | getTypeName | async}}
+              </p>
+              <p class="players">
+                <ion-icon name="man"></ion-icon>
+                {{ game.min_players + "-" +  game.max_players }}
+              </p>
+              <p class="time">
+                <ion-icon name="time"></ion-icon>
+                {{ game.min_time + "-" +  game.max_time }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </li>
+  </ul>
+
+  <ng-template #elseBlock>
+    <div class="any-result">
+      <div class="message-box">
+        <div class="icon">
+          <ion-icon name="library-outline"></ion-icon>
+        </div>
+        <div class="message">
+          <h2>Nigun Resultado Coincide Con Su Búsqueda</h2>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</div>

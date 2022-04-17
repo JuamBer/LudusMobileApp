@@ -33,6 +33,8 @@ export class AppComponent implements OnInit{
             email: user.email
           }
           this.store.dispatch(userActions.loginUser({ user: userLogged }))
+          this.store.dispatch(userActions.loadFavsGames({ id: userLogged.id }));
+
         }
       }
     )

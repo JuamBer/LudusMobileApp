@@ -7,6 +7,10 @@ import { FavsPage } from './favs.page';
 
 import { FavsPageRoutingModule } from './favs-page-routing.module';
 import { LudusHeaderModule } from '../../shared/ludus-header/ludus-header.module';
+import { GetGamePipe } from 'src/pipes/get-game.pipe';
+import { VarDirective } from 'src/utils/ng-var.directive';
+import { GridGameListComponent } from 'src/app/shared/games/grid-game-list/grid-game-list.component';
+import { GetTypeNamePipe } from 'src/pipes/get-type-name.pipe';
 
 @NgModule({
   imports: [
@@ -18,6 +22,16 @@ import { LudusHeaderModule } from '../../shared/ludus-header/ludus-header.module
     FormsModule,
     ReactiveFormsModule,
   ],
-  declarations: [FavsPage]
+  declarations: [
+    FavsPage,
+    GridGameListComponent,
+    GetGamePipe,
+    GetTypeNamePipe,
+    VarDirective
+  ],
+  exports: [
+    VarDirective,
+    GetTypeNamePipe
+  ]
 })
 export class FavsPageModule {}

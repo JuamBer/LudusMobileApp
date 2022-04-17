@@ -10,6 +10,7 @@
   <div class="gameView" *ngIf="game">
     <div class="title">
       <h3>{{ game.name }}</h3>
+      <ion-icon name="{{favicon}}" (click)="toggleGameToFavs(game)"></ion-icon>
     </div>
     <div class="info">
       <div class="duration">
