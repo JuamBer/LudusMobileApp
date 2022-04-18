@@ -14,6 +14,9 @@ import { SectionsPage } from './sections.page';
     FormsModule,
     SectionsPageRoutingModule
   ],
-  declarations: [SectionsPage]
+  declarations: [
+    SectionsPage,
+
+  ]
 })
 export class SectionsPageModule {}

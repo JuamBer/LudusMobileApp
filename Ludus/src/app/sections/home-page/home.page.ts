@@ -39,7 +39,7 @@ export class HomePage {
 
   ngOnInit(){
     this.store.dispatch(gamesActions.loadCardGames());
-    //this.store.dispatch(gamesActions.loadQuickGames());
-    //this.store.dispatch(gamesActions.loadPopularGames());
+    this.store.dispatch(gamesActions.loadQuickGames());
+    this.store.dispatch(gamesActions.loadPopularGames());
   }
 }

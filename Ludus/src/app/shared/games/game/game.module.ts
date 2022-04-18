@@ -7,6 +7,7 @@ import { ReviewsModule } from '../../reviews/reviews.module';
 import { LudusHeaderModule } from '../../ludus-header/ludus-header.module';
 import { GetGenderNamePipe } from 'src/pipes/get-gender-name.pipe';
 import { SafePipe } from 'src/pipes/safe.pipe';
+import { ApplicationPipesModule } from '../../modules/shared-pipes.module';
 
 
 @NgModule({
@@ -17,6 +18,7 @@ import { SafePipe } from 'src/pipes/safe.pipe';
 
     ReviewsModule,
     LudusHeaderModule,
+    ApplicationPipesModule
   ],
   declarations: [
     GameComponent,

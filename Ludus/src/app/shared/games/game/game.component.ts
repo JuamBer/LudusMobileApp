@@ -47,8 +47,11 @@ export class GameComponent implements OnInit,OnDestroy {
     let favsSubcription = this.store.select(store => store.auth.ids_favs_games).subscribe(ids_favs_games => {
       if (ids_favs_games.some(id => id == this.gameId )){
         this.iHaveThisGameInFavs = true;
+        this.favicon = "bookmark";
+
       }else{
         this.iHaveThisGameInFavs = false;
+        this.favicon = "bookmark-outline";
       }
     });
     this.suscriptions.push(favsSubcription);

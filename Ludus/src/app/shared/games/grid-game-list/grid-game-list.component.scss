@@ -8,7 +8,7 @@
 
   .game-list {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, 50%);
 
     .game {
       list-style: none;
@@ -17,13 +17,20 @@
       background: #eee9e9;
       border-radius: 5px;
       margin-top: 2.5%;
-
+      max-width: 100%;
       .title {
         width: 95%;
         padding: 5%;
         justify-content: space-between;
         display: flex;
         align-items: center;
+
+        h4 {
+          width: 100%;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+        }
 
         ion-icon {
           width: 20px;

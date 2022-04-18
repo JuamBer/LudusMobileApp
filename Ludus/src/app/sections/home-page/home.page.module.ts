@@ -30,6 +30,7 @@ import { GetUserNamePipe } from '../../../pipes/get-user-name.pipe';
 import { ReviewsModule } from 'src/app/shared/reviews/reviews.module';
 import { GameModule } from 'src/app/shared/games/game/game.module';
 import { GetComplexityNamePipe } from 'src/pipes/get-complexity-name.pipe';
+import { ApplicationPipesModule } from 'src/app/shared/modules/shared-pipes.module';
 
 @NgModule({
   imports: [
@@ -47,6 +48,7 @@ import { GetComplexityNamePipe } from 'src/pipes/get-complexity-name.pipe';
 
     //ROUTING
     HomePageRoutingModule,
+    ApplicationPipesModule
   ],
   declarations: [
     //COMPONENTS
@@ -59,11 +61,8 @@ import { GetComplexityNamePipe } from 'src/pipes/get-complexity-name.pipe';
 
 
     GetTypeNamePipe,
-    GetGenderNamePipe,
-    GetComplexityNamePipe
+    GetComplexityNamePipe,
+
   ],
-  exports: [
-    GetGenderNamePipe
-  ]
 })
 export class HomePageModule {}
