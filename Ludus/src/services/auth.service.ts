@@ -64,7 +64,8 @@ export class AuthService {
         const newUser: User = {
           id: res.user.uid,
           name: res.user.displayName,
-          email: res.user.email
+          email: res.user.email,
+          favs_games: []
         }
 
         this.updateMyUserTable(newUser);
@@ -103,7 +104,8 @@ export class AuthService {
       const user: User = {
         id: result.user.uid,
         name: result.user.displayName,
-        email: result.user.email
+        email: result.user.email,
+        favs_games: []
       };
 
       this.firestore.collection(environment.db_tables.users).doc(user.id).get().toPromise().then(
@@ -153,7 +155,7 @@ export class AuthService {
             const updatedUser: User = {
               id: fUser.uid,
               name: fUser.displayName,
-              email: newEmail
+              email: newEmail,
             }
             this.updateMyUserTable(updatedUser);
             this.store.dispatch(authActions.changeEmail({ email: newEmail }));

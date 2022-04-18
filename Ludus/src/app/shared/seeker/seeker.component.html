@@ -3,10 +3,10 @@
         <ion-icon name="filter-outline"></ion-icon>
       </ion-button>
 
-      <ion-searchbar (ionChange)="search($event)"></ion-searchbar>
+      <ion-searchbar (ionChange)="search($event)" placeholder="Buscar..."></ion-searchbar>
     </div>
 
-    <ion-modal [isOpen]="isFilterModalOpen" [breakpoints]="[0.1, 0.8, 1]" [initialBreakpoint]="0.8">
+    <ion-modal [isOpen]="isFilterModalOpen" [breakpoints]="[0.1, 0.5, 1]" [initialBreakpoint]="0.5">
       <ng-template>
         <app-filter-modal></app-filter-modal>
       </ng-template>

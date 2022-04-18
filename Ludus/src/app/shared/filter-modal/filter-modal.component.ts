@@ -32,6 +32,9 @@ export class FilterModalComponent implements OnInit, OnDestroy{
     //time: [null],
     complexity: [null]
   });
+  initialFormValue: any;
+  numberOfFromsChanges: number = 0;
+  formHasChanged: boolean = false;
   filter: Filter;
 
 
@@ -66,6 +69,19 @@ export class FilterModalComponent implements OnInit, OnDestroy{
     let filterSuscription = this.store.select(store => store.games.filter).subscribe(filter => this.filter = {...filter});
     this.suscriptions.push(filterSuscription);
 
+    let formSuscription = this.form.valueChanges.subscribe(form => {
+      console.log(form);
+
+      if (this.numberOfFromsChanges < 3){
+        this.initialFormValue = form;
+      }else{
+        if(this.initialFormValue != form){
+          this.formHasChanged = true;
+        }
+      }
+      this.numberOfFromsChanges++;
+    });
+    this.suscriptions.push(formSuscription);
   }
   ngOnDestroy(): void {
     this.suscriptions.forEach((suscription) => {

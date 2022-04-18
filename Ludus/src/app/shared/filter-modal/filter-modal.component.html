@@ -42,7 +42,8 @@
         </ion-select-option>
       </ion-select>
     </ion-item>
-    <ion-button expand="block" color="dark" type="reset" (click)="reset()">Limpiar Filtros</ion-button>
-    <ion-button expand="block" type="submit">Filtrar</ion-button>
+    <ion-button expand="block" color="dark" type="reset" (click)="reset()">Limpiar Filtros
+    </ion-button>
+    <ion-button expand="block" type="submit" [disabled]="!formHasChanged">Filtrar</ion-button>
   </form>
 </ion-list>

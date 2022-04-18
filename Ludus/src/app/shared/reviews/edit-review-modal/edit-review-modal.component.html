@@ -1,7 +1,7 @@
 <div class="edit-review-modal">
   <h1>{{title}}</h1>
 
-  <form [formGroup]="form" (ngSubmit)="send(form.value)">
+  <form [formGroup]="form" (ngSubmit)="send(form.value)" *ngIf="review">
     <div class="review">
       <ion-item>
         <ion-textarea [(ngModel)]="review.text" formControlName="review"></ion-textarea>
