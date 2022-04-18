@@ -26,9 +26,12 @@ export class SettingsModalComponent implements OnInit {
   ngOnInit() {}
 
   logOut(){
-    this.authService.logOut();
+    this.authService.logOut().then(
+      (res)=>{
+        this.router.navigate([environment.routes.login])
+      }
+    );
     this.dismiss();
-    this.router.navigate([environment.routes.login])
   }
 
   dismiss() {

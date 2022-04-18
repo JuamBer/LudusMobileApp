@@ -24,11 +24,7 @@ import { Subscription } from 'rxjs';
 })
 export class ProfilePage implements OnInit, OnDestroy{
 
-  user: User = {
-    id: '',
-    name: '',
-    email: ''
-  };
+  user: User;
   reviews$: Observable<Review[]> = this.store.select(store => store.reviews.user_reviews);
   isSettingsModalOpen: boolean = false;
   isReviewsVisible: boolean = true;
@@ -45,8 +41,10 @@ export class ProfilePage implements OnInit, OnDestroy{
 
     let userSuscription: Subscription = this.store.select(store => store.auth.user).subscribe(
       (user)=>{
-        this.user = user;
-        this.store.dispatch(reviewsActions.loadReviewsByUserId({ id: this.user.id }));
+        if(user){
+          this.user = user;
+          this.store.dispatch(reviewsActions.loadReviewsByUserId({ id: this.user.id }));
+        }
       }
     )
     this.suscriptions.push(userSuscription);

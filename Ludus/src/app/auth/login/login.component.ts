@@ -20,7 +20,6 @@ import { environment } from 'src/environments/environment';
 })
 export class LoginComponent implements OnInit {
 
-  userSuscription: Subscription
   form: FormGroup = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]]
@@ -35,12 +34,7 @@ export class LoginComponent implements OnInit {
     private store: Store<AppState>
   ) {}
 
-  ngOnInit() {
-    //this.authService.currentMessage.subscribe(toastMessage => {
-    //  this.toastMessage = toastMessage;
-    //  this.presentToast(toastMessage.header, toastMessage.message, toastMessage.icon, toastMessage.position, toastMessage.color);
-    //});
-  }
+  ngOnInit() {}
 
   login(LoginDTO: LoginDTO) {
     this.authService.login(LoginDTO);
