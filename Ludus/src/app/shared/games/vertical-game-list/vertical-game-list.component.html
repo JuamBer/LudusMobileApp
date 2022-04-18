@@ -1,6 +1,9 @@
 <div class="vertical-game-list">
-  <div class="list-title" *ngIf="games.length > 0">
-    <h2>{{ title }}</h2>
+  <div class="filter">
+    <p *ngIf="filter.genders.length>0">Generos: <span *ngFor="let id_gender of filter.genders">{{id_gender | getGenderName | async}} </span></p>
+    <p *ngIf="filter.players">Jugadores: <span>{{filter.players}} </span></p>
+    <p *ngIf="filter.complexity">Complejidad: <span>{{filter.complexity | getComplexityName | async }} </span></p>
+    <p *ngIf="filter.text">Término: <span>{{filter.text}} </span></p>
   </div>
   <ul class="game-list" *ngIf="games.length > 0; else elseBlock">
     <li class="game" *ngFor="let game of games" (click)="openGame(game)">

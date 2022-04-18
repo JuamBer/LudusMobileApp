@@ -5,11 +5,13 @@ import * as games from './games/games.reducer';
 import * as reviews from './reviews/reviews.reducer';
 import * as genders from './genders/genders.reducer';
 import * as types from './types/types.reducer';
+import * as complexities from './complexities/complexities.reducer';
 
 export const appReducers: ActionReducerMap<AppState> = {
   auth: auth.authReducer,
   games: games.gamesReducer,
   reviews: reviews.reviewsReducer,
   genders: genders.gendersReducer,
-  types: types.typesReducer
+  types: types.typesReducer,
+  complexities: complexities.complexitiesReducer
 }

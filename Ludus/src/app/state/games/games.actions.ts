@@ -69,26 +69,9 @@ export const loadQuickGamesFail = createAction(
   props<{ error: any }>()
 );
 
-//LOAD SEARCH RESULT GAMES
-export const loadSearchResultsGames = createAction(
-  '[Games] loadSearchResultsGames',
-  props<{ search: string }>()
-);
-export const loadSearchResultsGamesSuccess = createAction(
-  '[Games] loadSearchResultsGamesSuccess',
-  props<{ games: Game[] }>()
-);
-export const loadSearchResultsGamesFail = createAction(
-  '[Games] loadSearchResultsGamesFail',
-  props<{ error: any }>()
-);
-export const unSetSearchResultsGames = createAction(
-  '[Games] unSetSearchResultsGames',
-);
-
 //LOAD FILTERED GAMES
 export const loadFilteredGames = createAction(
-  '[Games] loadFilteredkGames',
+  '[Games] loadFilteredGames',
   props<{ filter: Filter }>()
 );
 export const loadFilteredGamesSuccess = createAction(
@@ -98,4 +81,7 @@ export const loadFilteredGamesSuccess = createAction(
 export const loadFilteredGamesFail = createAction(
   '[Games] loadFilteredGamesFail',
   props<{ error: any }>()
+);
+export const unSetFilteredGames = createAction(
+  '[Games] unSetFilteredGames'
 );

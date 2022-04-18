@@ -29,6 +29,7 @@ import { GetGenderNamePipe } from '../../../pipes/get-gender-name.pipe';
 import { GetUserNamePipe } from '../../../pipes/get-user-name.pipe';
 import { ReviewsModule } from 'src/app/shared/reviews/reviews.module';
 import { GameModule } from 'src/app/shared/games/game/game.module';
+import { GetComplexityNamePipe } from 'src/pipes/get-complexity-name.pipe';
 
 @NgModule({
   imports: [
@@ -58,6 +59,11 @@ import { GameModule } from 'src/app/shared/games/game/game.module';
 
 
     GetTypeNamePipe,
+    GetGenderNamePipe,
+    GetComplexityNamePipe
+  ],
+  exports: [
+    GetGenderNamePipe
   ]
 })
 export class HomePageModule {}

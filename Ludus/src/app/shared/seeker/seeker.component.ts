@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { Game } from 'src/models/Game';
 import { GameService } from 'src/services/game.service';
@@ -11,15 +11,18 @@ import { AppState } from 'src/app/state/app.state';
 import { Store } from '@ngrx/store';
 import * as gamesActions from 'src/app/state/games/games.actions';
 import { Subscription } from 'rxjs';
+import { Filter } from 'src/models/Filter.moda';
 
 @Component({
   selector: 'app-seeker',
   templateUrl: './seeker.component.html',
   styleUrls: ['./seeker.component.scss'],
 })
-export class SeekerComponent implements OnInit {
+export class SeekerComponent implements OnInit, OnDestroy {
 
+  filter: Filter;
   isFilterModalOpen: boolean = false;
+  suscriptions: Subscription[] = [];
 
   constructor(
     private modalController: ModalController,
@@ -28,6 +31,12 @@ export class SeekerComponent implements OnInit {
 
   ngOnInit() { }
 
+  ngOnDestroy(): void {
+    this.suscriptions.forEach((suscription) => {
+      suscription.unsubscribe();
+    })
+  }
+
   toggleFilterModal() {
     this.isFilterModalOpen = !this.isFilterModalOpen;
   }
@@ -35,10 +44,17 @@ export class SeekerComponent implements OnInit {
   search(event: any) {
     const search: string = event.detail.value;
 
+    let filterSuscription = this.store.select(store => store.games.filter).subscribe(filter => this.filter = filter);
+    this.suscriptions.push(filterSuscription);
+
     if (search != "") {
-      this.store.dispatch(gamesActions.loadSearchResultsGames({ search: search }));
+      const newFilter: Filter = {
+        ...this.filter,
+        text: search
+      }
+      this.store.dispatch(gamesActions.loadFilteredGames({filter: newFilter}));
     }else{
-      this.store.dispatch(gamesActions.unSetSearchResultsGames());
+      this.store.dispatch(gamesActions.unSetFilteredGames());
     }
   }
 }

@@ -9,7 +9,7 @@ export interface Game {
   max_time: number;
   age: string;
   preparation: string;
-  complexity: string;
+  id_complexity: string;
   strategy: string;
   random: string;
   video_url: string;

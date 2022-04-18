@@ -35,13 +35,48 @@ export class GameService {
 
   getFilteredResultsGames(filter: Filter) {
     return this.firestore.collection<Game[]>(environment.db_tables.games,
-      (ref) => {
+      (ref: any) => {
+        console.log(filter);
 
-        if (filter.types.length > 0){
-          ref.where('id_type', 'in', filter.types)
-        }
+        // LIMITACIÓN FIREBASE:
+        // No puede usar tanto in como array-contains-any en la misma consulta.
+        //if (filter.types.length > 0){
+        // ref = ref.where('id_type', 'in', filter.types)
+        //}
+
         if (filter.genders.length > 0) {
-          ref.where('ids_genders', 'array-contains-any', filter.genders)
+          ref = ref.where('ids_genders', 'array-contains-any', filter.genders)
+        }
+
+        if (filter.players != null) {
+          const option: string = filter.players.substring(0,1);
+
+          if (option == '+'){
+            ref = ref.where('max_players', '>=',8)
+          }else{
+            const num_players: number = parseInt(option);
+            ref = ref.where('max_players', '>=', num_players)
+          }
+        }
+
+        if (filter.complexity != null) {
+          ref = ref.where('id_complexity', '==', filter.complexity)
+        }
+
+        //if (filter.time != null) {
+        //  const result = filter.time.trim().split(/\s+/);
+        //  const option = result[0];
+        //
+        //  if (option == '+70') {
+        //    ref = ref.where('min_time', '<=', 70)
+        //  } else {
+        //    const time: number = parseInt(option);
+        //    ref = ref.where('max_time', '>=', time)
+        //  }
+        //}
+
+        if (filter.text != null) {
+          ref = ref.orderBy('name').startAt(filter.text).endAt(filter.text + '\uf8ff');
         }
 
         return ref

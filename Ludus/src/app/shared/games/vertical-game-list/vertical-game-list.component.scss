@@ -4,6 +4,22 @@
 
   }
 
+  .filter {
+    p {
+      padding: 2px;
+      font-size: 11px;
+      display: inline-block;
+
+      span {
+        background-color: #69c495;
+        text-align: center;
+        padding: 2px;
+        margin: 2px;
+        border-radius: 5px;
+      }
+    }
+  }
+
   .game-list {
 
     .game {

@@ -25,7 +25,6 @@ import { SafePipe } from 'src/pipes/safe.pipe';
 
     //PIPES
     SafePipe,
-    GetGenderNamePipe,
   ]
 })
 export class GameModule {}

@@ -1,4 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
+import { Filter } from 'src/models/Filter.moda';
 import { Game } from 'src/models/Game';
 import * as authActions from './games.actions';
 
@@ -8,6 +9,7 @@ export interface State {
   card_games: Game[],
   popular_games: Game[],
   quick_games: Game[],
+  filter: Filter;
   search_results_games: Game[] | null
 }
 
@@ -17,7 +19,13 @@ export const initialState: State = {
   card_games: [],
   popular_games: [],
   quick_games: [],
-  search_results_games: null
+  filter: {
+    genders: [],
+    players: null,
+    complexity: null,
+    text: null
+  },
+  search_results_games: null,
 }
 
 export const gamesReducer = createReducer(initialState,
@@ -28,7 +36,28 @@ export const gamesReducer = createReducer(initialState,
   on(authActions.loadCardGamesSuccess, (state, { games }) => ({ ...state, card_games: games })),
   on(authActions.loadPopularGamesSuccess, (state, { games }) => ({ ...state, popular_games: games })),
   on(authActions.loadQuickGamesSuccess, (state, { games }) => ({ ...state, quick_games: games })),
-  on(authActions.unSetSearchResultsGames, (state) => ({ ...state, search_results_games: null })),
-  on(authActions.loadSearchResultsGamesSuccess, (state, { games }) => ({ ...state, search_results_games: games })),
-  on(authActions.loadFilteredGamesSuccess, (state, { games }) => ({ ...state, search_results_games: games })),
+  on(authActions.loadFilteredGames, (state, { filter }) => ({ ...state, filter: filter })),
+  on(authActions.loadFilteredGamesSuccess, (state, { games }) => {
+    if(games!=null){
+      return {
+        ...state,
+        search_results_games: games
+      }
+    }else{
+      return {
+        ...state,
+        search_results_games: null
+      }
+    }
+  }),
+  on(authActions.unSetFilteredGames, (state) => ({
+    ...state,
+    filter: {
+      genders: [],
+      players: null,
+      complexity: null,
+      text: null
+    },
+    search_results_games: null,
+  })),
 );

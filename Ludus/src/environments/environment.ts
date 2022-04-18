@@ -31,6 +31,7 @@ export const environment = {
     reviews: 'reviews',
     genders: 'genders',
     types: 'types',
+    complexities: 'complexities'
   }
 };
 
