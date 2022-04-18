@@ -29,14 +29,14 @@ export class GameService {
   getGames() {
     return this.firestore.collection<Game[]>(environment.db_tables.games).valueChanges({ idField: 'id' });
   }
-  getSearchResultsGames(search: string) {
-    return this.firestore.collection<Game[]>(environment.db_tables.games, ref => ref.orderBy('name').startAt(search).endAt(search + '\uf8ff')).valueChanges({ idField: 'id' });
-  }
 
   getFilteredResultsGames(filter: Filter) {
     return this.firestore.collection<Game[]>(environment.db_tables.games,
       (ref: any) => {
-        console.log(filter);
+
+        if (filter.text != null) {
+          ref = ref.orderBy('name').startAt(filter.text).endAt(filter.text + '\uf8ff');
+        }
 
         // LIMITACIÓN FIREBASE:
         // No puede usar tanto in como array-contains-any en la misma consulta.
@@ -75,9 +75,6 @@ export class GameService {
         //  }
         //}
 
-        if (filter.text != null) {
-          ref = ref.orderBy('name').startAt(filter.text).endAt(filter.text + '\uf8ff');
-        }
 
         return ref
       }).valueChanges({ idField: 'id' });

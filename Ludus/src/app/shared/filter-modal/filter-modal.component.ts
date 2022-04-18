@@ -70,8 +70,6 @@ export class FilterModalComponent implements OnInit, OnDestroy{
     this.suscriptions.push(filterSuscription);
 
     let formSuscription = this.form.valueChanges.subscribe(form => {
-      console.log(form);
-
       if (this.numberOfFromsChanges < 3){
         this.initialFormValue = form;
       }else{
@@ -90,13 +88,7 @@ export class FilterModalComponent implements OnInit, OnDestroy{
   }
 
   reset(){
-    const resetFilter: Filter = {
-      genders: [],
-      players: null,
-      complexity: null,
-      text: this.filter.text
-    }
-    this.store.dispatch(gamesActions.loadFilteredGames({ filter: resetFilter }));
+    this.store.dispatch(gamesActions.unSetFilteredGames());
     this.dismiss();
   }
 
@@ -105,8 +97,6 @@ export class FilterModalComponent implements OnInit, OnDestroy{
       ...filter,
       text: this.filter.text,
     }
-    console.log(newFilter);
-
     this.store.dispatch(gamesActions.loadFilteredGames({filter: newFilter}));
     this.dismiss();
   }

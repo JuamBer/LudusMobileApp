@@ -7,15 +7,22 @@
   .filter {
     p {
       padding: 2px;
-      font-size: 11px;
-      display: inline-block;
+      font-size: 12px;
+      display: inline-flex;
+      align-items: center;
 
       span {
         background-color: #69c495;
-        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         padding: 2px;
         margin: 2px;
         border-radius: 5px;
+
+        ion-con {
+          margin-left: 2.5px;
+        }
       }
     }
   }

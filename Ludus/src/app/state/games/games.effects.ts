@@ -74,7 +74,6 @@ export class GamesEffects {
     this.actions$.pipe(
       ofType(gamesActions.loadFilteredGames),
       mergeMap((res) => {
-        console.log(res);
         return this.gameService.getFilteredResultsGames(res.filter)
           .pipe(
             map((games: any) => {

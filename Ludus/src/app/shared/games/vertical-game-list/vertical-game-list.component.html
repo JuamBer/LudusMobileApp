@@ -1,9 +1,22 @@
 <div class="vertical-game-list">
   <div class="filter">
-    <p *ngIf="filter.genders.length>0">Generos: <span *ngFor="let id_gender of filter.genders">{{id_gender | getGenderName | async}} </span></p>
-    <p *ngIf="filter.players">Jugadores: <span>{{filter.players}} </span></p>
-    <p *ngIf="filter.complexity">Complejidad: <span>{{filter.complexity | getComplexityName | async }} </span></p>
-    <p *ngIf="filter.text">Término: <span>{{filter.text}} </span></p>
+    <p *ngIf="filter.genders.length>0">Generos: <span *ngFor="let id_gender of filter.genders">
+      {{id_gender | getGenderName | async}}
+      <ion-icon name="close-outline" (click)="removeFilter('gender',id_gender)"></ion-icon>
+    </span></p>
+    <p *ngIf="filter.players">Jugadores: <span>
+      {{filter.players}}
+      <ion-icon name="close-outline" (click)="removeFilter('players',null)"></ion-icon>
+    </span></p>
+    <p *ngIf="filter.complexity">Complejidad: <span>
+      {{filter.complexity | getComplexityName | async }}
+      <ion-icon name="close-outline" (click)="removeFilter('complexity',null)"></ion-icon>
+    </span></p>
+    <p *ngIf="filter.text">Término: <span>
+      {{filter.text}}
+      <ion-icon name="close-outline" (click)="removeFilter('text',null)"></ion-icon>
+    </span></p>
+
   </div>
   <ul class="game-list" *ngIf="games.length > 0; else elseBlock">
     <li class="game" *ngFor="let game of games" (click)="openGame(game)">

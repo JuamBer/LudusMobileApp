@@ -37,6 +37,22 @@ export class VerticalGameListComponent implements OnInit,OnDestroy {
       suscription.unsubscribe();
     })
   }
+  removeFilter(type: string, value:string){
+    switch(type){
+      case 'gender':
+        this.store.dispatch(gamesActions.loadFilteredGames({ filter: { ...this.filter, genders: this.filter.genders.filter(id_gender => id_gender != value)}}))
+        break;
+      case 'players':
+        this.store.dispatch(gamesActions.loadFilteredGames({ filter: { ...this.filter, players: null } }))
+        break;
+      case 'complexity':
+        this.store.dispatch(gamesActions.loadFilteredGames({ filter: { ...this.filter, complexity: null } }))
+        break;
+      case 'text':
+        this.store.dispatch(gamesActions.loadFilteredGames({ filter: { ...this.filter, text: null } }))
+        break;
+    }
+  }
 
   openGame(game: Game) {
     this.router.navigate([environment.routes.home_game, game.id]);
