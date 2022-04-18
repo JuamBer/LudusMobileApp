@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/services/auth.service';
@@ -18,13 +18,14 @@ import { environment } from 'src/environments/environment';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
 
   form: FormGroup = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]]
   });
   toastMessage: ToastMessage;
+  suscriptions: Subscription[] = [];
 
   constructor(
     private router: Router,
@@ -34,8 +35,20 @@ export class LoginComponent implements OnInit {
     private store: Store<AppState>
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    let authSuscription = this.store.select(store => store.auth).subscribe(auth => {
+      if (auth.success){
+        this.presentToast('Login Exitoso','Entrando...','info','top','success');
+      }
+    })
+    this.suscriptions.push(authSuscription);
+  }
 
+  ngOnDestroy(): void {
+    this.suscriptions.forEach((suscription) => {
+      suscription.unsubscribe();
+    })
+  }
   login(LoginDTO: LoginDTO) {
     this.authService.login(LoginDTO);
   }

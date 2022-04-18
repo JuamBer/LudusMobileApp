@@ -5,20 +5,26 @@ import * as authActions from './auth.actions';
 
 export interface State {
   user: User | null;
-  ids_favs_games: string[]
+  ids_favs_games: string[];
+  loading: boolean;
+  success: boolean;
+  error: any;
 }
 
 export const initialState: State = {
   user: null,
-  ids_favs_games: []
+  ids_favs_games: [],
+  loading: false,
+  success: false,
+  error: null
 }
 
 export const authReducer = createReducer(initialState,
 
-  on(authActions.loginUser, (state, { user }) => ({ ...state, user: user})),
-  on(authActions.logoutUser, (state) => ({ ...state, user: null })),
-  on(authActions.changeName, (state, { name }) => ({ ...state, user: { ...state.user, name: name} })),
-  on(authActions.changeEmail, (state, { email }) => ({ ...state, user: { ...state.user, email: email } })),
+  on(authActions.loginUser, (state, { user }) => ({ ...state, user: user, success: true})),
+  on(authActions.logoutUser, (state) => ({ ...state, user: null, success: true })),
+  on(authActions.changeName, (state, { name }) => ({ ...state, user: { ...state.user, name: name }, success: true})),
+  on(authActions.changeEmail, (state, { email }) => ({ ...state, user: { ...state.user, email: email }, success: true })),
 
   on(authActions.addGameToFavsSuccess, (state, { id }) => ({ ...state, ids_favs_games: [...state.ids_favs_games, id] })),
   on(authActions.loadFavsGamesSuccess, (state, { ids_favs_games }) => ({ ...state, ids_favs_games: ids_favs_games })),

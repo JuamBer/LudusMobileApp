@@ -1,19 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { PasswordValidator } from 'src/utils/PasswordValidator';
-import { environment } from 'src/environments/environment';
 import { RegisterDTO } from 'src/models/dtos/RegisterDTO.model';
 import { ToastMessage } from 'src/models/resources/ToastMessage.model';
 import { AuthService } from 'src/services/auth.service';
+//NGRX
+import { AppState } from 'src/app/state/app.state';
+import { Store } from '@ngrx/store';
+import * as userActions from 'src/app/state/auth/auth.actions';
+import { Subscription } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss'],
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent implements OnInit, OnDestroy{
 
   form: FormGroup = this.formBuilder.group(
     {
@@ -27,19 +32,28 @@ export class RegisterComponent implements OnInit {
     }
   );
   toastMessage: ToastMessage;
+  suscriptions: Subscription[] = [];
 
   constructor(
     private authService: AuthService,
     private router: Router,
     private formBuilder: FormBuilder,
-    private toastController: ToastController
+    private toastController: ToastController,
+    private store: Store<AppState>
   ) { }
 
   ngOnInit() {
-    //this.authService.currentMessage.subscribe(toastMessage => {
-    //  this.toastMessage = toastMessage;
-    //  this.presentToast(toastMessage.header, toastMessage.message, toastMessage.icon, toastMessage.position, toastMessage.color);
-    //});
+    let authSuscription = this.store.select(store => store.auth).subscribe(auth => {
+      if (auth.success) {
+        this.presentToast('Registro Exitoso', 'Entrando...', 'info', 'top', 'success');
+      }
+    })
+    this.suscriptions.push(authSuscription);
+  }
+  ngOnDestroy(): void {
+    this.suscriptions.forEach((suscription) => {
+      suscription.unsubscribe();
+    })
   }
 
   register(registerDTO: RegisterDTO) {
