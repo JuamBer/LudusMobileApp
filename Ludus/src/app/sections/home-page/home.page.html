@@ -6,19 +6,19 @@
   <app-seeker></app-seeker>
 
    <app-horizontal-game-list
-    *ngIf="(!(searchResultsGames$ | async ) && exploreGames.popular_games$ | async)"
+    *ngIf="(!((searchResultsGames$ | async ) != null) && exploreGames.popular_games$ | async)"
     [title]="'Más Populares'"
     [games]="exploreGames.popular_games$ | async"
   ></app-horizontal-game-list>
 
   <app-horizontal-game-list
-    *ngIf="(!(searchResultsGames$ | async ) && exploreGames.quick_games$ | async)"
+    *ngIf="(!((searchResultsGames$ | async ) != null) && exploreGames.quick_games$ | async)"
     [title]="'Rápidos'"
     [games]="exploreGames.quick_games$ | async"
   ></app-horizontal-game-list>
 
   <app-horizontal-game-list
-    *ngIf="(!(searchResultsGames$ | async ) && exploreGames.card_games$) | async"
+    *ngIf="(!((searchResultsGames$ | async ) != null) && exploreGames.card_games$) | async"
     [title]="'De Cartas'"
     [games]="exploreGames.card_games$ | async"
   ></app-horizontal-game-list>

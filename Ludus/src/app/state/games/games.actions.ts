@@ -85,3 +85,6 @@ export const loadFilteredGamesFail = createAction(
 export const unSetFilteredGames = createAction(
   '[Games] unSetFilteredGames'
 );
+export const unSetFilteredResultsGames = createAction(
+  '[Games] unSetFilteredResultsGames'
+);

@@ -60,4 +60,8 @@ export const gamesReducer = createReducer(initialState,
     },
     search_results_games: null,
   })),
+  on(authActions.unSetFilteredResultsGames, (state) => ({
+    ...state,
+    search_results_games: null,
+  })),
 );

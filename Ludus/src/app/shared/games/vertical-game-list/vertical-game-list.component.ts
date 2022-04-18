@@ -28,7 +28,24 @@ export class VerticalGameListComponent implements OnInit,OnDestroy {
   ) { }
 
   ngOnInit() {
-    let filterSuscription = this.store.select(store => store.games.filter).subscribe(filter => this.filter = filter);
+    let stopInfiniteBucle: boolean = false;
+    let filterSuscription = this.store.select(store => store.games.filter).subscribe(filter => {
+      this.filter = filter;
+
+      const resetFilter: Filter = {
+        genders: [],
+        players: null,
+        complexity: null,
+        text: null
+      }
+
+      if (JSON.stringify(this.filter) == JSON.stringify(resetFilter)) {
+        if (!stopInfiniteBucle){
+          this.store.dispatch(gamesActions.unSetFilteredResultsGames());
+          stopInfiniteBucle = !stopInfiniteBucle;
+        }
+      }
+    });
     this.suscriptions.push(filterSuscription);
   }
 
