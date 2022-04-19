@@ -16,14 +16,14 @@
 
     <ion-item>
       <ion-label>Género</ion-label>
-      <ion-select formControlName="genders" multiple="true" cancelText="Cancelar" okText="OK" [(ngModel)]="filter.genders">
+      <ion-select formControlName="genders" multiple="true" cancelText="Cancelar" okText="OK">
         <ion-select-option *ngFor="let gender of genders" value="{{gender.id}}">{{gender.name}}</ion-select-option>
       </ion-select>
     </ion-item>
 
     <ion-item>
       <ion-label>Jugadores Máximos</ion-label>
-      <ion-select formControlName="players" cancelText="Cancelar" okText="OK" [(ngModel)]="filter.players">
+      <ion-select formControlName="players" cancelText="Cancelar" okText="OK">
         <ion-select-option *ngFor="let player of players" value="{{player}}">{{player}}</ion-select-option>
       </ion-select>
     </ion-item>
@@ -37,7 +37,7 @@
 
     <ion-item>
       <ion-label>Complejidad</ion-label>
-      <ion-select formControlName="complexity" cancelText="Cancelar" okText="OK" [(ngModel)]="filter.complexity">
+      <ion-select formControlName="complexity" cancelText="Cancelar" okText="OK">
         <ion-select-option *ngFor="let complexity of complexities" value="{{complexity.id}}">{{complexity.name}}
         </ion-select-option>
       </ion-select>
