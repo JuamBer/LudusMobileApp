@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AuthService } from 'src/services/auth.service';
 import { User } from 'src/models/User';
 
@@ -8,7 +8,10 @@ import { Store } from '@ngrx/store';
 import * as userActions from 'src/app/state/auth/auth.actions';
 import { Subscription } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { ToastController } from '@ionic/angular';
 
+import { Message, Type } from "src/models/Message.model";
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -16,15 +19,43 @@ import { environment } from 'src/environments/environment';
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss'],
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit, OnDestroy{
+
+  suscriptions: Subscription[] = [];
 
   constructor(
     private authService: AuthService,
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    private toastController: ToastController,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
-    this.authService.getUser().subscribe(
+    let messageSuscription = this.store.select(store=> store.auth.message).subscribe(
+      (message)=>{
+        if (message){
+          this.presentToast(message.text, message.icon, "top", message.color);
+
+          switch (message.type) {
+            case Type.LOGIN_SUCCESS:
+              this.router.navigate([environment.routes.home])
+              break;
+            case Type.LOGIN_ERROR:
+              this.router.navigate([environment.routes.login])
+              break;
+            case Type.LOGOUT_SUCCESS:
+              this.router.navigate([environment.routes.login])
+              break;
+            case Type.REGISTER_SUCCESS:
+              this.router.navigate([environment.routes.home])
+              break;
+          }
+        }
+      }
+    )
+    this.suscriptions.push(messageSuscription)
+
+    let getUserSuscription = this.authService.getUser().subscribe(
       (user)=>{
         if(user){
           const userLogged: User = {
@@ -32,12 +63,28 @@ export class AppComponent implements OnInit{
             name: user.displayName,
             email: user.email
           }
-          this.store.dispatch(userActions.loginUser({ user: userLogged }))
+          this.store.dispatch(userActions.loginUserSuccess({ user: userLogged }))
           this.store.dispatch(userActions.loadFavsGames({ id: userLogged.id }));
-
         }
       }
     )
+    this.suscriptions.push(getUserSuscription)
+  }
 
+  ngOnDestroy(): void {
+    this.suscriptions.forEach((suscription) => {
+      suscription.unsubscribe();
+    })
+  }
+
+  async presentToast(msg: string, icon: string, position: "top" | "bottom" | "middle", color: string) {
+    const toast = await this.toastController.create({
+      message: msg,
+      icon: icon,
+      position: position,
+      color: color,
+      duration: 1500
+    });
+    await toast.present();
   }
 }

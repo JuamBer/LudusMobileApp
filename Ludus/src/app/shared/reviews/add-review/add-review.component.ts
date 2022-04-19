@@ -33,8 +33,10 @@ export class AddReviewComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     let userSubscription = this.store.select(store => store.auth.user).subscribe(user => {
-      this.user = user;
-      this.store.dispatch(reviewsActions.getIfIHaveDoneAReview({ user_id: this.user.id, game_id: this.gameId}))
+      if(user){
+        this.user = user;
+        this.store.dispatch(reviewsActions.getIfIHaveDoneAReview({ user_id: this.user.id, game_id: this.gameId }))
+      }
     });
     this.suscriptions.push(userSubscription);
     let iHaveDoneAReviewSubscription = this.store.select(store => store.reviews.iHaveDoneAReview).subscribe(iHaveDoneAReview => {

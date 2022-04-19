@@ -33,8 +33,10 @@ export class ReviewItemComponent implements OnInit {
   ngOnInit() {
     this.store.select(store => store.auth.user).subscribe(
       (user) => {
-        if (user.id == this.review.id_user){
-          this.imTheOwnerOfTheReview = true;
+        if(user){
+          if (user.id == this.review.id_user) {
+            this.imTheOwnerOfTheReview = true;
+          }
         }
       }
     )

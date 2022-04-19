@@ -9,7 +9,7 @@ import { ToastMessage } from 'src/models/resources/ToastMessage.model';
 //NGRX
 import { AppState } from 'src/app/state/app.state';
 import { Store } from '@ngrx/store';
-import * as userActions from 'src/app/state/auth/auth.actions';
+import * as authActions from 'src/app/state/auth/auth.actions';
 import { Subscription } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
@@ -18,39 +18,23 @@ import { environment } from 'src/environments/environment';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent implements OnInit, OnDestroy {
+export class LoginComponent implements OnInit {
 
   form: FormGroup = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]]
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', [Validators.required, Validators.minLength(6)]]
   });
-  toastMessage: ToastMessage;
-  suscriptions: Subscription[] = [];
 
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
-    private authService: AuthService,
-    private toastController: ToastController,
     private store: Store<AppState>
   ) {}
 
-  ngOnInit() {
-    let authSuscription = this.store.select(store => store.auth).subscribe(auth => {
-      if (auth.success){
-        this.presentToast('Login Exitoso','Entrando...','info','top','success');
-      }
-    })
-    this.suscriptions.push(authSuscription);
-  }
+  ngOnInit() {}
 
-  ngOnDestroy(): void {
-    this.suscriptions.forEach((suscription) => {
-      suscription.unsubscribe();
-    })
-  }
-  login(LoginDTO: LoginDTO) {
-    this.authService.login(LoginDTO);
+  login(loginDTO: LoginDTO) {
+    this.store.dispatch(authActions.loginUser({ loginDTO: loginDTO }))
   }
 
   goToRegister(){
@@ -58,20 +42,6 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   loginWithGoogle() {
-    this.authService.googleAuth();
+    this.store.dispatch(authActions.loginUserWithGoogle());
   }
-
-  async presentToast(header: string, message: string, icon: string, position: "top" | "bottom" | "middle", color: string) {
-    const toast = await this.toastController.create({
-      header: header,
-      message: message,
-      icon: icon,
-      position: position,
-      color: color,
-      duration: 1500
-    });
-    await toast.present();
-  }
-
-
 }

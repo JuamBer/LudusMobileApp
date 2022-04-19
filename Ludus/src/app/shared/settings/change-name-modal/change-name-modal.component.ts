@@ -23,7 +23,6 @@ export class ChangeNameModalComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private authService: AuthService,
     private modalController: ModalController,
     private store: Store<AppState>
   ) { }
@@ -31,7 +30,7 @@ export class ChangeNameModalComponent implements OnInit {
   ngOnInit() {}
 
   send(changeNameDTO: ChangeNameDTO){
-    this.authService.updateName(changeNameDTO.name);
+    this.store.dispatch(authActions.changeName({ name: changeNameDTO.name}));
     this.dismiss();
   }
 

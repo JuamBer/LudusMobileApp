@@ -18,7 +18,7 @@ import { environment } from 'src/environments/environment';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss'],
 })
-export class RegisterComponent implements OnInit, OnDestroy{
+export class RegisterComponent implements OnInit{
 
   form: FormGroup = this.formBuilder.group(
     {
@@ -31,49 +31,20 @@ export class RegisterComponent implements OnInit, OnDestroy{
       validators: PasswordValidator.confirmed('password', 'confirmPassword')
     }
   );
-  toastMessage: ToastMessage;
-  suscriptions: Subscription[] = [];
 
   constructor(
-    private authService: AuthService,
     private router: Router,
     private formBuilder: FormBuilder,
-    private toastController: ToastController,
     private store: Store<AppState>
   ) { }
 
-  ngOnInit() {
-    let authSuscription = this.store.select(store => store.auth).subscribe(auth => {
-      if (auth.success) {
-        this.presentToast('Registro Exitoso', 'Entrando...', 'info', 'top', 'success');
-      }
-    })
-    this.suscriptions.push(authSuscription);
-  }
-  ngOnDestroy(): void {
-    this.suscriptions.forEach((suscription) => {
-      suscription.unsubscribe();
-    })
-  }
+  ngOnInit() {}
 
   register(registerDTO: RegisterDTO) {
-    this.authService.register(registerDTO);
+    this.store.dispatch(userActions.register({ registerDTO: registerDTO }));
   }
 
   goToLogin() {
     this.router.navigate([environment.routes.login])
   }
-
-  async presentToast(header: string, message: string, icon: string, position: "top" | "bottom" | "middle", color: string) {
-    const toast = await this.toastController.create({
-      header: header,
-      message: message,
-      icon: icon,
-      position: position,
-      color: color,
-      duration: 1500
-    });
-    await toast.present();
-  }
-
 }

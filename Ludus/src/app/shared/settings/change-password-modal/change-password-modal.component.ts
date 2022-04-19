@@ -7,7 +7,10 @@ import { environment } from 'src/environments/environment';
 import { ChangeNameDTO } from 'src/models/dtos/ChangeNameDTO.model';
 import { ChangePasswordDTO } from 'src/models/dtos/ChangePasswordDTO.model';
 import { AuthService } from 'src/services/auth.service';
-
+//NGRX
+import { AppState } from '@capacitor/app';
+import { Store } from '@ngrx/store';
+import * as authActions from 'src/app/state/auth/auth.actions';
 @Component({
   selector: 'app-change-password-modal',
   templateUrl: './change-password-modal.component.html',
@@ -26,22 +29,14 @@ export class ChangePasswordModalComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private authService: AuthService,
-    private modalController: ModalController
+    private modalController: ModalController,
+    private store: Store<AppState>
   ) { }
 
   ngOnInit() {}
 
   send(changePassowrdDTO: ChangePasswordDTO){
-    this.authService.updatePassword(changePassowrdDTO.new_password).then(
-      (res)=>{
-        this.dismiss();
-      }
-    ).catch(
-      (err)=>{
-        console.error(err);
-      }
-    )
+    this.store.dispatch(authActions.changePassword({ password: changePassowrdDTO.new_password }));
   }
 
   dismiss() {

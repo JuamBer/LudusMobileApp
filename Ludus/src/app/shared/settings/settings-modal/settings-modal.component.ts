@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Form, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
-import { environment } from 'src/environments/environment';
-import { AuthService } from 'src/services/auth.service';
-import { ChangeNameModalComponent } from '../change-name-modal/change-name-modal.component';
+
+//NGRX
+import { AppState } from 'src/app/state/app.state';
+import { Store } from '@ngrx/store';
+import * as authActions from 'src/app/state/auth/auth.actions';
 
 @Component({
   selector: 'app-settings-modal',
@@ -18,19 +18,14 @@ export class SettingsModalComponent implements OnInit {
   isChangePasswordModalOpen: boolean = false;
 
   constructor(
-    private authService: AuthService,
-    private router: Router,
-    private modalController: ModalController
+    private modalController: ModalController,
+    private store: Store<AppState>
   ) { }
 
   ngOnInit() {}
 
   logOut(){
-    this.authService.logOut().then(
-      (res)=>{
-        this.router.navigate([environment.routes.login])
-      }
-    );
+    this.store.dispatch(authActions.logoutUser());
     this.dismiss();
   }
 
