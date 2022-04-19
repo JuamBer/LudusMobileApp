@@ -6,31 +6,21 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 //IONIC
 import { IonicModule } from '@ionic/angular';
 
-//SWIPERJS
-import { SwiperModule } from 'swiper/angular';
-
-
-
-//COMOPONETS AND MODULES
-import { HomePageRoutingModule } from './home-page-routing.module';
-import { LudusHeaderModule } from '../../shared/ludus-header/ludus-header.module';
+//COMPONENTS
 import { HomePage } from './home.page';
 import { FilterModalComponent } from '../../shared/filter-modal/filter-modal.component';
-import { GameComponent } from '../../shared/games/game/game.component';
 import { SeekerComponent } from '../../shared/seeker/seeker.component';
 import { HorizontalGameListComponent } from '../../shared/games/horizontal-game-list/horizontal-game-list.component';
 import { VerticalGameListComponent } from '../../shared/games/vertical-game-list/vertical-game-list.component';
 import { SpecialGameViewComponent } from '../../shared/games/special-game-view/special-game-view.component';
 
-//PIPES
-import { SafePipe } from '../../../pipes/safe.pipe';
-import { GetTypeNamePipe } from '../../../pipes/get-type-name.pipe';
-import { GetGenderNamePipe } from '../../../pipes/get-gender-name.pipe';
-import { GetUserNamePipe } from '../../../pipes/get-user-name.pipe';
-import { ReviewsModule } from 'src/app/shared/reviews/reviews.module';
+//MODULES
 import { GameModule } from 'src/app/shared/games/game/game.module';
-import { GetComplexityNamePipe } from 'src/pipes/get-complexity-name.pipe';
-import { ApplicationPipesModule } from 'src/app/shared/modules/shared-pipes.module';
+import { HomePageRoutingModule } from './home-page-routing.module';
+import { ApplicationPipesAndDirectivesModule } from 'src/app/shared/modules/shared-pipes-and-directives.module';
+
+//SWIPERJS
+import { SwiperModule } from 'swiper/angular';
 
 @NgModule({
   imports: [
@@ -45,10 +35,8 @@ import { ApplicationPipesModule } from 'src/app/shared/modules/shared-pipes.modu
 
     //MODULES
     GameModule,
-
-    //ROUTING
     HomePageRoutingModule,
-    ApplicationPipesModule
+    ApplicationPipesAndDirectivesModule
   ],
   declarations: [
     //COMPONENTS
@@ -58,11 +46,6 @@ import { ApplicationPipesModule } from 'src/app/shared/modules/shared-pipes.modu
     HorizontalGameListComponent,
     VerticalGameListComponent,
     SpecialGameViewComponent,
-
-
-    GetTypeNamePipe,
-    GetComplexityNamePipe,
-
   ],
 })
 export class HomePageModule {}

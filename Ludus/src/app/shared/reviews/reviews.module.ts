@@ -3,8 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ReviewListComponent } from './review-list/review-list.component';
 import { ReviewItemComponent } from './review-item/review-item.component';
 import { IonicModule } from '@ionic/angular';
-import { GetUserNamePipe } from 'src/pipes/get-user-name.pipe';
-import { GetGameNamePipe } from 'src/pipes/get-game-name.pipe';
+
 
 
 
@@ -13,6 +12,7 @@ import { NgxStarRatingModule } from 'ngx-star-rating';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddReviewComponent } from './add-review/add-review.component';
 import { EditReviewModalComponent } from './edit-review-modal/edit-review-modal.component';
+import { ApplicationPipesAndDirectivesModule } from '../modules/shared-pipes-and-directives.module';
 
 @NgModule({
   declarations: [
@@ -20,9 +20,6 @@ import { EditReviewModalComponent } from './edit-review-modal/edit-review-modal.
     ReviewListComponent,
     AddReviewComponent,
     EditReviewModalComponent,
-
-    GetUserNamePipe,
-    GetGameNamePipe
   ],
   imports: [
     CommonModule,
@@ -33,7 +30,7 @@ import { EditReviewModalComponent } from './edit-review-modal/edit-review-modal.
 
     //STAR RATING
     NgxStarRatingModule,
-
+    ApplicationPipesAndDirectivesModule
   ],
   exports: [
     ReviewListComponent,

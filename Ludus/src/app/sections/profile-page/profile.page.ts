@@ -1,14 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { ModalController } from '@ionic/angular';
 import { Observable } from 'rxjs';
 
-import { SettingsModalComponent } from 'src/app/shared/settings/settings-modal/settings-modal.component';
-import { environment } from 'src/environments/environment';
 import { Review } from 'src/models/Review';
 import { User } from 'src/models/User';
-import { AuthService } from 'src/services/auth.service';
-import { UserService } from 'src/services/user.service';
 
 
 //NGRX
@@ -32,9 +26,7 @@ export class ProfilePage implements OnInit, OnDestroy{
   suscriptions: Subscription[] = [];
 
   constructor(
-    private router: Router,
-    private store: Store<AppState>,
-    private modalController: ModalController
+    private store: Store<AppState>
   ) {}
 
   ngOnInit(): void {

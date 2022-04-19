@@ -1,17 +1,16 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+//ANGULAR
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/services/auth.service';
-import { LoginDTO } from 'src/models/dtos/LoginDTO.model';
-import { ToastController } from '@ionic/angular';
-import { ToastMessage } from 'src/models/resources/ToastMessage.model';
 
 //NGRX
 import { AppState } from 'src/app/state/app.state';
 import { Store } from '@ngrx/store';
 import * as authActions from 'src/app/state/auth/auth.actions';
-import { Subscription } from 'rxjs';
 import { environment } from 'src/environments/environment';
+
+//MODELS
+import { LoginDTO } from 'src/models/dtos/LoginDTO.model';
 
 @Component({
   selector: 'app-login',

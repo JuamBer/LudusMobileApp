@@ -1,0 +1,17 @@
+//ANGULAR
+
+//IONIC
+
+//MODULES
+
+//COMPONENTS
+
+//RXJS
+
+//NGRX
+
+//MODELS
+
+//UTILS
+
+//SWIPERJS

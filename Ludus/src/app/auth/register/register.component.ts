@@ -1,17 +1,19 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+//ANGULAR
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ToastController } from '@ionic/angular';
-import { PasswordValidator } from 'src/utils/PasswordValidator';
-import { RegisterDTO } from 'src/models/dtos/RegisterDTO.model';
-import { ToastMessage } from 'src/models/resources/ToastMessage.model';
-import { AuthService } from 'src/services/auth.service';
+
 //NGRX
 import { AppState } from 'src/app/state/app.state';
 import { Store } from '@ngrx/store';
-import * as userActions from 'src/app/state/auth/auth.actions';
-import { Subscription } from 'rxjs';
+import * as authActions from 'src/app/state/auth/auth.actions';
 import { environment } from 'src/environments/environment';
+
+//MODELS
+import { RegisterDTO } from 'src/models/dtos/RegisterDTO.model';
+
+//UTILS
+import { PasswordValidator } from 'src/utils/PasswordValidator';
 
 @Component({
   selector: 'app-register',
@@ -41,7 +43,7 @@ export class RegisterComponent implements OnInit{
   ngOnInit() {}
 
   register(registerDTO: RegisterDTO) {
-    this.store.dispatch(userActions.register({ registerDTO: registerDTO }));
+    this.store.dispatch(authActions.register({ registerDTO: registerDTO }));
   }
 
   goToLogin() {

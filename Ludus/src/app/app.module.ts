@@ -30,23 +30,37 @@ import { GendersEffects } from './state/genders/genders.effects';
 import { AuthEffects } from './state/auth/auth.effects';
 import { TypesEffects } from './state/types/types.effects';
 import { ComplexitiesEffects } from './state/complexities/complexities.effects';
+import { ApplicationPipesAndDirectivesModule } from './shared/modules/shared-pipes-and-directives.module';
+
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
   imports: [
+    //ANGULAR
     BrowserModule,
     CommonModule,
+
+    //IONIC
     IonicModule.forRoot(),
+
+    //MODULES
+    ApplicationPipesAndDirectivesModule,
     AppRoutingModule,
+
+    //FIREBASE
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFireAuthModule,
     AngularFireStorageModule,
     AngularFireDatabaseModule,
+
+
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
+
+    //NGRX
     StoreModule.forRoot(appReducers),
     StoreDevtoolsModule.instrument({
       maxAge: 25
@@ -55,5 +69,6 @@ import { ComplexitiesEffects } from './state/complexities/complexities.effects';
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
+
 })
 export class AppModule {}
