@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Form, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
@@ -17,9 +17,8 @@ import * as authActions from 'src/app/state/auth/auth.actions';
 export class ChangeNameModalComponent implements OnInit {
 
   title: string = "Cambiar Nombre";
-  form: FormGroup = this.formBuilder.group({
-    name: ['', [Validators.required]],
-  });
+  @Input() name: string;
+  form: FormGroup;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -27,7 +26,11 @@ export class ChangeNameModalComponent implements OnInit {
     private store: Store<AppState>
   ) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.form =this.formBuilder.group({
+      name: [this.name, [Validators.required]],
+    });
+  }
 
   send(changeNameDTO: ChangeNameDTO){
     this.store.dispatch(authActions.changeName({ name: changeNameDTO.name}));

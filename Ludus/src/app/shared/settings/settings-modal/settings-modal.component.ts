@@ -5,6 +5,7 @@ import { ModalController } from '@ionic/angular';
 import { AppState } from 'src/app/state/app.state';
 import { Store } from '@ngrx/store';
 import * as authActions from 'src/app/state/auth/auth.actions';
+import { User } from 'src/models/User';
 
 @Component({
   selector: 'app-settings-modal',
@@ -13,6 +14,7 @@ import * as authActions from 'src/app/state/auth/auth.actions';
 })
 export class SettingsModalComponent implements OnInit {
 
+  user: User;
   isChangeNameModalOpen: boolean = false;
   isChangeEmailModalOpen: boolean = false;
   isChangePasswordModalOpen: boolean = false;
@@ -22,7 +24,9 @@ export class SettingsModalComponent implements OnInit {
     private store: Store<AppState>
   ) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.store.select(store=>store.auth.user).subscribe(user=>this.user=user);
+  }
 
   logOut(){
     this.store.dispatch(authActions.logoutUser());

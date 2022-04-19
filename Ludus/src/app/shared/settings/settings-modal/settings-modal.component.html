@@ -22,13 +22,13 @@
 
 <ion-modal [isOpen]="isChangeNameModalOpen" [breakpoints]="[0.1, 0.5, 1]" [initialBreakpoint]="0.5">
   <ng-template>
-    <app-change-name-modal></app-change-name-modal>
+    <app-change-name-modal [name]="user.name"></app-change-name-modal>
   </ng-template>
 </ion-modal>
 
 <ion-modal [isOpen]="isChangeEmailModalOpen" [breakpoints]="[0.1, 0.5, 1]" [initialBreakpoint]="0.5">
   <ng-template>
-    <app-change-email-modal></app-change-email-modal>
+    <app-change-email-modal [email]="user.email"></app-change-email-modal>
   </ng-template>
 </ion-modal>
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
 import { ChangeEmailDTO } from 'src/models/dtos/ChangeEmailDTO.model';
@@ -15,9 +15,8 @@ import * as authActions from 'src/app/state/auth/auth.actions';
 export class ChangeEmailModalComponent implements OnInit {
 
   title: string = "Cambiar Email";
-  form: FormGroup = this.formBuilder.group({
-    email: ['', [Validators.required]],
-  });
+  @Input() email: string;
+  form: FormGroup;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -25,7 +24,11 @@ export class ChangeEmailModalComponent implements OnInit {
     private store: Store<AppState>
   ) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.form = this.formBuilder.group({
+      email: [this.email, [Validators.required, Validators.email]],
+    });
+  }
 
   send(changeEmailDTO: ChangeEmailDTO){
     this.store.dispatch(authActions.changeEmail({ email: changeEmailDTO.email }));
