@@ -57,7 +57,7 @@ export class ReviewItemComponent implements OnInit {
     const modal = await this.modalController.create({
       component: EditReviewModalComponent,
       componentProps: {
-        review: {...review}
+        review: review
       },
       breakpoints: [0.1, 0.5, 1],
       initialBreakpoint: 0.5

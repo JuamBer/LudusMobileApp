@@ -4,11 +4,11 @@
   <form [formGroup]="form" (ngSubmit)="send(form.value)" *ngIf="review">
     <div class="review">
       <ion-item>
-        <ion-textarea [(ngModel)]="review.text" formControlName="review"></ion-textarea>
+        <ion-textarea formControlName="review"></ion-textarea>
       </ion-item>
     </div>
     <div class="star-rating">
-      <ngx-star-rating [(ngModel)]='review.rating' formControlName="rating"></ngx-star-rating>
+      <ngx-star-rating formControlName="rating"></ngx-star-rating>
     </div>
 
     <div class="save">

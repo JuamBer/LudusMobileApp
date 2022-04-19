@@ -20,18 +20,20 @@ export class EditReviewModalComponent implements OnInit {
 
   title: string = "Editar Tu Opinión";
   @Input() review: Review;
-  form: FormGroup = this.formBuilder.group({
-    rating: ['', Validators.required],
-    review: ['', Validators.required]
-  });
+  form: FormGroup;
 
   constructor(
     private formBuilder: FormBuilder,
     private modalController: ModalController,
     private store: Store<AppState>
-  ) { }
+  ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.form = this.formBuilder.group({
+      rating: [this.review.rating, Validators.required],
+      review: [this.review.text, Validators.required]
+    });
+  }
 
   send(formValue: any){
     const updatedReview: Review = {
