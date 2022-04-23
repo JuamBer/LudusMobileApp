@@ -44,7 +44,7 @@ export class EditReviewModalComponent implements OnInit {
       id_game: this.review.id_game
     }
 
-    this.store.dispatch(reviewsActions.updateReview({ review: updatedReview }));
+    this.store.dispatch(reviewsActions.updateReview({ review: updatedReview, oldReview: this.review}));
     this.dismiss();
   }
 

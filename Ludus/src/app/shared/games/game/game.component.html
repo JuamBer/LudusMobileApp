@@ -9,8 +9,11 @@
 
   <div class="gameView" *ngIf="game">
     <div class="title">
-      <h3>{{ game.name }}</h3>
-      <ion-icon name="{{favicon}}" (click)="toggleGameToFavs(game)"></ion-icon>
+      <div class="main-info">
+        <h3>{{ game.name }}</h3>
+        <span><ion-icon name="star"></ion-icon> {{game.average_rating}} | <ion-icon name="person"></ion-icon> {{game.number_of_ratings}} </span>
+      </div>
+      <ion-icon class="save" name="{{favicon}}" (click)="toggleGameToFavs(game)"></ion-icon>
     </div>
     <div class="info">
       <div class="duration">

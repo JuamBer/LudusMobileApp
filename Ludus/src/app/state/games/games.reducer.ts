@@ -29,6 +29,7 @@ export const initialState: State = {
 }
 
 export const gamesReducer = createReducer(initialState,
+  on(authActions.updateAverageRatingSuccess, (state, { game }) => ({ ...state, game: game })),
 
   on(authActions.loadGameSuccess, (state, { game }) => ({ ...state, game: game })),
   on(authActions.loadGameSuccess, (state, { game }) => ({ ...state, game: game })),

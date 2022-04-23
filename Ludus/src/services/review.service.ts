@@ -26,9 +26,9 @@ export class ReviewService {
     }
   }
 
-  async delete(id: string){
+  async delete(review: Review){
     try {
-      const res = await this.firestore.collection(environment.db_tables.reviews).doc(id).delete();
+      const res = await this.firestore.collection(environment.db_tables.reviews).doc(review.id).delete();
 
       return res;
     } catch (err) {

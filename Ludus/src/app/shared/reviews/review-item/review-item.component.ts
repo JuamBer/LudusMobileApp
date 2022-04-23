@@ -49,8 +49,8 @@ export class ReviewItemComponent implements OnInit {
   editReview(id: string) {
   }
 
-  deleteReview(id: string) {
-    this.store.dispatch(reviewsActions.deleteReview({id: id}));
+  deleteReview(review: Review) {
+    this.store.dispatch(reviewsActions.deleteReview({ review: review}));
   }
 
   async presentModal(review: Review) {
@@ -65,7 +65,7 @@ export class ReviewItemComponent implements OnInit {
     return await modal.present();
   }
 
-  async presentConfirmDeleteToast(id: string) {
+  async presentConfirmDeleteToast(review: Review) {
     const toast = await this.toastController.create({
       message: '¿ Estás Seguro ?',
       color: 'dark',
@@ -78,9 +78,8 @@ export class ReviewItemComponent implements OnInit {
         }, {
           text: 'Eliminar',
           handler: () => {
-            console.log(id);
 
-            this.deleteReview(id);
+            this.deleteReview(review);
           }
         }
       ]

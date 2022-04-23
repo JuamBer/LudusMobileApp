@@ -1,4 +1,5 @@
 import { createAction, props } from '@ngrx/store';
+import { Game } from 'src/models/Game';
 import { Review } from 'src/models/Review';
 
 //LOAD GAME
@@ -61,11 +62,11 @@ export const createReviewFail = createAction(
 //DELETE REVIEW
 export const deleteReview = createAction(
   '[Reviews] delete Review',
-  props<{ id: string }>()
+  props<{ review: Review }>()
 );
 export const deleteReviewSuccess = createAction(
   '[Reviews] delete Review Success',
-  props<{ id: string }>()
+  props<{ review: Review }>()
 );
 export const deleteReviewFail = createAction(
   '[Reviews] delete Review Fail',
@@ -75,11 +76,11 @@ export const deleteReviewFail = createAction(
 //UPDATE REVIEW
 export const updateReview = createAction(
   '[Reviews] update Review',
-  props<{ review: Review }>()
+  props<{ review: Review, oldReview: Review }>()
 );
 export const updateReviewSuccess = createAction(
   '[Reviews] update Review Success',
-  props<{ review: Review }>()
+  props<{ review: Review, oldReview: Review }>()
 );
 export const updateReviewFail = createAction(
   '[Reviews] update Review Fail',

@@ -62,12 +62,12 @@ export class ReviewsEffects {
     this.actions$.pipe(
       ofType(reviewsActions.deleteReview),
       mergeMap((res) => {
-        return from(this.reviewService.delete(res.id))
+        return from(this.reviewService.delete(res.review))
           .pipe(
-            map(() => reviewsActions.deleteReviewSuccess({ id: res.id })),
+            map(() => reviewsActions.deleteReviewSuccess({ review: res.review })),
             catchError(err => of(reviewsActions.deleteReviewFail({ error: err })))
           )
-      }
+        }
       )
     )
   );
@@ -78,7 +78,7 @@ export class ReviewsEffects {
       mergeMap((res) => {
         return from(this.reviewService.update(res.review))
           .pipe(
-            map(() => reviewsActions.updateReviewSuccess({ review: res.review })),
+            map(() => reviewsActions.updateReviewSuccess({ review: res.review, oldReview: res.oldReview })),
             catchError(err => of(reviewsActions.updateReviewFail({ error: err })))
           )
       }

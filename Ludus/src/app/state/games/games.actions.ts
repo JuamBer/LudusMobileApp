@@ -3,6 +3,17 @@ import { Filter } from 'src/models/Filter.moda';
 import { Game } from 'src/models/Game';
 import { User } from 'src/models/User';
 
+//UPDATE AVERAGE RATING
+export const updateAverageRatingSuccess = createAction(
+  '[Games] updateAverageRatingSuccess',
+  props<{ game: Game }>()
+);
+export const updateAverageRatingFail = createAction(
+  '[Games] updateAverageRatingFail',
+  props<{ error: any }>()
+);
+
+
 //LOAD GAME
 export const loadGame = createAction(
   '[Games] load Game',

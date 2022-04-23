@@ -16,4 +16,5 @@ export interface Game {
   summary: string;
   description: string;
   average_rating: number;
+  number_of_ratings: number;
 }

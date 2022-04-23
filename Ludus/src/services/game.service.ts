@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment';
 import { Filter } from 'src/models/Filter.moda';
 import { Game } from 'src/models/Game';
 import { Page, PageFilter } from 'src/models/Page.model';
+import { Review } from 'src/models/Review';
 
 @Injectable({
   providedIn: 'root'
@@ -111,5 +112,52 @@ export class GameService {
     return this.firestore.collection(environment.db_tables.games).doc(id).valueChanges({ idField: 'id' }).pipe(map((game: any) => game.name));
   }
 
+
+  async updateAverageRating(game: Game, review: Review, type: "create" | "update" | "delete", oldReview?: Review): Promise<void>{
+    try {
+      let newNumberOfRating: number = game.number_of_ratings;
+      switch (type) {
+        case "create":
+          newNumberOfRating = newNumberOfRating+1;
+          break;
+        case "delete":
+          newNumberOfRating = newNumberOfRating-1;
+          break;
+      }
+      const newAverageRating: number = this.calculateNewAverageRating(game, review, type, oldReview);
+
+      return await this.firestore.collection(environment.db_tables.games).doc(review.id_game).update({
+        average_rating: newAverageRating,
+        number_of_ratings: newNumberOfRating,
+      });
+
+    } catch (err) {
+      console.log(err);
+
+      return err;
+    }
+
+  }
+
+  calculateNewAverageRating(game: Game, review: Review, type: "create" | "update" | "delete", oldReview?: Review){
+    let res: number = 0;
+
+    switch (type) {
+      case "create":
+        res = (((game.average_rating * game.number_of_ratings) + review.rating) / (game.number_of_ratings + 1));
+        break;
+      case "update":
+        res = (((game.average_rating * game.number_of_ratings) - oldReview.rating + review.rating ) / (game.number_of_ratings));
+        break;
+      case "delete":
+        res = (((game.average_rating * game.number_of_ratings) - review.rating) / (game.number_of_ratings - 1));
+        break;
+    }
+
+
+    console.log(res);
+
+    return res
+  }
 }
 
