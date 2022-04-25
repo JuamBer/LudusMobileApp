@@ -65,3 +65,39 @@ export const changePasswordSuccess: Message = {
   type: Type.CHANGE_PASSWORD_SUCCESS
 }
 
+
+
+export const addGameToFavsSuccess: Message = {
+  text: "¡ Juego Guardado Con Éxito !",
+  icon: "information-circle-outline",
+  color: "success",
+  type: Type.ADD_GAME_TO_FAVS_SUCCESS
+}
+
+export const removeGameToFavsSuccess: Message = {
+  text: "¡ Juego Eliminado De Tus Guardados Con Éxito !",
+  icon: "information-circle-outline",
+  color: "success",
+  type: Type.REMOVE_GAME_TO_FAVS_SUCCESS
+}
+
+
+//REVIEWS
+export const createReviewSuccess: Message = {
+  text: "¡ Opinion Publicada Con Éxito !",
+  icon: "information-circle-outline",
+  color: "success",
+  type: Type.CREATE_REVIEW_SUCCESS
+}
+export const deleteReviewSuccess: Message = {
+  text: "¡ Opinion Eliminada Con Éxito !",
+  icon: "information-circle-outline",
+  color: "success",
+  type: Type.DELETE_REVIEW_SUCCESS
+}
+export const updateReviewSuccess: Message = {
+  text: "¡ Opinion Actulizada Con Éxito !",
+  icon: "information-circle-outline",
+  color: "success",
+  type: Type.UPDATE_REVIEW_SUCCESSS
+}

@@ -133,10 +133,18 @@ export const authReducer = createReducer(initialState,
   })),
 
 
-  on(authActions.addGameToFavsSuccess, (state, { id }) => ({ ...state, ids_favs_games: [...state.ids_favs_games, id] })),
-  on(authActions.loadFavsGamesSuccess, (state, { ids_favs_games }) => ({ ...state, ids_favs_games: ids_favs_games })),
+  on(authActions.addGameToFavsSuccess, (state, { id }) => ({
+    ...state,
+    ids_favs_games: [...state.ids_favs_games, id],
+    message: {...messages.addGameToFavsSuccess}
+  })),
+  on(authActions.loadFavsGamesSuccess, (state, { ids_favs_games }) => ({
+    ...state,
+    ids_favs_games: ids_favs_games
+  })),
   on(authActions.removeGameToFavsSuccess, (state, { id }) => ({
     ...state,
-    ids_favs_games: state.ids_favs_games.filter(id_game => id_game != id)
+    ids_favs_games: state.ids_favs_games.filter(id_game => id_game != id),
+    message: {...messages.removeGameToFavsSuccess}
   })),
 );

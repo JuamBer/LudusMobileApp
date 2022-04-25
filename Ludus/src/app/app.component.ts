@@ -31,7 +31,7 @@ export class AppComponent implements OnInit, OnDestroy{
   ) {}
 
   ngOnInit(): void {
-    let messageSuscription = this.store.select(store=> store.auth.message).subscribe(
+    let authMessageSuscription = this.store.select(store=> store.auth.message).subscribe(
       (message)=>{
         if (message){
           this.presentToast(message.text, message.icon, "top", message.color);
@@ -53,7 +53,7 @@ export class AppComponent implements OnInit, OnDestroy{
         }
       }
     )
-    this.suscriptions.push(messageSuscription)
+    this.suscriptions.push(authMessageSuscription)
 
     let getUserSuscription = this.authService.getUser().subscribe(
       (user)=>{
@@ -69,6 +69,15 @@ export class AppComponent implements OnInit, OnDestroy{
       }
     )
     this.suscriptions.push(getUserSuscription)
+
+    let reviewMessageSuscription = this.store.select(store => store.reviews.message).subscribe(
+      (message)=>{
+        if (message) {
+          this.presentToast(message.text, message.icon, "top", message.color);
+        }
+      }
+    )
+    this.suscriptions.push(reviewMessageSuscription)
   }
 
   ngOnDestroy(): void {

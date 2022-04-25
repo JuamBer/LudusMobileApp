@@ -139,10 +139,6 @@ export class GameService {
         res = (((game.average_rating * game.number_of_ratings) - review.rating) / (game.number_of_ratings - 1));
         break;
     }
-
-
-    console.log(res);
-
     return res
   }
 }
