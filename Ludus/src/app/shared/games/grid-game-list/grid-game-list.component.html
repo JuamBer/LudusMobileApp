@@ -1,9 +1,9 @@
-<div class="grid-game-list" *ngIf="ids_games">
-  <div class="list-title" *ngIf="ids_games.length > 0">
+<div class="grid-game-list">
+  <div class="list-title">
     <h2>{{ title }}</h2>
   </div>
 
-  <ul class="game-list" *ngIf="ids_games.length > 0; else elseBlock">
+  <ul class="game-list" *ngIf="(ids_games?.length > 0); else elseBlock">
     <li class="game" *ngFor="let id_game of ids_games; index as i">
       <div *ngVar="(id_game | getGame) | async as game">
         <div class="fav-game" *ngIf="game" (click)="openGame(game)">

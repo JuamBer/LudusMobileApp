@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { Filter } from 'src/models/Filter.moda';
+import { Filter } from 'src/models/Filter.model';
 import { Game } from 'src/models/Game';
 import * as authActions from './games.actions';
 

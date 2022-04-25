@@ -10,7 +10,7 @@
       margin-top: 2.5%;
       background: #eee9e9;
       border-radius: 5px;
-
+      height: 100px;
       .title {
         width: 100%;
         text-align: center;
@@ -63,6 +63,30 @@
 
 
       }
+    }
+  }
+
+  .load-more {
+    list-style: none;
+    padding: 2.5%;
+    margin: 1%;
+    margin-top: 2.5%;
+    border: #eee9e9 solid 1.5px;
+    border-radius: 5px;
+    height: 100px;
+    vertical-align: middle;
+    display: flex;
+    align-items: center;
+    .title {
+      width: 100%;
+      text-align: center;
+      vertical-align: middle;
+
+      h4 {
+            vertical-align: middle;
+
+      }
+
     }
   }
 }

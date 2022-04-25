@@ -11,7 +11,7 @@ import { AppState } from 'src/app/state/app.state';
 import { Store } from '@ngrx/store';
 import * as gamesActions from 'src/app/state/games/games.actions';
 import { Subscription } from 'rxjs';
-import { Filter } from 'src/models/Filter.moda';
+import { Filter } from 'src/models/Filter.model';
 
 @Component({
   selector: 'app-seeker',

@@ -3,7 +3,8 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { Filter } from 'src/models/Filter.moda';
+import { Filter } from 'src/models/Filter.model';
+import { ScrollFilter } from 'src/models/ScrollFilter.model';
 import { Game } from 'src/models/Game';
 import { Page, PageFilter } from 'src/models/Page.model';
 import { Review } from 'src/models/Review';
@@ -24,9 +25,11 @@ export class GameService {
   getQuickGames() {
     return this.firestore.collection<Game[]>(environment.db_tables.games, ref => ref.orderBy('min_time')).valueChanges({ idField: 'id' });
   }
-  getPopularGames() {
-    return this.firestore.collection<Game[]>(environment.db_tables.games, ref => ref.orderBy('average_rating', 'desc')).valueChanges({ idField: 'id' });
+
+  getPopularGames(scrollFilter: ScrollFilter) {
+    return this.firestore.collection<Game[]>(environment.db_tables.games, ref => ref.orderBy('average_rating', 'desc').limit(scrollFilter.limit)).valueChanges({ idField: 'id' });
   }
+
   getGames() {
     return this.firestore.collection<Game[]>(environment.db_tables.games).valueChanges({ idField: 'id' });
   }
@@ -79,23 +82,6 @@ export class GameService {
 
         return ref
       }).valueChanges({ idField: 'id' });
-  }
-
-  getGamesPage(pageFilter: PageFilter) {
-    return this.firestore.collection<Game[]>(environment.db_tables.games, ref => {
-      return ref
-        .startAfter(0)
-        .limit(10);
-    }).valueChanges().pipe(
-      map((games)=>{
-        let resultPage: Page<Game> = {
-          items: games as unknown as Game[],
-          items_per_page: pageFilter.items_per_page,
-          page: pageFilter.page
-        }
-        return resultPage
-      })
-    );
   }
 
   insertNewGame(newGame: Game) {

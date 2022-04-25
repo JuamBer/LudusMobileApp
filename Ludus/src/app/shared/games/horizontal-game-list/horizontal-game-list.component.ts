@@ -16,6 +16,9 @@ export class HorizontalGameListComponent implements OnInit {
   swiperConfig: SwiperOptions = {
     initialSlide: 2,
     slidesPerView: 2,
+    navigation: true,
+    pagination: { clickable: true },
+    scrollbar: { draggable: true },
     speed: 400
   }
 
@@ -27,6 +30,10 @@ export class HorizontalGameListComponent implements OnInit {
 
   openGame(game: Game) {
     this.router.navigate([environment.routes.home_game, game.id]);
+  }
+
+  loadMore(number: number){
+
   }
 
 }

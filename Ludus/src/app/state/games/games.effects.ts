@@ -116,7 +116,7 @@ loadCardGames$ = createEffect(() =>
 loadPopularGames$ = createEffect(() =>
   this.actions$.pipe(
     ofType(gamesActions.loadPopularGames),
-    mergeMap(() => this.gameService.getPopularGames()
+    mergeMap((action) => this.gameService.getPopularGames(action.scrollFilter)
       .pipe(
         map((games: any) => gamesActions.loadPopularGamesSuccess({ games: games })),
         catchError(err => of(gamesActions.loadPopularGamesFail({ error: err })))

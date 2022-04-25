@@ -15,7 +15,7 @@ import * as complexitiesActions from 'src/app/state/complexities/complexities.ac
 import { Subscription } from 'rxjs';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Type } from 'src/models/Type.model';
-import { Filter } from 'src/models/Filter.moda';
+import { Filter } from 'src/models/Filter.model';
 import { Complexity } from 'src/models/Complexity.model';
 
 @Component({

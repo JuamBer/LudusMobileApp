@@ -39,7 +39,6 @@ export class GameComponent implements OnInit,OnDestroy {
   ngOnInit() {
     this.gameId = this.activateRoute.snapshot.paramMap.get('id');
     this.store.dispatch(gamesActions.loadGame({ id: this.gameId }));
-    console.log(this.gameId);
     let userSubcription = this.store.select(store=> store.auth.user).subscribe(user => this.user = user);
     this.suscriptions.push(userSubcription);
     let gameSubcription = this.store.select(store => store.games.game).subscribe(game => this.game = game);

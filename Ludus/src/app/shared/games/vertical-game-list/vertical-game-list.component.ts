@@ -2,7 +2,7 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Filter } from 'src/models/Filter.moda';
+import { Filter } from 'src/models/Filter.model';
 import { Game } from 'src/models/Game';
 //NGRX
 import { AppState } from 'src/app/state/app.state';

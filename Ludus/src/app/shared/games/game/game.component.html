@@ -11,7 +11,10 @@
     <div class="title">
       <div class="main-info">
         <h3>{{ game.name }}</h3>
-        <span><ion-icon name="star"></ion-icon> {{game.average_rating}} | <ion-icon name="person"></ion-icon> {{game.number_of_ratings}} </span>
+        <span>
+          <ion-icon name="star"></ion-icon> {{game.average_rating | number: '1.1-1'}} | <ion-icon name="person">
+          </ion-icon> {{game.number_of_ratings}}
+        </span>
       </div>
       <ion-icon class="save" name="{{favicon}}" (click)="toggleGameToFavs(game)"></ion-icon>
     </div>

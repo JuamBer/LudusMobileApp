@@ -1,7 +1,8 @@
 import { createAction, props } from '@ngrx/store';
-import { Filter } from 'src/models/Filter.moda';
+import { ScrollFilter } from 'src/models/ScrollFilter.model';
 import { Game } from 'src/models/Game';
 import { User } from 'src/models/User';
+import { Filter } from 'src/models/Filter.model';
 
 //UPDATE AVERAGE RATING
 export const updateAverageRatingSuccess = createAction(
@@ -57,6 +58,7 @@ export const loadCardGamesFail = createAction(
 //LOAD POPULARS GAMES
 export const loadPopularGames = createAction(
   '[Games] loadPopularGames',
+  props < { scrollFilter: ScrollFilter }>()
 );
 export const loadPopularGamesSuccess = createAction(
   '[Games] loadPopularGamesSuccess',
