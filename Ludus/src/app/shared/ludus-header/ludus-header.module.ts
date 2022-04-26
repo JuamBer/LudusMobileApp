@@ -1,9 +1,12 @@
+//ANGULAR
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { LudusHeaderComponent } from './ludus-header.component';
+
+//IONIC
 import { IonicModule } from '@ionic/angular';
 
-
+//COMPONENTS
+import { LudusHeaderComponent } from './ludus-header.component';
 
 @NgModule({
   declarations: [LudusHeaderComponent],

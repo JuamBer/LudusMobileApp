@@ -1,11 +1,18 @@
-import { IonicModule } from '@ionic/angular';
+//ANGULAR
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { GameComponent } from './game.component';
+
+//IONIC
+import { IonicModule } from '@ionic/angular';
+
+//MODULES
 import { ReviewsModule } from '../../reviews/reviews.module';
 import { LudusHeaderModule } from '../../ludus-header/ludus-header.module';
 import { ApplicationPipesAndDirectivesModule } from '../../modules/shared-pipes-and-directives.module';
+
+//COMPONENTS
+import { GameComponent } from './game.component';
 
 
 @NgModule({
@@ -13,6 +20,7 @@ import { ApplicationPipesAndDirectivesModule } from '../../modules/shared-pipes-
     IonicModule,
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
 
     ReviewsModule,
     LudusHeaderModule,

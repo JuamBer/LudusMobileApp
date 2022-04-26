@@ -1,4 +1,7 @@
+//ANGULAR
 import { Component, OnInit } from '@angular/core';
+
+//IONIC
 import { ModalController } from '@ionic/angular';
 
 //NGRX

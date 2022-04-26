@@ -1,15 +1,17 @@
+//ANGULAR
 import { Component, Input, OnInit } from '@angular/core';
-import { Form, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+//IONIC
 import { ModalController } from '@ionic/angular';
-import { environment } from 'src/environments/environment';
-import { ChangeNameDTO } from 'src/models/dtos/ChangeNameDTO.model';
-import { ChangePasswordDTO } from 'src/models/dtos/ChangePasswordDTO.model';
-import { AuthService } from 'src/services/auth.service';
-import { Review } from 'src/models/Review';
+
+//NGRX
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/state/app.state';
 import * as reviewsActions from 'src/app/state/reviews/reviews.actions';
+
+//MODELS
+import { Review } from 'src/models/Review';
 
 @Component({
   selector: 'app-edit-review-modal',

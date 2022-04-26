@@ -1,15 +1,13 @@
+//ANGULAR
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from 'src/services/auth.service';
-import { ReviewService } from 'src/services/review.service';
+
+//RXJS
+import { Observable } from 'rxjs';
 
 //NGRX
 import { AppState } from 'src/app/state/app.state';
 import { Store } from '@ngrx/store';
 import * as reviewsActions from 'src/app/state/reviews/reviews.actions';
-import { Observable, Subscription } from 'rxjs';
-import { environment } from 'src/environments/environment';
-import { User } from 'src/models/User';
 import { Review } from 'src/models/Review';
 
 @Component({

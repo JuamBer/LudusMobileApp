@@ -1,13 +1,21 @@
+//ANGULAR
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+
+//RXJS
 import { Subscription } from 'rxjs';
-import { environment } from 'src/environments/environment';
-import { Filter } from 'src/models/Filter.model';
-import { Game } from 'src/models/Game';
+
 //NGRX
 import { AppState } from 'src/app/state/app.state';
 import { Store } from '@ngrx/store';
 import * as gamesActions from 'src/app/state/games/games.actions';
+
+//MODELS
+import { Filter } from 'src/models/Filter.model';
+import { Game } from 'src/models/Game';
+
+//ENVIRONMENTS
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-vertical-game-list',

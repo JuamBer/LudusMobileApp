@@ -1,9 +1,10 @@
+//ANGULAR
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from './auth/login/login.component';
-import { RegisterComponent } from './auth/register/register.component';
-import { environment } from 'src/environments/environment';
 import { AngularFireAuthGuard, hasCustomClaim, redirectUnauthorizedTo, redirectLoggedInTo } from '@angular/fire/compat/auth-guard';
+
+//ENVIRONMENTS
+import { environment } from 'src/environments/environment';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo([environment.routes.login]);
 const redirectLoggedInToToHome = () => redirectLoggedInTo([environment.routes.home]);

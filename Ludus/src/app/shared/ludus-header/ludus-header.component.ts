@@ -1,5 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+//ANGULAR
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+
+//ENVIRONMENTS
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -16,6 +19,6 @@ export class LudusHeaderComponent implements OnInit {
   ngOnInit() {}
 
   backToHome(){
-    this.router.navigate([environment.routes.home]);
+    this.router.navigate([environment.routes.explore]);
   }
 }
