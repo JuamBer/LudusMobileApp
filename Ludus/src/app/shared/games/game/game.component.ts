@@ -1,17 +1,18 @@
+//ANGULAR
 import { Component, OnInit, Input, OnDestroy} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Game } from 'src/models/Game';
-import { Gender } from 'src/models/Gender';
-import { GameService } from 'src/services/game.service';
-import { GenderService } from 'src/services/gender.service';
-import { ReviewService } from 'src/services/review.service';
+
+//RXJS
+import { Subscription } from 'rxjs';
 
 //NGRX
 import { AppState } from 'src/app/state/app.state';
 import { Store } from '@ngrx/store';
 import * as gamesActions from 'src/app/state/games/games.actions';
-import { Observable, Subscription } from 'rxjs';
 import * as authActions from 'src/app/state/auth/auth.actions';
+
+//MODELS
+import { Game } from 'src/models/Game';
 import { User } from 'src/models/User';
 
 @Component({

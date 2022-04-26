@@ -1,16 +1,18 @@
-import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
-import { ModalController } from '@ionic/angular';
-import { Game } from 'src/models/Game';
-import { GameService } from 'src/services/game.service';
+//AMGULAR
+import { Component, OnDestroy, OnInit } from '@angular/core';
 
-//MODULES AND COMPONENTS
-import { FilterModalComponent } from '../../shared/filter-modal/filter-modal.component';
+//IONIC
+import { ModalController } from '@ionic/angular';
+
+//RXJS
+import { Subscription } from 'rxjs';
 
 //NGRX
 import { AppState } from 'src/app/state/app.state';
 import { Store } from '@ngrx/store';
 import * as gamesActions from 'src/app/state/games/games.actions';
-import { Subscription } from 'rxjs';
+
+//MODELS
 import { Filter } from 'src/models/Filter.model';
 
 @Component({

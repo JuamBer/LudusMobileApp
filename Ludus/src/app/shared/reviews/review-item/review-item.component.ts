@@ -1,14 +1,24 @@
+//ANGULAR
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+
+//IONIC
 import { ModalController, ToastController } from '@ionic/angular';
+
+//NGRX
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/state/app.state';
-import { environment } from 'src/environments/environment';
-import { Review } from 'src/models/Review';
-import { User } from 'src/models/User';
-import { UserService } from 'src/services/user.service';
 import * as reviewsActions from 'src/app/state/reviews/reviews.actions';
+
+//COMPONENTS
 import { EditReviewModalComponent } from '../edit-review-modal/edit-review-modal.component';
+
+//MODELS
+import { Review } from 'src/models/Review';
+
+//ENVIRONMENTS
+import { environment } from 'src/environments/environment';
+
 
 @Component({
   selector: 'app-review-item',

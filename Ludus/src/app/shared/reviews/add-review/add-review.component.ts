@@ -1,12 +1,18 @@
+//ANGULAR
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { User } from 'src/models/User';
-import * as reviewsActions from 'src/app/state/reviews/reviews.actions';
-import { Review } from 'src/models/Review';
-import { Store } from '@ngrx/store';
-import { AppState } from 'src/app/state/app.state';
+
+//RXJS
 import { Subscription } from 'rxjs';
 
+//NGRX
+import * as reviewsActions from 'src/app/state/reviews/reviews.actions';
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/state/app.state';
+
+//MODELS
+import { User } from 'src/models/User';
+import { Review } from 'src/models/Review';
 
 @Component({
   selector: 'app-add-review',

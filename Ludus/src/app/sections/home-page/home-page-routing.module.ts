@@ -2,7 +2,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-//COMOPONETS AND MODULES
+//COMPONENTS
 import { GameComponent } from '../../shared/games/game/game.component';
 import { HomePage } from './home.page';
 

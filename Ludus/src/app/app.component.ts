@@ -1,17 +1,25 @@
+//ANGULAR
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
+//IONIC
+import { ToastController } from '@ionic/angular';
+
+//SERVICES
 import { AuthService } from 'src/services/auth.service';
-import { User } from 'src/models/User';
 
 //NGRX
 import { AppState } from 'src/app/state/app.state';
 import { Store } from '@ngrx/store';
 import * as userActions from 'src/app/state/auth/auth.actions';
 import { Subscription } from 'rxjs';
-import { environment } from 'src/environments/environment';
-import { ToastController } from '@ionic/angular';
 
-import { Message, Type } from "src/models/Message.model";
-import { Router } from '@angular/router';
+//ENVIRONMENTS
+import { environment } from 'src/environments/environment';
+
+//MODELS
+import { User } from 'src/models/User';
+import { Type } from "src/models/Message.model";
 
 
 @Component({

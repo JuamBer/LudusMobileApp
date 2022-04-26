@@ -1,7 +1,12 @@
+//ANGULAR
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { environment } from 'src/environments/environment';
+
+//MODELS
 import { Game } from 'src/models/Game';
+
+//ENVIRONMENTS
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-special-game-view',

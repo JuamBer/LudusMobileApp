@@ -1,20 +1,22 @@
+//ANGULAR
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { IonRouterOutlet, ModalController } from '@ionic/angular';
-import { max } from 'rxjs/operators';
-import { Gender } from 'src/models/Gender';
-import { GenderService } from 'src/services/gender.service';
+import { FormBuilder, FormGroup } from '@angular/forms';
+
+//IONIC
+import { ModalController } from '@ionic/angular';
+
+//RXJS
+import { Subscription } from 'rxjs';
 
 //NGRX
 import { AppState } from 'src/app/state/app.state';
 import { Store } from '@ngrx/store';
 import * as gamesActions from 'src/app/state/games/games.actions';
 import * as gendersActions from 'src/app/state/genders/genders.actions';
-import * as typesActions from 'src/app/state/types/types.actions';
 import * as complexitiesActions from 'src/app/state/complexities/complexities.actions';
 
-import { Subscription } from 'rxjs';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Type } from 'src/models/Type.model';
+//MODELS
+import { Gender } from 'src/models/Gender';
 import { Filter } from 'src/models/Filter.model';
 import { Complexity } from 'src/models/Complexity.model';
 

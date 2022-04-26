@@ -1,14 +1,18 @@
+//ANGULAR
 import { Component, Input, OnInit } from '@angular/core';
-import { Form, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+//IONIC
 import { ModalController } from '@ionic/angular';
-import { environment } from 'src/environments/environment';
-import { ChangeNameDTO } from 'src/models/dtos/ChangeNameDTO.model';
-import { AuthService } from 'src/services/auth.service';
+
 //NGRX
 import { AppState } from '@capacitor/app';
 import { Store } from '@ngrx/store';
 import * as authActions from 'src/app/state/auth/auth.actions';
+
+//MODELS
+import { ChangeNameDTO } from 'src/models/dtos/ChangeNameDTO.model';
+
 @Component({
   selector: 'app-change-name-modal',
   templateUrl: './change-name-modal.component.html',

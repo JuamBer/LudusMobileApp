@@ -1,16 +1,21 @@
+//ANGULAR
 import { Component, OnInit } from '@angular/core';
-import { Form, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+//IONIC
 import { ModalController } from '@ionic/angular';
-import { PasswordValidator } from 'src/utils/PasswordValidator';
-import { environment } from 'src/environments/environment';
-import { ChangeNameDTO } from 'src/models/dtos/ChangeNameDTO.model';
-import { ChangePasswordDTO } from 'src/models/dtos/ChangePasswordDTO.model';
-import { AuthService } from 'src/services/auth.service';
+
 //NGRX
 import { AppState } from '@capacitor/app';
 import { Store } from '@ngrx/store';
 import * as authActions from 'src/app/state/auth/auth.actions';
+
+//MODELS
+import { ChangePasswordDTO } from 'src/models/dtos/ChangePasswordDTO.model';
+
+//UTILS
+import { PasswordValidator } from 'src/utils/PasswordValidator';
+
 @Component({
   selector: 'app-change-password-modal',
   templateUrl: './change-password-modal.component.html',

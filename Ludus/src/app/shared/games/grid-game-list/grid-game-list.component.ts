@@ -1,14 +1,21 @@
+//ANGULAR
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { environment } from 'src/environments/environment';
-import { Game } from 'src/models/Game';
+
+//RXJS
+import { Subscription } from 'rxjs';
+
 //NGRX
 import { AppState } from 'src/app/state/app.state';
 import { Store } from '@ngrx/store';
-import * as gamesActions from 'src/app/state/games/games.actions';
-import { Observable, Subscription } from 'rxjs';
 import * as authActions from 'src/app/state/auth/auth.actions';
+
+//MODELS
+import { Game } from 'src/models/Game';
 import { User } from 'src/models/User';
+
+//ENVIRONMENTS
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-grid-game-list',

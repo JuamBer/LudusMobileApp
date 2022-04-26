@@ -1,7 +1,14 @@
+//ANGULAR
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+
+//ENVIRONMENTS
 import { environment } from 'src/environments/environment';
+
+//MODELS
 import { Game } from 'src/models/Game';
+
+//SWIPER
 import { SwiperOptions } from 'swiper';
 
 @Component({

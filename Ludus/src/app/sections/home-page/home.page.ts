@@ -1,13 +1,8 @@
 //ANGULAR
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 
 //RXJS
 import { Observable } from 'rxjs';
-import { ExploreGames } from 'src/models/ExploreGames.model';
-
-//SERVICES
-import { GameService } from 'src/services/game.service';
 
 //MODELS
 import { Game } from '../../../models/Game';
@@ -16,7 +11,6 @@ import { Game } from '../../../models/Game';
 import { AppState } from 'src/app/state/app.state';
 import { Store } from '@ngrx/store';
 import * as gamesActions from 'src/app/state/games/games.actions';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-home-page',

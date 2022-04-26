@@ -1,11 +1,18 @@
+//ANGULAR
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+//IONIC
 import { ModalController } from '@ionic/angular';
-import { ChangeEmailDTO } from 'src/models/dtos/ChangeEmailDTO.model';
+
 //NGRX
 import { AppState } from '@capacitor/app';
 import { Store } from '@ngrx/store';
 import * as authActions from 'src/app/state/auth/auth.actions';
+
+//MODELS
+import { ChangeEmailDTO } from 'src/models/dtos/ChangeEmailDTO.model';
+
 
 @Component({
   selector: 'app-change-email-modal',
