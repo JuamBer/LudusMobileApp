@@ -8,6 +8,7 @@ import { ScrollFilter } from 'src/models/ScrollFilter.model';
 import { Game } from 'src/models/Game';
 import { Page, PageFilter } from 'src/models/Page.model';
 import { Review } from 'src/models/Review';
+import { capitalize } from 'src/utils/CamelCase';
 
 @Injectable({
   providedIn: 'root'
@@ -39,7 +40,9 @@ export class GameService {
       (ref: any) => {
 
         if (filter.text != null) {
-          ref = ref.orderBy('name').startAt(filter.text).endAt(filter.text + '\uf8ff');
+          const search: string = capitalize(filter.text);
+
+          ref = ref.orderBy('name').startAt(search).endAt(search + '\uf8ff');
         }
 
         // LIMITACIÓN FIREBASE:

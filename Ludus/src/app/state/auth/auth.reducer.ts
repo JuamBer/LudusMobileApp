@@ -133,18 +133,33 @@ export const authReducer = createReducer(initialState,
   })),
 
 
-  on(authActions.addGameToFavsSuccess, (state, { id }) => ({
-    ...state,
-    ids_favs_games: [...state.ids_favs_games, id],
-    message: {...messages.addGameToFavsSuccess}
-  })),
-  on(authActions.loadFavsGamesSuccess, (state, { ids_favs_games }) => ({
-    ...state,
-    ids_favs_games: ids_favs_games
-  })),
-  on(authActions.removeGameToFavsSuccess, (state, { id }) => ({
-    ...state,
-    ids_favs_games: state.ids_favs_games.filter(id_game => id_game != id),
-    message: {...messages.removeGameToFavsSuccess}
-  })),
+  on(authActions.addGameToFavsSuccess, (state, { id }) => {
+    const favs_games: any = { ids_favs_games: [...state.ids_favs_games, id] };
+    localStorage.setItem("favs_games", JSON.stringify(favs_games));
+
+    return {
+      ...state,
+      ids_favs_games: [...state.ids_favs_games, id],
+      message: {...messages.addGameToFavsSuccess}
+    }
+  }),
+  on(authActions.loadFavsGamesSuccess, (state, { ids_favs_games }) => {
+    const favs_games: any = { ids_favs_games: ids_favs_games };
+    localStorage.setItem("favs_games", JSON.stringify(favs_games));
+
+    return {
+      ...state,
+      ids_favs_games: ids_favs_games
+    }
+  }),
+  on(authActions.removeGameToFavsSuccess, (state, { id }) => {
+    const favs_games: any = { ids_favs_games: state.ids_favs_games.filter(id_game => id_game != id) };
+    localStorage.setItem("favs_games", JSON.stringify(favs_games));
+
+    return{
+      ...state,
+      ids_favs_games: state.ids_favs_games.filter(id_game => id_game != id),
+      message: {...messages.removeGameToFavsSuccess}
+    }
+}),
 );
