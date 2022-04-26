@@ -5,8 +5,8 @@
 
 * **Ionic**  
 * **Angular**  
-* **MongoDB**  
-* **Node.js**  
+* **NGRX**  
+* **Firebase**  
 
 ## Pogramas Utilizados 📌
 
