@@ -18,6 +18,7 @@ export const environment = {
     register: 'auth/register',
 
     home: 'sections/favs',
+    explore: 'sections/home',
     home_game: 'sections/home/game',
 
     favs: 'sections/favs',

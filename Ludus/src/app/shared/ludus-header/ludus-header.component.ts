@@ -16,6 +16,6 @@ export class LudusHeaderComponent implements OnInit {
   ngOnInit() {}
 
   backToHome(){
-    this.router.navigate([environment.routes.home]);
+    this.router.navigate([environment.routes.explore]);
   }
 }
