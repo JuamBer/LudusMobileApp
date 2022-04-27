@@ -21,11 +21,8 @@ export class HorizontalGameListComponent implements OnInit {
   @Input() title: string;
   @Input() games: Game[] = [];
   swiperConfig: SwiperOptions = {
-    initialSlide: 2,
+    initialSlide: 1,
     slidesPerView: 2,
-    navigation: true,
-    pagination: { clickable: true },
-    scrollbar: { draggable: true },
     speed: 400
   }
 

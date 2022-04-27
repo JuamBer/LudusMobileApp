@@ -22,6 +22,8 @@ export class HomePage {
     popular_games$: this.store.select(store => store.games.popular_games),
     card_games$: this.store.select(store => store.games.card_games),
     quick_games$: this.store.select(store => store.games.quick_games),
+    special_game1$: this.store.select(store => store.games.special_game1),
+    special_game2$: this.store.select(store => store.games.special_game2),
   };
 
   searchResultsGames$: Observable<Game[] | null> = this.store.select(store => store.games.search_results_games);
@@ -35,5 +37,7 @@ export class HomePage {
     this.store.dispatch(gamesActions.loadCardGames());
     this.store.dispatch(gamesActions.loadQuickGames());
     this.store.dispatch(gamesActions.loadPopularGames({scrollFilter: {limit:3}}));
+    this.store.dispatch(gamesActions.loadSpecialGame1({ id: "4" }));
+    this.store.dispatch(gamesActions.loadSpecialGame2({ id: "10" }));
   }
 }
