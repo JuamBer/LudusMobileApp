@@ -9,6 +9,7 @@
     background: #eee9e9;
     border-radius: 5px;
     margin-top: 2.5%;
+    padding-bottom: 2.5%;
 
     .title {
       width: 100%;
@@ -80,6 +81,8 @@
       text-align: justify;
       padding: 2.5%;
       max-height: 200px;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
   }
 

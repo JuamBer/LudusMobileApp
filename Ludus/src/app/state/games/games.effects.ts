@@ -77,6 +77,30 @@ loadGame$ = createEffect(() =>
   )
 );
 
+loadSpecialGame1$ = createEffect(() =>
+  this.actions$.pipe(
+    ofType(gamesActions.loadSpecialGame1),
+    mergeMap((res) => this.gameService.getGame(res.id)
+      .pipe(
+        map((game: any) => gamesActions.loadSpecialGame1Success({ game: game })),
+        catchError(err => of(gamesActions.loadSpecialGame1Fail({ error: err })))
+      )
+    )
+  )
+);
+
+loadSpecialGame2$ = createEffect(() =>
+  this.actions$.pipe(
+    ofType(gamesActions.loadSpecialGame2),
+    mergeMap((res) => this.gameService.getGame(res.id)
+      .pipe(
+        map((game: any) => gamesActions.loadSpecialGame2Success({ game: game })),
+        catchError(err => of(gamesActions.loadSpecialGame2Fail({ error: err })))
+      )
+    )
+  )
+);
+
 loadGames$ = createEffect(() =>
   this.actions$.pipe(
     ofType(gamesActions.loadGames),

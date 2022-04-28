@@ -29,6 +29,34 @@ export const loadGameFail = createAction(
   props<{ error: any }>()
 );
 
+//LOAD SPECIAL GAME 1
+export const loadSpecialGame1 = createAction(
+  '[Games] loadSpecialGame1',
+  props<{ id: string }>()
+);
+export const loadSpecialGame1Success = createAction(
+  '[Games] loadSpecialGame1 Success',
+  props<{ game: Game }>()
+);
+export const loadSpecialGame1Fail = createAction(
+  '[Games] loadSpecialGame1 Fail',
+  props<{ error: any }>()
+);
+
+//LOAD SPECIAL GAME 2
+export const loadSpecialGame2 = createAction(
+  '[Games] loadSpecialGame2',
+  props<{ id: string }>()
+);
+export const loadSpecialGame2Success = createAction(
+  '[Games] loadSpecialGame2 Success',
+  props<{ game: Game }>()
+);
+export const loadSpecialGame2Fail = createAction(
+  '[Games] loadSpecialGame2 Fail',
+  props<{ error: any }>()
+);
+
 //LOAD GAMES
 export const loadGames = createAction(
   '[Games] loadGames',

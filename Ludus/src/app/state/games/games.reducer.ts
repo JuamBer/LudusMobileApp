@@ -11,6 +11,8 @@ export interface State {
   quick_games: Game[],
   filter: Filter;
   search_results_games: Game[] | null
+  special_game1: Game;
+  special_game2: Game;
 }
 
 export const initialState: State = {
@@ -26,11 +28,14 @@ export const initialState: State = {
     text: null
   },
   search_results_games: null,
+  special_game1: undefined,
+  special_game2: undefined
 }
 
 export const gamesReducer = createReducer(initialState,
   on(authActions.updateAverageRatingSuccess, (state, { game }) => ({ ...state, game: game })),
-
+  on(authActions.loadSpecialGame1Success, (state, { game }) => ({ ...state, special_game1: game })),
+  on(authActions.loadSpecialGame2Success, (state, { game }) => ({ ...state, special_game2: game })),
   on(authActions.loadGameSuccess, (state, { game }) => ({ ...state, game: game })),
   on(authActions.loadGameSuccess, (state, { game }) => ({ ...state, game: game })),
   on(authActions.loadGamesSuccess, (state, { games }) => ({ ...state, games: games})),
