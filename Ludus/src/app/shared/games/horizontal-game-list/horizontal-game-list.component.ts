@@ -12,7 +12,7 @@ import { environment } from 'src/environments/environment';
 
 //MODELS
 import { Game } from 'src/models/Game';
-import { Page } from 'src/models/Page.model';
+import { Page, PageType } from 'src/models/Page.model';
 
 //SWIPER
 import { SwiperOptions } from 'swiper';
@@ -28,10 +28,11 @@ export class HorizontalGameListComponent implements OnInit {
   @Input() title: string;
   @Input() games: Page<Game>;
   swiperConfig: SwiperOptions = {
-    initialSlide: 1,
+    initialSlide: 0,
     slidesPerView: 2,
     speed: 400
   }
+  areMoreGames: boolean = true;
 
   constructor(
     private router: Router,
@@ -45,7 +46,17 @@ export class HorizontalGameListComponent implements OnInit {
   }
 
   loadMore(){
-    this.store.dispatch(gamesActions.loadMorePopularGames({page: this.games}));
+    switch (this.games.type) {
+      case PageType.CARD_GAMES:
+        this.store.dispatch(gamesActions.loadMoreCardGames({ page: this.games }));
+        break;
+      case PageType.POPULAR_GAMES:
+        this.store.dispatch(gamesActions.loadMorePopularGames({ page: this.games }));
+        break;
+      case PageType.QUICK_GAMES:
+        this.store.dispatch(gamesActions.loadMoreQuickGames({ page: this.games }));
+        break;
+    }
   }
 
 }

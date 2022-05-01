@@ -25,7 +25,7 @@
 
 
     </ng-template>
-    <ng-template swiperSlide>
+    <ng-template swiperSlide *ngIf="areMoreGames">
       <div class="load-more" (click)="loadMore()">
         <div class="title">
           <h4>¡ Haz click para cargar más juegos !</h4>

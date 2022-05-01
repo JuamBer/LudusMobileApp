@@ -18,7 +18,6 @@ import { CommonModule } from '@angular/common'
 
 //IONIC
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
-import { Network } from '@ionic-native/network/ngx';
 
 //MODULES
 import { AppRoutingModule } from './app-routing.module';
@@ -77,7 +76,6 @@ import { environment } from '../environments/environment';
     EffectsModule.forRoot([GamesEffects, ReviewsEffects, GendersEffects, AuthEffects, TypesEffects, ComplexitiesEffects])
   ],
   providers: [
-    Network,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent],

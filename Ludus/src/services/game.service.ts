@@ -20,31 +20,33 @@ export class GameService {
   ) { }
 
   getPopularGames(page: Page<Game>) {
-    return this.firestore.collection<Game[]>(environment.db_tables.games, ref => ref.orderBy('average_rating', 'desc').limit(page.limit))
-    .snapshotChanges();
+    return this.firestore.collection<Game[]>(environment.db_tables.games, ref => ref.orderBy('average_rating', 'desc').limit(page.limit)).snapshotChanges();
   }
   getMorePopularGames(page: Page<Game>){
     console.log(page);
-    return this.firestore.collection<Game[]>(environment.db_tables.games, ref => ref.orderBy('average_rating', 'desc').limit(page.limit)
-      .startAfter(page.ultimoDoc)).snapshotChanges();
+
+    return this.firestore.collection<Game[]>(environment.db_tables.games, ref => ref.orderBy('average_rating', 'desc').startAfter(page.ultimoDoc).limit(page.limit)).snapshotChanges();
   }
 
-  getCardGames() {
-    return this.firestore.collection<Game[]>(environment.db_tables.games, ref => ref.where('id_type', '==', '2')).valueChanges({ idField: 'id' });
+  getCardGames(page: Page<Game>) {
+    return this.firestore.collection<Game[]>(environment.db_tables.games, ref => ref.where('id_type', '==', '2').limit(page.limit)).snapshotChanges();
   }
-  getQuickGames() {
-    return this.firestore.collection<Game[]>(environment.db_tables.games, ref => ref.orderBy('min_time')).valueChanges({ idField: 'id' });
+  getMoreCardGames(page: Page<Game>) {
+    return this.firestore.collection<Game[]>(environment.db_tables.games, ref => ref.where('id_type', '==', '2').limit(page.limit).startAfter(page.ultimoDoc)).snapshotChanges();
+
+  }
+  getQuickGames(page: Page<Game>) {
+    return this.firestore.collection<Game[]>(environment.db_tables.games, ref => ref.orderBy('min_time').limit(page.limit)).snapshotChanges();
+  }
+  getMoreQuickGames(page: Page<Game>) {
+    return this.firestore.collection<Game[]>(environment.db_tables.games, ref => ref.orderBy('min_time').limit(page.limit).startAfter(page.ultimoDoc)).snapshotChanges();
   }
 
 
-
-  getGames() {
-    return this.firestore.collection<Game[]>(environment.db_tables.games).valueChanges({ idField: 'id' });
-  }
-
-  getFilteredResultsGames(filter: Filter) {
+  getFilteredResultsGames(page: Page<Game>, filter: Filter) {
     return this.firestore.collection<Game[]>(environment.db_tables.games,
       (ref: any) => {
+        ref = ref.limit(page.limit);
 
         if (filter.text != null) {
           const search: string = capitalize(filter.text);
@@ -91,14 +93,70 @@ export class GameService {
 
 
         return ref
-      }).valueChanges({ idField: 'id' });
+      }).snapshotChanges();
+  }
+
+  getMoreFilteredResultsGames(page: Page<Game>, filter: Filter) {
+    return this.firestore.collection<Game[]>(environment.db_tables.games,
+      (ref: any) => {
+        ref = ref.limit(page.limit);
+        ref = ref.startAfter(page.ultimoDoc);
+
+        if (filter.text != null) {
+          const search: string = capitalize(filter.text);
+
+          ref = ref.orderBy('name').startAt(search).endAt(search + '\uf8ff');
+        }
+
+        // LIMITACIÓN FIREBASE:
+        // No puede usar tanto in como array-contains-any en la misma consulta.
+        //if (filter.types.length > 0){
+        // ref = ref.where('id_type', 'in', filter.types)
+        //}
+
+        if (filter.genders.length > 0) {
+          ref = ref.where('ids_genders', 'array-contains-any', filter.genders)
+        }
+
+        if (filter.players != null) {
+          const option: string = filter.players.substring(0, 1);
+
+          if (option == '+') {
+            ref = ref.where('max_players', '>=', 8)
+          } else {
+            const num_players: number = parseInt(option);
+            ref = ref.where('max_players', '>=', num_players)
+          }
+        }
+
+        if (filter.complexity != null) {
+          ref = ref.where('id_complexity', '==', filter.complexity)
+        }
+
+        //if (filter.time != null) {
+        //  const result = filter.time.trim().split(/\s+/);
+        //  const option = result[0];
+        //
+        //  if (option == '+70') {
+        //    ref = ref.where('min_time', '<=', 70)
+        //  } else {
+        //    const time: number = parseInt(option);
+        //    ref = ref.where('max_time', '>=', time)
+        //  }
+        //}
+
+
+        return ref
+      }).snapshotChanges();
+  }
+
+  getGames() {
+    return this.firestore.collection<Game>(environment.db_tables.games).valueChanges({ idField: 'id' });
   }
 
   insertNewGame(newGame: Game) {
     return this.firestore.collection(environment.db_tables.games).add(newGame);
   }
-
-
 
   getGame(id: string) {
     return this.firestore.collection<Game>(environment.db_tables.games).doc(id).valueChanges({ idField: 'id' });

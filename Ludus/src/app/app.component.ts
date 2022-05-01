@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 
 //IONIC
 import { ToastController } from '@ionic/angular';
-import { Network } from '@capacitor/network';
 
 //SERVICES
 import { AuthService } from 'src/services/auth.service';
@@ -30,7 +29,6 @@ import { Type } from "src/models/Message.model";
 })
 export class AppComponent implements OnInit, OnDestroy{
 
-  isConnected: boolean = false;
   suscriptions: Subscription[] = [];
 
   constructor(
@@ -41,10 +39,15 @@ export class AppComponent implements OnInit, OnDestroy{
   ) {}
 
   ngOnInit(): void {
+    let gamesMessageSuscription = this.store.select(store => store.games.message).subscribe(
+      (message) => {
+        if (message) {
+          this.presentToast(message.text, message.icon, "top", message.color);
+        }
+      }
+    )
+    this.suscriptions.push(gamesMessageSuscription)
 
-    Network.addListener('networkStatusChange', status => {
-      console.log('Network status changed', status);
-    });
 
     let authMessageSuscription = this.store.select(store=> store.auth.message).subscribe(
       (message)=>{

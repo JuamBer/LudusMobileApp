@@ -74,16 +74,28 @@ export const loadGamesFail = createAction(
 //LOAD CARDS GAMES
 export const loadCardGames = createAction(
   '[Games] loadCardGames',
+  props<{ page: Page<Game> }>()
 );
 export const loadCardGamesSuccess = createAction(
   '[Games] loadCardGamesSuccess',
-  props<{ games: Game[] }>()
+  props<{ page: Page<Game> }>()
 );
 export const loadCardGamesFail = createAction(
   '[Games] loadCardGamesFail',
   props<{ error: any }>()
 );
-
+export const loadMoreCardGames = createAction(
+  '[Games] loadMoreCardGames',
+  props<{ page: Page<Game> }>()
+);
+export const loadMoreCardGamesSuccess = createAction(
+  '[Games] loadMoreCardGamesSuccess',
+  props<{ page: Page<Game> }>()
+);
+export const loadMoreCardGamesFail = createAction(
+  '[Games] loadMoreCardGamesFail',
+  props<{ error: any }>()
+);
 //LOAD POPULARS GAMES
 export const loadPopularGames = createAction(
   '[Games] loadPopularGames',
@@ -113,27 +125,51 @@ export const loadMorePopularGamesFail = createAction(
 //LOAD QUICK GAMES
 export const loadQuickGames = createAction(
   '[Games] loadQuickGames',
+  props<{ page: Page<Game> }>()
 );
 export const loadQuickGamesSuccess = createAction(
   '[Games] loadQuickGamesSuccess',
-  props<{ games: Game[] }>()
+  props<{ page: Page<Game> }>()
 );
 export const loadQuickGamesFail = createAction(
   '[Games] loadQuickGamesFail',
   props<{ error: any }>()
 );
-
+export const loadMoreQuickGames = createAction(
+  '[Games] loadMoreQuickGames',
+  props<{ page: Page<Game> }>()
+);
+export const loadMoreQuickGamesSuccess = createAction(
+  '[Games] loadMoreQuickGamesSuccess',
+  props<{ page: Page<Game> }>()
+);
+export const loadMoreQuickGamesFail = createAction(
+  '[Games] loadMoreQuickGamesFail',
+  props<{ error: any }>()
+);
 //LOAD FILTERED GAMES
 export const loadFilteredGames = createAction(
   '[Games] loadFilteredGames',
-  props<{ filter: Filter }>()
+  props<{ page: Page<Game>, filter: Filter }>()
 );
 export const loadFilteredGamesSuccess = createAction(
   '[Games] loadFilteredGamesSuccess',
-  props<{ games: Game[] }>()
+  props<{ page: Page<Game> }>()
 );
 export const loadFilteredGamesFail = createAction(
   '[Games] loadFilteredGamesFail',
+  props<{ error: any }>()
+);
+export const loadMoreFilteredGames = createAction(
+  '[Games] loadMoreFilteredGames',
+  props<{ page: Page<Game>, filter: Filter }>()
+);
+export const loadMoreFilteredGamesSuccess = createAction(
+  '[Games] loadMoreFilteredGamesSuccess',
+  props<{ page: Page<Game> }>()
+);
+export const loadMoreFilteredGamesFail = createAction(
+  '[Games] loadMoreFilteredGamesFail',
   props<{ error: any }>()
 );
 export const unSetFilteredGames = createAction(

@@ -1,25 +1,25 @@
 <div class="vertical-game-list">
   <div class="filter">
     <p *ngIf="filter.genders.length>0">Generos: <span *ngFor="let id_gender of filter.genders">
-      {{id_gender | getGenderName | async}}
-      <ion-icon name="close-outline" (click)="removeFilter('gender',id_gender)"></ion-icon>
-    </span></p>
+        {{id_gender | getGenderName | async}}
+        <ion-icon name="close-outline" (click)="removeFilter('gender',id_gender)"></ion-icon>
+      </span></p>
     <p *ngIf="filter.players">Jugadores: <span>
-      {{filter.players}}
-      <ion-icon name="close-outline" (click)="removeFilter('players',null)"></ion-icon>
-    </span></p>
+        {{filter.players}}
+        <ion-icon name="close-outline" (click)="removeFilter('players',null)"></ion-icon>
+      </span></p>
     <p *ngIf="filter.complexity">Complejidad: <span>
-      {{filter.complexity | getComplexityName | async }}
-      <ion-icon name="close-outline" (click)="removeFilter('complexity',null)"></ion-icon>
-    </span></p>
+        {{filter.complexity | getComplexityName | async }}
+        <ion-icon name="close-outline" (click)="removeFilter('complexity',null)"></ion-icon>
+      </span></p>
     <p *ngIf="filter.text">Término: <span>
-      {{filter.text}}
-      <ion-icon name="close-outline" (click)="removeFilter('text',null)"></ion-icon>
-    </span></p>
+        {{filter.text}}
+        <ion-icon name="close-outline" (click)="removeFilter('text',null)"></ion-icon>
+      </span></p>
 
   </div>
-  <ul class="game-list" *ngIf="games.length > 0; else elseBlock">
-    <li class="game" *ngFor="let game of games" (click)="openGame(game)">
+  <ul class="game-list" *ngIf="games.items.length > 0; else elseBlock">
+    <li class="game" *ngFor="let game of games.items" (click)="openGame(game)">
       <div class="title">
         <h4>{{ game.name }}</h4>
       </div>
@@ -41,6 +41,11 @@
         </div>
       </div>
     </li>
+    <div class="load-more" (click)="loadMore()">
+      <div class="title">
+        <h4>¡ Haz click para cargar más juegos !</h4>
+      </div>
+    </div>
   </ul>
   <ng-template #elseBlock>
     <div class="any-result">
@@ -54,4 +59,5 @@
       </div>
     </div>
   </ng-template>
+
 </div>

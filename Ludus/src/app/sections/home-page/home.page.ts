@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 
 //MODELS
 import { Game } from '../../../models/Game';
+import { Page, PageType } from 'src/models/Page.model';
 
 //NGRX
 import { AppState } from 'src/app/state/app.state';
@@ -26,7 +27,7 @@ export class HomePage {
     special_game2$: this.store.select(store => store.games.special_game2),
   };
 
-  searchResultsGames$: Observable<Game[] | null> = this.store.select(store => store.games.search_results_games);
+  searchResultsGames$: Observable<Page<Game>> | null = this.store.select(store => store.games.search_results_games);
 
   constructor(
     private store: Store<AppState>,
@@ -34,17 +35,34 @@ export class HomePage {
 
 
   ngOnInit(){
-    //this.store.dispatch(gamesActions.loadCardGames());
-    //this.store.dispatch(gamesActions.loadQuickGames());
+    this.store.dispatch(gamesActions.loadCardGames({
+      page: {
+        limit: 3,
+        primerDoc: null,
+        ultimoDoc: null,
+        items: [],
+        type: PageType.CARD_GAMES
+      }
+    }));
+    this.store.dispatch(gamesActions.loadQuickGames({
+      page: {
+        limit: 3,
+        primerDoc: null,
+        ultimoDoc: null,
+        items: [],
+        type: PageType.QUICK_GAMES
+      }
+    }));
     this.store.dispatch(gamesActions.loadPopularGames({
       page: {
         limit: 3,
         primerDoc: null,
         ultimoDoc: null,
-        items: []
+        items: [],
+        type: PageType.POPULAR_GAMES
       }
     }));
-    //this.store.dispatch(gamesActions.loadSpecialGame1({ id: "4" }));
-    //this.store.dispatch(gamesActions.loadSpecialGame2({ id: "10" }));
+    this.store.dispatch(gamesActions.loadSpecialGame1({ id: "4" }));
+    this.store.dispatch(gamesActions.loadSpecialGame2({ id: "10" }));
   }
 }

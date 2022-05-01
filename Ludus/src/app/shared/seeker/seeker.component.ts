@@ -14,6 +14,7 @@ import * as gamesActions from 'src/app/state/games/games.actions';
 
 //MODELS
 import { Filter } from 'src/models/Filter.model';
+import { PageType } from 'src/models/Page.model';
 
 @Component({
   selector: 'app-seeker',
@@ -54,7 +55,16 @@ export class SeekerComponent implements OnInit, OnDestroy {
         ...this.filter,
         text: search
       }
-      this.store.dispatch(gamesActions.loadFilteredGames({filter: newFilter}));
+      this.store.dispatch(gamesActions.loadFilteredGames({
+        page: {
+          limit: 3,
+          primerDoc: null,
+          ultimoDoc: null,
+          items: [],
+          type: PageType.FILTERED_GAMES
+        },
+        filter: newFilter
+      }));
     }else{
       this.store.dispatch(gamesActions.unSetFilteredGames());
     }

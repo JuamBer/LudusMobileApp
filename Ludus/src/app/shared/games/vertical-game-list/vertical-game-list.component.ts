@@ -16,6 +16,7 @@ import { Game } from 'src/models/Game';
 
 //ENVIRONMENTS
 import { environment } from 'src/environments/environment';
+import { Page, PageType } from 'src/models/Page.model';
 
 @Component({
   selector: 'app-vertical-game-list',
@@ -25,8 +26,9 @@ import { environment } from 'src/environments/environment';
 export class VerticalGameListComponent implements OnInit,OnDestroy {
 
   @Input() title: string;
-  @Input() games: Game[] = [];
+  @Input() games: Page<Game>;
   filter: Filter;
+  areMoreGames: boolean = true;
 
   suscriptions: Subscription[] = [];
 
@@ -62,19 +64,59 @@ export class VerticalGameListComponent implements OnInit,OnDestroy {
       suscription.unsubscribe();
     })
   }
+
+  loadMore(){
+    this.store.dispatch(gamesActions.loadMoreFilteredGames({ page: this.games, filter: this.filter}));
+  }
   removeFilter(type: string, value:string){
     switch(type){
       case 'gender':
-        this.store.dispatch(gamesActions.loadFilteredGames({ filter: { ...this.filter, genders: this.filter.genders.filter(id_gender => id_gender != value)}}))
+        this.store.dispatch(gamesActions.loadFilteredGames({
+          page: {
+            limit: 3,
+            primerDoc: null,
+            ultimoDoc: null,
+            items: [],
+            type: PageType.FILTERED_GAMES
+          },
+          filter: { ...this.filter, genders: this.filter.genders.filter(id_gender => id_gender != value)}
+        }))
         break;
       case 'players':
-        this.store.dispatch(gamesActions.loadFilteredGames({ filter: { ...this.filter, players: null } }))
+        this.store.dispatch(gamesActions.loadFilteredGames({
+          page: {
+            limit: 3,
+            primerDoc: null,
+            ultimoDoc: null,
+            items: [],
+            type: PageType.FILTERED_GAMES
+          },
+          filter: { ...this.filter, players: null }
+        }))
         break;
       case 'complexity':
-        this.store.dispatch(gamesActions.loadFilteredGames({ filter: { ...this.filter, complexity: null } }))
+        this.store.dispatch(gamesActions.loadFilteredGames({
+          page: {
+            limit: 3,
+            primerDoc: null,
+            ultimoDoc: null,
+            items: [],
+            type: PageType.FILTERED_GAMES
+          },
+          filter: { ...this.filter, complexity: null }
+        }))
         break;
       case 'text':
-        this.store.dispatch(gamesActions.loadFilteredGames({ filter: { ...this.filter, text: null } }))
+        this.store.dispatch(gamesActions.loadFilteredGames({
+          page: {
+            limit: 3,
+            primerDoc: null,
+            ultimoDoc: null,
+            items: [],
+            type: PageType.FILTERED_GAMES
+          },
+          filter: { ...this.filter, text: null }
+        }))
         break;
     }
   }
