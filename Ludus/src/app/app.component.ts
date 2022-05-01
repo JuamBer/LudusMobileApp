@@ -37,8 +37,7 @@ export class AppComponent implements OnInit, OnDestroy{
     private authService: AuthService,
     private store: Store<AppState>,
     private toastController: ToastController,
-    private router: Router,
-    private network: Network
+    private router: Router
   ) {}
 
   ngOnInit(): void {
