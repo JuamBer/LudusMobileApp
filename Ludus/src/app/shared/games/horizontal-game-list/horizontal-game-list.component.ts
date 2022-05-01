@@ -2,14 +2,21 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
+//NGRX
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/state/app.state';
+import * as gamesActions from 'src/app/state/games/games.actions';
+
 //ENVIRONMENTS
 import { environment } from 'src/environments/environment';
 
 //MODELS
 import { Game } from 'src/models/Game';
+import { Page } from 'src/models/Page.model';
 
 //SWIPER
 import { SwiperOptions } from 'swiper';
+import { runInThisContext } from 'vm';
 
 @Component({
   selector: 'app-horizontal-game-list',
@@ -19,7 +26,7 @@ import { SwiperOptions } from 'swiper';
 export class HorizontalGameListComponent implements OnInit {
 
   @Input() title: string;
-  @Input() games: Game[] = [];
+  @Input() games: Page<Game>;
   swiperConfig: SwiperOptions = {
     initialSlide: 1,
     slidesPerView: 2,
@@ -27,7 +34,8 @@ export class HorizontalGameListComponent implements OnInit {
   }
 
   constructor(
-    private router: Router
+    private router: Router,
+    private store: Store<AppState>,
   ) { }
 
   ngOnInit() {}
@@ -36,8 +44,8 @@ export class HorizontalGameListComponent implements OnInit {
     this.router.navigate([environment.routes.home_game, game.id]);
   }
 
-  loadMore(number: number){
-
+  loadMore(){
+    this.store.dispatch(gamesActions.loadMorePopularGames({page: this.games}));
   }
 
 }

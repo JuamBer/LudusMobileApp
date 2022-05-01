@@ -6,7 +6,7 @@ import { environment } from 'src/environments/environment';
 import { Filter } from 'src/models/Filter.model';
 import { ScrollFilter } from 'src/models/ScrollFilter.model';
 import { Game } from 'src/models/Game';
-import { Page, PageFilter } from 'src/models/Page.model';
+import { Page } from 'src/models/Page.model';
 import { Review } from 'src/models/Review';
 import { capitalize } from 'src/utils/CamelCase';
 
@@ -19,6 +19,15 @@ export class GameService {
     private firestore: AngularFirestore,
   ) { }
 
+  getPopularGames(page: Page<Game>) {
+    return this.firestore.collection<Game[]>(environment.db_tables.games, ref => ref.orderBy('average_rating', 'desc').limit(page.limit))
+    .snapshotChanges();
+  }
+  getMorePopularGames(page: Page<Game>){
+    console.log(page);
+    return this.firestore.collection<Game[]>(environment.db_tables.games, ref => ref.orderBy('average_rating', 'desc').limit(page.limit)
+      .startAfter(page.ultimoDoc)).snapshotChanges();
+  }
 
   getCardGames() {
     return this.firestore.collection<Game[]>(environment.db_tables.games, ref => ref.where('id_type', '==', '2')).valueChanges({ idField: 'id' });
@@ -27,9 +36,7 @@ export class GameService {
     return this.firestore.collection<Game[]>(environment.db_tables.games, ref => ref.orderBy('min_time')).valueChanges({ idField: 'id' });
   }
 
-  getPopularGames(scrollFilter: ScrollFilter) {
-    return this.firestore.collection<Game[]>(environment.db_tables.games, ref => ref.orderBy('average_rating', 'desc').limit(scrollFilter.limit)).valueChanges({ idField: 'id' });
-  }
+
 
   getGames() {
     return this.firestore.collection<Game[]>(environment.db_tables.games).valueChanges({ idField: 'id' });

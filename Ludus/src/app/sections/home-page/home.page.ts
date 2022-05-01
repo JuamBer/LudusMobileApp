@@ -34,10 +34,17 @@ export class HomePage {
 
 
   ngOnInit(){
-    this.store.dispatch(gamesActions.loadCardGames());
-    this.store.dispatch(gamesActions.loadQuickGames());
-    this.store.dispatch(gamesActions.loadPopularGames({scrollFilter: {limit:3}}));
-    this.store.dispatch(gamesActions.loadSpecialGame1({ id: "4" }));
-    this.store.dispatch(gamesActions.loadSpecialGame2({ id: "10" }));
+    //this.store.dispatch(gamesActions.loadCardGames());
+    //this.store.dispatch(gamesActions.loadQuickGames());
+    this.store.dispatch(gamesActions.loadPopularGames({
+      page: {
+        limit: 3,
+        primerDoc: null,
+        ultimoDoc: null,
+        items: []
+      }
+    }));
+    //this.store.dispatch(gamesActions.loadSpecialGame1({ id: "4" }));
+    //this.store.dispatch(gamesActions.loadSpecialGame2({ id: "10" }));
   }
 }

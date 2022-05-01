@@ -1,13 +1,14 @@
 import { createReducer, on } from '@ngrx/store';
 import { Filter } from 'src/models/Filter.model';
 import { Game } from 'src/models/Game';
+import { Page } from 'src/models/Page.model';
 import * as authActions from './games.actions';
 
 export interface State {
   game: Game,
   games: Game[],
   card_games: Game[],
-  popular_games: Game[],
+  popular_games: Page<Game>,
   quick_games: Game[],
   filter: Filter;
   search_results_games: Game[] | null
@@ -19,7 +20,12 @@ export const initialState: State = {
   game: null,
   games: [],
   card_games: [],
-  popular_games: [],
+  popular_games: {
+    items: [],
+    primerDoc: null,
+    ultimoDoc: null,
+    limit: 4,
+  },
   quick_games: [],
   filter: {
     genders: [],
@@ -40,7 +46,22 @@ export const gamesReducer = createReducer(initialState,
   on(authActions.loadGameSuccess, (state, { game }) => ({ ...state, game: game })),
   on(authActions.loadGamesSuccess, (state, { games }) => ({ ...state, games: games})),
   on(authActions.loadCardGamesSuccess, (state, { games }) => ({ ...state, card_games: games })),
-  on(authActions.loadPopularGamesSuccess, (state, { games }) => ({ ...state, popular_games: games })),
+
+  on(authActions.loadPopularGamesSuccess, (state, { page }) => (
+    {
+      ...state,
+      popular_games: page
+    }
+  )),
+  on(authActions.loadMorePopularGamesSuccess, (state, { page }) => (
+    {
+      ...state,
+      popular_games: {
+        ...page,
+        items: [...state.popular_games.items, ...page.items]
+    }
+  })),
+
   on(authActions.loadQuickGamesSuccess, (state, { games }) => ({ ...state, quick_games: games })),
   on(authActions.loadFilteredGames, (state, { filter }) => ({ ...state, filter: filter })),
   on(authActions.loadFilteredGamesSuccess, (state, { games }) => {

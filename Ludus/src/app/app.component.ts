@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 
 //IONIC
 import { ToastController } from '@ionic/angular';
+import { Network } from '@capacitor/network';
 
 //SERVICES
 import { AuthService } from 'src/services/auth.service';
@@ -39,6 +40,11 @@ export class AppComponent implements OnInit, OnDestroy{
   ) {}
 
   ngOnInit(): void {
+
+    Network.addListener('networkStatusChange', status => {
+      console.log('Network status changed', status);
+    });
+
     let authMessageSuscription = this.store.select(store=> store.auth.message).subscribe(
       (message)=>{
         if (message){

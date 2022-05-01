@@ -3,6 +3,7 @@ import { ScrollFilter } from 'src/models/ScrollFilter.model';
 import { Game } from 'src/models/Game';
 import { User } from 'src/models/User';
 import { Filter } from 'src/models/Filter.model';
+import { Page } from 'src/models/Page.model';
 
 //UPDATE AVERAGE RATING
 export const updateAverageRatingSuccess = createAction(
@@ -86,14 +87,26 @@ export const loadCardGamesFail = createAction(
 //LOAD POPULARS GAMES
 export const loadPopularGames = createAction(
   '[Games] loadPopularGames',
-  props < { scrollFilter: ScrollFilter }>()
+  props<{ page: Page<Game> }>()
 );
 export const loadPopularGamesSuccess = createAction(
   '[Games] loadPopularGamesSuccess',
-  props<{ games: Game[] }>()
+  props<{ page: Page<Game> }>()
 );
 export const loadPopularGamesFail = createAction(
   '[Games] loadPopularGamesFail',
+  props<{ error: any }>()
+);
+export const loadMorePopularGames = createAction(
+  '[Games] loadMorePopularGames',
+  props<{ page: Page<Game> }>()
+);
+export const loadMorePopularGamesSuccess = createAction(
+  '[Games] loadMorePopularGamesSuccess',
+  props<{ page: Page<Game> }>()
+);
+export const loadMorePopularGamesFail = createAction(
+  '[Games] loadMorePopularGamesFail',
   props<{ error: any }>()
 );
 
