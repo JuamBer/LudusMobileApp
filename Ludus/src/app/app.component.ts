@@ -30,13 +30,15 @@ import { Type } from "src/models/Message.model";
 })
 export class AppComponent implements OnInit, OnDestroy{
 
+  isConnected: boolean = false;
   suscriptions: Subscription[] = [];
 
   constructor(
     private authService: AuthService,
     private store: Store<AppState>,
     private toastController: ToastController,
-    private router: Router
+    private router: Router,
+    private network: Network
   ) {}
 
   ngOnInit(): void {
