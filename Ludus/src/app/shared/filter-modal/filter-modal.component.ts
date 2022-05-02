@@ -19,6 +19,7 @@ import * as complexitiesActions from 'src/app/state/complexities/complexities.ac
 import { Gender } from 'src/models/Gender';
 import { Filter } from 'src/models/Filter.model';
 import { Complexity } from 'src/models/Complexity.model';
+import { PageType } from 'src/models/Page.model';
 
 @Component({
   selector: 'app-filter-modal',
@@ -88,7 +89,16 @@ export class FilterModalComponent implements OnInit, OnDestroy {
       ...filter,
       text: this.filter.text,
     }
-    this.store.dispatch(gamesActions.loadFilteredGames({ filter: newFilter }));
+    this.store.dispatch(gamesActions.loadFilteredGames({
+      page: {
+        limit: 3,
+        primerDoc: null,
+        ultimoDoc: null,
+        items: [],
+        type: PageType.FILTERED_GAMES
+      },
+      filter: newFilter
+    }));
     this.dismiss();
   }
 

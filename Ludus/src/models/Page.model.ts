@@ -1,11 +1,14 @@
-
-export interface PageFilter {
-  items_per_page: number;
-  page: number;
+export enum PageType {
+  POPULAR_GAMES,
+  QUICK_GAMES,
+  CARD_GAMES,
+  FILTERED_GAMES
 }
 
 export interface Page<T> {
   items: T[],
-  items_per_page: number;
-  page: number;
+  primerDoc: any;
+  ultimoDoc: any;
+  limit: number;
+  type: PageType
 }

@@ -2,14 +2,21 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
+//NGRX
+import { Store } from '@ngrx/store';
+import { AppState } from 'src/app/state/app.state';
+import * as gamesActions from 'src/app/state/games/games.actions';
+
 //ENVIRONMENTS
 import { environment } from 'src/environments/environment';
 
 //MODELS
 import { Game } from 'src/models/Game';
+import { Page, PageType } from 'src/models/Page.model';
 
 //SWIPER
 import { SwiperOptions } from 'swiper';
+import { runInThisContext } from 'vm';
 
 @Component({
   selector: 'app-horizontal-game-list',
@@ -19,15 +26,17 @@ import { SwiperOptions } from 'swiper';
 export class HorizontalGameListComponent implements OnInit {
 
   @Input() title: string;
-  @Input() games: Game[] = [];
+  @Input() games: Page<Game>;
   swiperConfig: SwiperOptions = {
-    initialSlide: 1,
+    initialSlide: 0,
     slidesPerView: 2,
     speed: 400
   }
+  areMoreGames: boolean = true;
 
   constructor(
-    private router: Router
+    private router: Router,
+    private store: Store<AppState>,
   ) { }
 
   ngOnInit() {}
@@ -36,8 +45,18 @@ export class HorizontalGameListComponent implements OnInit {
     this.router.navigate([environment.routes.home_game, game.id]);
   }
 
-  loadMore(number: number){
-
+  loadMore(){
+    switch (this.games.type) {
+      case PageType.CARD_GAMES:
+        this.store.dispatch(gamesActions.loadMoreCardGames({ page: this.games }));
+        break;
+      case PageType.POPULAR_GAMES:
+        this.store.dispatch(gamesActions.loadMorePopularGames({ page: this.games }));
+        break;
+      case PageType.QUICK_GAMES:
+        this.store.dispatch(gamesActions.loadMoreQuickGames({ page: this.games }));
+        break;
+    }
   }
 
 }

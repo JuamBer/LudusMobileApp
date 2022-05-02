@@ -2,6 +2,9 @@
 import { Component, OnInit, Input, OnDestroy} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
+//IONIC
+import { Network } from '@capacitor/network';
+
 //RXJS
 import { Subscription } from 'rxjs';
 

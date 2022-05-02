@@ -101,3 +101,11 @@ export const updateReviewSuccess: Message = {
   color: "success",
   type: Type.UPDATE_REVIEW_SUCCESSS
 }
+
+//REVIEWS
+export const loadMoreGamesSuccess: Message = {
+  text: "¡ Más Juegos Cargador Con Éxito !",
+  icon: "information-circle-outline",
+  color: "success",
+  type: Type.LOAD_MORE_GAMES_SUCCESS
+}
