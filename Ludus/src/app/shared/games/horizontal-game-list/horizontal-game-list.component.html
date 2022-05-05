@@ -2,7 +2,7 @@
   <div class="list-title">
     <h2>{{ title }}</h2>
   </div>
-  <swiper class="game-list" [config]="swiperConfig" *ngIf="games">
+  <swiper #swiperRef class="game-list" [config]="swiperConfig" *ngIf="games" id="swiper">
     <ng-template swiperSlide *ngFor="let game of games.items">
       <div class="game" (click)="openGame(game)">
         <div class="title">
