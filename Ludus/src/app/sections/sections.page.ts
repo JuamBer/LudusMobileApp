@@ -8,6 +8,8 @@ import { Component } from '@angular/core';
 })
 export class SectionsPage {
 
+  isAdmin: boolean = false;
+
   constructor() {}
 
 }

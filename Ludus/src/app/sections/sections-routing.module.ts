@@ -24,6 +24,10 @@ const routes: Routes = [
         loadChildren: () => import('./profile-page/profile.module').then(m => m.ProfilePageModule)
       },
       {
+        path: 'admin',
+        loadChildren: () => import('./admin-page/admin.module').then(m => m.AdminPageModule)
+      },
+      {
         path: '',
         redirectTo: 'favs',
         pathMatch: 'full'

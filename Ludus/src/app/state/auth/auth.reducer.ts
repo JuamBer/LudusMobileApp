@@ -8,7 +8,7 @@ import * as messages from 'src/utils/messages';
 export interface State {
   user: User | null;
   ids_favs_games: string[];
-  message: Message
+  message: Message | null;
 }
 
 export const initialState: State = {

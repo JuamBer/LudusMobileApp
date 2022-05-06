@@ -23,8 +23,6 @@ export class GameService {
     return this.firestore.collection<Game[]>(environment.db_tables.games, ref => ref.orderBy('average_rating', 'desc').limit(page.limit)).snapshotChanges();
   }
   getMorePopularGames(page: Page<Game>){
-    console.log(page);
-
     return this.firestore.collection<Game[]>(environment.db_tables.games, ref => ref.orderBy('average_rating', 'desc').startAfter(page.ultimoDoc).limit(page.limit)).snapshotChanges();
   }
 
