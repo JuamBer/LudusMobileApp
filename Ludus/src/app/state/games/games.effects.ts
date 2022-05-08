@@ -265,6 +265,52 @@ export class GamesEffects {
   );
 
 
+  createGame$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(gamesActions.createGame),
+      mergeMap((action) => {
+        return from(this.gameService.create(action.game))
+          .pipe(
+            map((res) => gamesActions.createGameSuccess({ id_user: action.id_user, game: { id: res.id, ...action.game} })),
+            catchError(err => of(gamesActions.createGameFail({ error: err })))
+          )
+      }
+      )
+    )
+  );
+
+  deleteGame$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(gamesActions.deleteGame),
+      mergeMap((res) => {
+        return from(this.gameService.delete(res.game))
+          .pipe(
+            map(() => gamesActions.deleteGameSuccess({ id_user: res.id_user, game: res.game })),
+            catchError(err => of(gamesActions.deleteGameFail({ error: err })))
+          )
+      }
+      )
+    )
+  );
+
+  updateGame$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(gamesActions.updateGame),
+      mergeMap((res) => {
+        return from(this.gameService.update(res.game))
+          .pipe(
+            map((ress) => {
+              console.log(ress);
+              return gamesActions.updateGameSuccess({ game: res.game, id_user: res.id_user })
+            }),
+            catchError(err => of(gamesActions.updateGameFail({ error: err })))
+          )
+      }
+      )
+    )
+  );
+
+
 
   constructor(
     private actions$: Actions,

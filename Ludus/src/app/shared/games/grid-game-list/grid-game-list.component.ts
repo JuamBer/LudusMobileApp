@@ -16,6 +16,7 @@ import { User } from 'src/models/User';
 
 //ENVIRONMENTS
 import { environment } from 'src/environments/environment';
+import { PopoverController, ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-grid-game-list',
@@ -26,12 +27,14 @@ export class GridGameListComponent implements OnInit,OnDestroy {
 
   @Input() title: string;
   @Input() ids_games: string[] = [];
+  @Input() type: string;
+  isGameSettingsOpen: boolean = false;
   suscriptions: Subscription[]= [];
   user: User;
 
   constructor(
     private router: Router,
-    private store: Store<AppState>
+    private store: Store<AppState>,
   ) { }
 
   ngOnInit() {
@@ -51,4 +54,9 @@ export class GridGameListComponent implements OnInit,OnDestroy {
   removeGameToFavs(game: Game){
     this.store.dispatch(authActions.removeGameToFavs({ id_user: this.user.id, game: game }));
   }
+
+  openGameSettings(game: Game){
+    this.isGameSettingsOpen = true;
+  }
+
 }

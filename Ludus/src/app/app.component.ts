@@ -56,7 +56,7 @@ export class AppComponent implements OnInit, OnDestroy{
 
           switch (message.type) {
             case Type.LOGIN_SUCCESS:
-              this.router.navigate([environment.routes.home])
+              this.router.navigate([environment.routes.admin_add_game])
               break;
             case Type.LOGIN_ERROR:
               this.router.navigate([environment.routes.login])
@@ -82,7 +82,9 @@ export class AppComponent implements OnInit, OnDestroy{
             email: user.email
           }
           this.store.dispatch(userActions.loginUserSuccess({ user: userLogged }))
-          this.store.dispatch(userActions.loadFavsGames({ id: userLogged.id }));
+          //this.store.dispatch(userActions.loadFavsGames({ id: userLogged.id }));
+          //this.store.dispatch(userActions.loadRole({ id: userLogged.id }));
+          this.store.dispatch(userActions.loadMyUser({ id: userLogged.id }));
         }
       }
     )

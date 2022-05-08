@@ -27,6 +27,28 @@ export class UserService {
     return this.firestore.collection(environment.db_tables.users).doc(id).valueChanges().pipe(map((user: any) => user.favs_games));
   }
 
+  getRole(id: string) {
+    return this.firestore.collection(environment.db_tables.users).doc(id).valueChanges().pipe(map((user: any) => user.role));
+  }
+
+  async addGame(id_user:string, game: Game) {
+    try {
+      const res = this.firestore.collection(environment.db_tables.users).doc(id_user).update({ ids_games: arrayUnion(game.id) });
+      return res;
+    } catch (err) {
+      return err;
+    }
+  }
+  async deleteGame(id_user: string, game: Game) {
+    try {
+      const res = await this.firestore.collection(environment.db_tables.users).doc(id_user).update({ ids_games: arrayRemove(game.id) });
+
+      return res;
+    } catch (err) {
+      return err;
+    }
+  }
+
   async addGameToFavs(id_user: string, game: Game){
     try {
       const res = await this.firestore.collection(environment.db_tables.users).doc(id_user).update({ favs_games: arrayUnion(game.id)});

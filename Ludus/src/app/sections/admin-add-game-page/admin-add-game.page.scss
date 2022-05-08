@@ -1,0 +1,23 @@
+.admin-add-game {
+  padding: 5%;
+
+  .title {
+    display: flex;
+    justify-content: center;
+    padding: 2.5%;
+  }
+
+  form {
+    ion-item {
+      padding-top: 2%;
+      padding-bottom: 2%;
+    }
+    ion-textarea {
+      min-height: 300px;
+    }
+
+    ion-button {
+      margin-top: 2.5%;
+    }
+  }
+}

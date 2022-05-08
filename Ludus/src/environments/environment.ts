@@ -24,6 +24,8 @@ export const environment = {
     favs: 'sections/favs',
     profile: 'sections/profile',
     profile_settings: 'sections/profile/settings',
+    admin: 'sections/admin',
+    admin_add_game: 'sections/admin-add-game',
   },
 
   db_tables: {

@@ -15,6 +15,7 @@ import { VarDirective } from 'src/utils/ng-var.directive';
 
 @NgModule({
   imports: [
+
   ],
   declarations: [
     GetGenderNamePipe,

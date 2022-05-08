@@ -118,29 +118,63 @@ export const addGameToFavsFail = createAction(
 
 //REMOVE GAME TO FAVS
 export const removeGameToFavs = createAction(
-  '[Games] removeGameToFavs',
+  '[Auth] removeGameToFavs',
   props<{ id_user: string, game: Game }>()
 );
 export const removeGameToFavsSuccess = createAction(
-  '[Games] removeGameToFavsSuccess',
+  '[Auth] removeGameToFavsSuccess',
   props<{ id: string }>()
 );
 export const removeGameToFavsFail = createAction(
-  '[Games] removeGameToFavsFail',
+  '[Auth] removeGameToFavsFail',
   props<{ error: any }>()
 );
 
-//LOAD FAVS GAMES
-export const loadFavsGames = createAction(
-  '[Games] loadFavsGames',
+//LOAD MY USER
+export const loadMyUser = createAction(
+  '[Games] loadMyUser',
   props<{ id: string }>()
 );
-export const loadFavsGamesSuccess = createAction(
-  '[Games] loadFavsGamesSuccess',
-  props<{ ids_favs_games: string[] }>()
+export const loadMyUserSuccess = createAction(
+  '[Auth] loadMyUserSuccess',
+  props<{ user: User }>()
 );
-export const loadFavsGamesFail = createAction(
-  '[Games] loadFavsGamesFail',
+export const loadMyUserFail = createAction(
+  '[Auth] loadMyUserFail',
   props<{ error: any }>()
 );
 
+export const createGame = createAction(
+  '[Auth] createGame',
+  props<{ id_user:string, game: Game }>()
+);
+export const createGameSuccess = createAction(
+  '[Auth] createGameSuccess',
+  props<{ id_user: string, game: Game }>()
+);
+export const createGameFail = createAction(
+  '[Auth] createGameFail',
+  props<{ error: any }>()
+);
+
+export const deleteGame = createAction(
+  '[Auth] deleteGame',
+  props<{ id_user: string, game: Game }>()
+);
+export const deleteGameSuccess = createAction(
+  '[Auth] deleteGameSuccess',
+  props<{ id_user:string, game: Game }>()
+);
+export const deleteGameFail = createAction(
+  '[Auth] deleteGameFail',
+  props<{ error: any }>()
+);
+
+export const updateGame = createAction(
+  '[Auth] updateGame',
+  props<{ id_user: string, game: Game }>()
+);
+export const updateGameSuccess = createAction(
+  '[Auth] updateGameSuccess',
+  props<{ id_user: string, game: Game }>()
+);

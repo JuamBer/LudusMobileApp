@@ -178,3 +178,46 @@ export const unSetFilteredGames = createAction(
 export const unSetFilteredResultsGames = createAction(
   '[Games] unSetFilteredResultsGames'
 );
+
+
+//CREATE REVIEW
+export const createGame = createAction(
+  '[Games] create Game',
+  props<{ id_user:string, game: Game }>()
+);
+export const createGameSuccess = createAction(
+  '[Games] create Game Success',
+  props<{ id_user: string, game: Game }>()
+);
+export const createGameFail = createAction(
+  '[Games] create Game Fail',
+  props<{ error: any }>()
+);
+
+//DELETE REVIEW
+export const deleteGame = createAction(
+  '[Games] delete Game',
+  props<{ id_user:string, game: Game }>()
+);
+export const deleteGameSuccess = createAction(
+  '[Games] delete Game Success',
+  props<{ id_user: string, game: Game }>()
+);
+export const deleteGameFail = createAction(
+  '[Games] delete Game Fail',
+  props<{ error: any }>()
+);
+
+//UPDATE REVIEW
+export const updateGame = createAction(
+  '[Games] update Game',
+  props<{ id_user: string, game: Game }>()
+);
+export const updateGameSuccess = createAction(
+  '[Games] update Game Success',
+  props<{ id_user: string, game: Game }>()
+);
+export const updateGameFail = createAction(
+  '[Games] update Game Fail',
+  props<{ error: any }>()
+);

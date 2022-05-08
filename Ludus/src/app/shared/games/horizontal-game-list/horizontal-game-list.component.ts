@@ -41,9 +41,6 @@ export class HorizontalGameListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log(this.sliderRef);
-
-    this.sliderRef.swiperRef.slideTo(0, 0);
   }
 
   openGame(game: Game) {

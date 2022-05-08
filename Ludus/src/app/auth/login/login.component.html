@@ -4,20 +4,7 @@
         <h2>Entrar</h2>
       </div>
 
-      <form class="form" [formGroup]="form" (ngSubmit)="login(form.value)">
-        <ion-item>
-          <ion-label position="floating">Email</ion-label>
-          <ion-input type="text" formControlName="email"></ion-input>
-        </ion-item>
-        <ion-item>
-          <ion-label position="floating">Contraseña</ion-label>
-          <ion-input type="password" formControlName="password"></ion-input>
-        </ion-item>
-        <div>
-          <ion-button [disabled]="form.invalid" color="tertiary" shape="round" expand="full" type="submit">Entrar
-          </ion-button>
-        </div>
-      </form>
+
 
       <div class="external-login">
         <p>O entra con</p>

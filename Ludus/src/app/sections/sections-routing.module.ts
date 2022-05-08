@@ -28,6 +28,10 @@ const routes: Routes = [
         loadChildren: () => import('./admin-page/admin.module').then(m => m.AdminPageModule)
       },
       {
+        path: 'admin-add-game',
+        loadChildren: () => import('./admin-add-game-page/admin-add-game.module').then(m => m.AdminAddGamePageModule)
+      },
+      {
         path: '',
         redirectTo: 'favs',
         pathMatch: 'full'

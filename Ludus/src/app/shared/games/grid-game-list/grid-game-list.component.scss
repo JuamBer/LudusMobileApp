@@ -1,11 +1,15 @@
 .grid-game-list {
-  padding: 5%;
 
   .list-title {
     text-align: center;
     padding: 2.5%;
   }
 
+  .game-settings {
+
+    padding: 50px;
+    background-color: red;
+  }
   .game-list {
     display: grid;
     grid-template-columns: repeat(2, 50%);
@@ -84,7 +88,6 @@
       }
     }
   }
-
 
   .any-result {
     width: 100%;

@@ -2,9 +2,9 @@ import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AdminPage } from './admin.page';
+import { AdminAddGamePage } from './admin-add-game.page';
 
-import { AdminPageRoutingModule } from './admin-page-routing.module';
+import { AdminAddGamePageRoutingModule } from './admin-add-game-page-routing.module';
 import { LudusHeaderModule } from '../../shared/ludus-header/ludus-header.module';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -20,7 +20,6 @@ import { ChangePasswordModalComponent } from 'src/app/shared/settings/change-pas
 import { ReviewsModule } from 'src/app/shared/reviews/reviews.module';
 import { GridGameListComponent } from 'src/app/shared/games/grid-game-list/grid-game-list.component';
 import { GridGameListModule } from 'src/app/shared/games/grid-game-list/grid-game-list.module';
-import { GameSettingsComponent } from 'src/app/shared/games/game-settings/game-settings.component';
 
 @NgModule({
   imports: [
@@ -28,7 +27,7 @@ import { GameSettingsComponent } from 'src/app/shared/games/game-settings/game-s
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    AdminPageRoutingModule,
+    AdminAddGamePageRoutingModule,
     LudusHeaderModule,
     MatButtonModule,
     LudusHeaderModule,
@@ -36,7 +35,7 @@ import { GameSettingsComponent } from 'src/app/shared/games/game-settings/game-s
     GridGameListModule
   ],
   declarations: [
-    AdminPage,
+    AdminAddGamePage,
   ]
 })
-export class AdminPageModule {}
+export class AdminAddGamePageModule {}

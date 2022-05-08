@@ -7,17 +7,27 @@ import * as messages from 'src/utils/messages';
 
 export interface State {
   user: User | null;
-  ids_favs_games: string[];
   message: Message | null;
 }
 
 export const initialState: State = {
   user: null,
-  ids_favs_games: [],
   message: null
 }
 
 export const authReducer = createReducer(initialState,
+
+  //LOGIN
+  on(authActions.createGameSuccess, (state, { game }) => ({
+    ...state,
+    user: {
+      ...state.user,
+      ids_games: [
+        ...state.user.ids_games,
+        game.id
+      ]
+    }
+  })),
 
   //LOGIN
   on(authActions.loginUser, (state) => ({
@@ -134,32 +144,31 @@ export const authReducer = createReducer(initialState,
 
 
   on(authActions.addGameToFavsSuccess, (state, { id }) => {
-    const favs_games: any = { ids_favs_games: [...state.ids_favs_games, id] };
-    localStorage.setItem("favs_games", JSON.stringify(favs_games));
-
     return {
       ...state,
-      ids_favs_games: [...state.ids_favs_games, id],
+      user: {
+        ...state.user,
+        favs_games: [...state.user.favs_games, id]
+      },
       message: {...messages.addGameToFavsSuccess}
     }
   }),
-  on(authActions.loadFavsGamesSuccess, (state, { ids_favs_games }) => {
-    const favs_games: any = { ids_favs_games: ids_favs_games };
-    localStorage.setItem("favs_games", JSON.stringify(favs_games));
 
-    return {
-      ...state,
-      ids_favs_games: ids_favs_games
-    }
-  }),
   on(authActions.removeGameToFavsSuccess, (state, { id }) => {
-    const favs_games: any = { ids_favs_games: state.ids_favs_games.filter(id_game => id_game != id) };
-    localStorage.setItem("favs_games", JSON.stringify(favs_games));
-
     return{
       ...state,
-      ids_favs_games: state.ids_favs_games.filter(id_game => id_game != id),
+      user: {
+        ...state.user,
+        favs_games: state.user.favs_games.filter(id_game => id_game != id)
+      },
       message: {...messages.removeGameToFavsSuccess}
     }
-}),
+  }),
+
+  on(authActions.loadMyUserSuccess, (state, { user }) => {
+    return {
+      ...state,
+      user: user
+    }
+  }),
 );

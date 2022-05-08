@@ -41,7 +41,7 @@
         </div>
       </div>
     </li>
-    <div class="load-more" (click)="loadMore()">
+    <div class="load-more" (click)="loadMore()" *ngIf="games.items.length == games.limit">
       <div class="title">
         <h4>¡ Haz click para cargar más juegos !</h4>
       </div>

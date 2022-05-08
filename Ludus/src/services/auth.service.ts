@@ -7,6 +7,7 @@ import { RegisterDTO } from 'src/models/dtos/RegisterDTO.model';
 import { User } from 'src/models/User';
 import { environment } from '../environments/environment';
 import { GoogleAuthProvider } from 'firebase/auth';
+import { Game } from 'src/models/Game';
 
 @Injectable({
   providedIn: 'root'

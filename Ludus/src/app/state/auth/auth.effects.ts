@@ -5,6 +5,8 @@ import { map, mergeMap, catchError } from 'rxjs/operators';
 import { EMPTY, EmptyError } from 'rxjs';
 import { UserService } from 'src/services/user.service';
 import * as authActions from './auth.actions';
+import * as gameActions from '../games/games.actions';
+
 import { AuthService } from 'src/services/auth.service';
 import { User } from 'src/models/User';
 //NGRX
@@ -96,13 +98,13 @@ export class AuthEffects {
     )
   );
 
-  loadFavsGames$ = createEffect(() =>
+  loadMyUser$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(authActions.loadFavsGames),
-      mergeMap((res) => this.userService.getFavsGames(res.id)
+      ofType(authActions.loadMyUser),
+      mergeMap((res) => this.userService.getUser(res.id)
         .pipe(
-          map((ids_favs_games: any) => authActions.loadFavsGamesSuccess({ ids_favs_games: ids_favs_games })),
-          catchError(err => of(authActions.loadFavsGamesFail({ error: err })))
+          map((user: any) => authActions.loadMyUserSuccess({ user: user })),
+          catchError(err => of(authActions.loadMyUserFail({ error: err })))
         )
       )
     )
@@ -180,6 +182,36 @@ export class AuthEffects {
       )
     )
   );
+
+  addGame$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(gameActions.createGameSuccess),
+      mergeMap((action) => {
+        return from(this.userService.addGame(action.id_user, action.game))
+          .pipe(
+            map((res) => authActions.createGameSuccess({ id_user: action.id_user, game: action.game })),
+            catchError(err => of(authActions.createGameFail({ error: err })))
+          )
+      }
+      )
+    )
+  );
+
+  deleteGame$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(gameActions.deleteGameSuccess),
+      mergeMap((action) => {
+        return from(this.userService.deleteGame(action.id_user, action.game))
+          .pipe(
+            map((res) => authActions.deleteGameSuccess({ id_user: action.id_user, game: action.game })),
+            catchError(err => of(authActions.deleteGameFail({ error: err })))
+          )
+      }
+      )
+    )
+  );
+
+
 
 
   constructor(

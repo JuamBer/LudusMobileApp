@@ -6,10 +6,14 @@
   <ul class="game-list" *ngIf="(ids_games?.length > 0); else elseBlock">
     <li class="game" *ngFor="let id_game of ids_games; index as i">
       <div *ngVar="(id_game | getGame) | async as game">
-        <div class="fav-game" *ngIf="game" (click)="openGame(game)">
+        <div class="fav-game" *ngIf="game" (click)="openGame(game)" id="{{id_game}}">
           <div class="title">
             <h4>{{ game.name }}</h4>
-            <ion-icon name="bookmark" (click)="removeGameToFavs(game); $event.stopPropagation()"></ion-icon>
+            <ion-icon name="bookmark" *ngIf="type=='favs'" (click)="removeGameToFavs(game); $event.stopPropagation()">
+            </ion-icon>
+            <ion-icon name="ellipsis-vertical-outline" *ngIf="type=='admin'"
+              (click)="openGameSettings(game); $event.stopPropagation()">
+            </ion-icon>
           </div>
           <hr>
           <div class="info">
@@ -25,22 +29,33 @@
             </div>
           </div>
         </div>
+        <ion-popover trigger="{{id_game}}" triggerAction="hover" size="cover" dismissOnSelect="true">
+          <ng-template>
+            <app-game-settings [game]="game"></app-game-settings>
+          </ng-template>
+        </ion-popover>
       </div>
     </li>
   </ul>
 
-
-
   <ng-template #elseBlock>
     <div class="any-result">
       <div class="message-box">
-        <div class="icon">
+        <div class="icon" *ngIf="type == 'admin'">
+          <ion-icon name="albums-outline"></ion-icon>
+        </div>
+        <div class="icon" *ngIf="type == 'favs'">
           <ion-icon name="bookmark-outline"></ion-icon>
         </div>
-        <div class="message">
+        <div class="message" *ngIf="type == 'admin'">
+          <h2>Aún no has creado ningún juego</h2>
+        </div>
+        <div class="message" *ngIf="type == 'favs'">
           <h2>Aún no has guardado ningún juego</h2>
         </div>
       </div>
     </div>
   </ng-template>
+
+
 </div>

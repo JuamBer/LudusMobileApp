@@ -3,4 +3,6 @@ export interface User {
   name: string;
   email: string;
   favs_games?: string[];
+  ids_games?: string[];
+  role?:string;
 }

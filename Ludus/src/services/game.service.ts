@@ -19,6 +19,37 @@ export class GameService {
     private firestore: AngularFirestore,
   ) { }
 
+  async create(game: Game): Promise<any> {
+    try {
+      const res = await this.firestore.collection(environment.db_tables.games).add({ ...game });
+
+      return res;
+    } catch (err) {
+      return err;
+    }
+  }
+
+  async delete(game: Game) {
+    try {
+      const res = await this.firestore.collection(environment.db_tables.games).doc(game.id).delete();
+
+      return res;
+    } catch (err) {
+      return err;
+    }
+  }
+
+  async update(game: Game) {
+    try {
+
+      const res = await this.firestore.collection(environment.db_tables.games).doc(game.id).update({ ...game });
+
+      return res;
+    } catch (err) {
+      return err;
+    }
+  }
+
   getPopularGames(page: Page<Game>) {
     return this.firestore.collection<Game[]>(environment.db_tables.games, ref => ref.orderBy('average_rating', 'desc').limit(page.limit)).snapshotChanges();
   }

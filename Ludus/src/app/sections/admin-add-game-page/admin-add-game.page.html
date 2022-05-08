@@ -1,0 +1,93 @@
+
+<ion-content [fullscreen]="true">
+  <div class="admin-add-game">
+    <div class="title" *ngIf="formType == 'create'">
+      <h1>Publicar Un Juego</h1>
+    </div>
+    <div class="title" *ngIf="formType == 'update'">
+      <h1>Actualiza El Juego</h1>
+    </div>
+
+    <form class="form" [formGroup]="form" (ngSubmit)="send(form.value)" *ngIf="form">
+      <ion-item>
+        <ion-label position="floating">Nombre *</ion-label>
+        <ion-input type="text" formControlName="name"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Género *</ion-label>
+        <ion-select formControlName="ids_genders" multiple="true" cancelText="Cancelar" okText="OK">
+          <ion-select-option *ngFor="let gender of genders" value="{{gender.id}}">{{gender.name}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Tipo *</ion-label>
+        <ion-select formControlName="id_type" multiple="false" cancelText="Cancelar" okText="OK">
+          <ion-select-option *ngFor="let type of types" value="{{type.id}}">{{type.name}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Complejidad *</ion-label>
+        <ion-select formControlName="id_complexity" multiple="false" cancelText="Cancelar" okText="OK">
+          <ion-select-option *ngFor="let complexity of complexities" value="{{complexity.id}}">{{complexity.name}}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Jugadores Mínimos *</ion-label>
+        <ion-input type="number" formControlName="min_players"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Jugadores Máximos *</ion-label>
+        <ion-input type="number" formControlName="max_players"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Tiempo Mínimo *</ion-label>
+        <ion-input type="number" formControlName="min_time"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Tiempo Máximos *</ion-label>
+        <ion-input type="number" formControlName="max_time"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Edad</ion-label>
+        <ion-input type="text" formControlName="age"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Tiempo De Preparación</ion-label>
+        <ion-input type="number" formControlName="preparation"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Url vídeo</ion-label>
+        <ion-input type="text" formControlName="video_url"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Resumen</ion-label>
+        <ion-textarea type="text" formControlName="summary"></ion-textarea>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Descripción *</ion-label>
+        <ion-textarea type="text" formControlName="description"></ion-textarea>
+      </ion-item>
+
+      <div>
+        <ion-button *ngIf="formType == 'create'" [disabled]="form.invalid" color="tertiary" shape="round" expand="full"
+          type="submit">Enviar
+        </ion-button>
+
+        <ion-button *ngIf="formType == 'update'" [disabled]="form.invalid" color="tertiary" shape="round" expand="full"
+          type="submit">Actualizar
+        </ion-button>
+      </div>
+    </form>
+  </div>
+</ion-content>

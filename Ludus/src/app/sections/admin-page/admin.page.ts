@@ -6,6 +6,9 @@ import { User } from 'src/models/User';
 import { AppState } from 'src/app/state/app.state';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
+import { ToastController } from '@ionic/angular';
+import { Game } from 'src/models/Game';
 
 @Component({
   selector: 'app-admin-page',
@@ -19,7 +22,9 @@ export class AdminPage implements OnInit, OnDestroy{
   suscriptions: Subscription[] = [];
 
   constructor(
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    private router: Router,
+    private toastController: ToastController
   ) {}
 
   ngOnInit(): void {
@@ -38,4 +43,10 @@ export class AdminPage implements OnInit, OnDestroy{
       suscription.unsubscribe();
     })
   }
+
+  goTo(url){
+    this.router.navigate([url, { form: 'create' }]);
+  }
+
+
 }

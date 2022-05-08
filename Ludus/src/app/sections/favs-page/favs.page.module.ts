@@ -14,12 +14,12 @@ import { LudusHeaderModule } from '../../shared/ludus-header/ludus-header.module
 import { FavsPage } from './favs.page';
 import { GridGameListComponent } from 'src/app/shared/games/grid-game-list/grid-game-list.component';
 import { ApplicationPipesAndDirectivesModule } from 'src/app/shared/modules/shared-pipes-and-directives.module';
+import { GridGameListModule } from 'src/app/shared/games/grid-game-list/grid-game-list.module';
 
 
 @NgModule({
   declarations: [
     FavsPage,
-    GridGameListComponent,
   ],
   imports: [
     //ANGULAR
@@ -33,7 +33,8 @@ import { ApplicationPipesAndDirectivesModule } from 'src/app/shared/modules/shar
     //MODULES
     FavsPageRoutingModule,
     LudusHeaderModule,
-    ApplicationPipesAndDirectivesModule
+    ApplicationPipesAndDirectivesModule,
+    GridGameListModule
   ],
 
 })

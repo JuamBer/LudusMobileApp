@@ -1,6 +1,22 @@
 
 <ion-content [fullscreen]="true">
   <div class="admin">
-    <h1>Admin</h1>
+    <div class="title">
+      <h1>Panel De Control</h1>
+    </div>
+    <div class="control-panel">
+      <ion-button expand="block" type="submit" (click)="goTo('sections/admin-add-game')">
+        <ion-icon slot="start" name="add"></ion-icon>
+        Publicar Un Nuevo Juego
+      </ion-button>
+    </div>
+    <app-grid-game-list [type]="'admin'" [title]="'Mis Juegos'" [ids_games]="user.ids_games"></app-grid-game-list>
+
+    <div class="title">
+      <h1>Estadísticas</h1>
+    </div>
+    <div class="estadisticas">
+      <h3>Próximamente</h3>
+    </div>
   </div>
 </ion-content>
