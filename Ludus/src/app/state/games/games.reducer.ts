@@ -63,11 +63,11 @@ export const gamesReducer = createReducer(initialState,
 
 
   on(authActions.loadGameSuccess, (state, { game }) => ({ ...state, game: game })),
-  on(authActions.loadGamesSuccess, (state, { games }) => ({ ...state, games: games})),
+  on(authActions.loadGamesSuccess, (state, { games }) => ({ ...state, games: games })),
 
   //LOAD CARD GAMES
   on(authActions.loadCardGamesSuccess, (state, { page }) => ({ ...state, card_games: page })),
-  on(authActions.loadMoreCardGames, (state, { page }) => ({ ...state, message: messages.loadingMessage})),
+  on(authActions.loadMoreCardGames, (state, { page }) => ({ ...state, message: messages.loadingMessage })),
   on(authActions.loadMoreCardGamesSuccess, (state, { page }) => (
     {
       ...state,
@@ -76,9 +76,9 @@ export const gamesReducer = createReducer(initialState,
         items: [...state.card_games.items, ...page.items]
       },
       message: messages.loadMoreGamesSuccess
-  })),
+    })),
   //LOAD POPULAR GAMES
-  on(authActions.loadPopularGamesSuccess, (state, { page }) => ({...state, popular_games: page })),
+  on(authActions.loadPopularGamesSuccess, (state, { page }) => ({ ...state, popular_games: page })),
   on(authActions.loadMorePopularGames, (state, { page }) => ({ ...state, message: messages.loadingMessage })),
   on(authActions.loadMorePopularGamesSuccess, (state, { page }) => (
     {
@@ -88,7 +88,7 @@ export const gamesReducer = createReducer(initialState,
         items: [...state.popular_games.items, ...page.items]
       },
       message: messages.loadMoreGamesSuccess
-  })),
+    })),
   //LOAD QUICK GAMES
   on(authActions.loadQuickGamesSuccess, (state, { page }) => ({ ...state, quick_games: page })),
   on(authActions.loadMoreQuickGames, (state, { page }) => ({ ...state, message: messages.loadingMessage })),
@@ -104,19 +104,30 @@ export const gamesReducer = createReducer(initialState,
   //LOAD FILTERED GAMES
   on(authActions.loadFilteredGames, (state, { filter }) => ({ ...state, filter: filter, message: messages.loadingMessage })),
   on(authActions.loadFilteredGamesSuccess, (state, { page }) => {
-    if (page!=null){
+    if (page != null) {
       return {
         ...state,
         search_results_games: page,
-        message: messages.loadMoreGamesSuccess
+        message: messages.loadGamesSuccess
       }
-    }else{
+    } else {
       return {
         ...state,
-        search_results_games: null
+        search_results_games: {
+          items: [],
+          primerDoc: null,
+          ultimoDoc: null,
+          limit: 3,
+          type: PageType.FILTERED_GAMES
+        }
       }
     }
   }),
+  on(authActions.loadFilteredGamesFail, (state, { error }) => (
+    {
+      ...state,
+      message: messages.errorMessage
+    })),
   on(authActions.loadMoreFilteredGames, (state, { page }) => ({ ...state, message: messages.loadingMessage })),
   on(authActions.loadMoreFilteredGamesSuccess, (state, { page }) => {
     if (page != null) {
@@ -128,10 +139,21 @@ export const gamesReducer = createReducer(initialState,
     } else {
       return {
         ...state,
-        search_results_games: null
+        search_results_games: {
+          items: [],
+          primerDoc: null,
+          ultimoDoc: null,
+          limit: null,
+          type: null
+        }
       }
     }
   }),
+  on(authActions.loadMoreCardGamesFail, (state, { error }) => (
+    {
+      ...state,
+      message: messages.errorMessage
+    })),
 
   on(authActions.unSetFilteredGames, (state) => ({
     ...state,

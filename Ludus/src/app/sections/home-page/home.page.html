@@ -23,7 +23,7 @@
     [games]="exploreGames.quick_games$ | async"
   ></app-horizontal-game-list>
 
-  <app-special-game-view *ngIf="(!((searchResultsGames$ | async ) != null) && exploreGames.special_game2$ | async)"
+   <app-special-game-view *ngIf="(!((searchResultsGames$ | async ) != null) && exploreGames.special_game2$ | async)"
     [title]="'Patrocinado'"
     [game]="exploreGames.special_game2$ | async">
   </app-special-game-view>

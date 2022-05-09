@@ -6,14 +6,19 @@
   <ul class="game-list" *ngIf="(ids_games?.length > 0); else elseBlock">
     <li class="game" *ngFor="let id_game of ids_games; index as i">
       <div *ngVar="(id_game | getGame) | async as game">
-        <div class="fav-game" *ngIf="game" (click)="openGame(game)" id="{{id_game}}">
+        <div class="fav-game" *ngIf="game" (click)="openGame(game); $event.stopPropagation()">
           <div class="title">
             <h4>{{ game.name }}</h4>
             <ion-icon name="bookmark" *ngIf="type=='favs'" (click)="removeGameToFavs(game); $event.stopPropagation()">
             </ion-icon>
-            <ion-icon name="ellipsis-vertical-outline" *ngIf="type=='admin'"
+            <ion-icon id="settings{{id_game}}" name="ellipsis-vertical-outline" *ngIf="type=='admin'"
               (click)="openGameSettings(game); $event.stopPropagation()">
             </ion-icon>
+            <ion-popover trigger="settings{{id_game}}" translucent="false" triggerAction="hover" dismissOnSelect="true">
+              <ng-template>
+                <app-game-settings [game]="game"></app-game-settings>
+              </ng-template>
+            </ion-popover>
           </div>
           <hr>
           <div class="info">
@@ -29,11 +34,7 @@
             </div>
           </div>
         </div>
-        <ion-popover trigger="{{id_game}}" triggerAction="hover" size="cover" dismissOnSelect="true">
-          <ng-template>
-            <app-game-settings [game]="game"></app-game-settings>
-          </ng-template>
-        </ion-popover>
+
       </div>
     </li>
   </ul>

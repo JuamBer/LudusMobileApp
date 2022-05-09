@@ -103,8 +103,14 @@ export const updateReviewSuccess: Message = {
 }
 
 //REVIEWS
+export const loadGamesSuccess: Message = {
+  text: "¡ Juegos Cargados Con Éxito !",
+  icon: "information-circle-outline",
+  color: "success",
+  type: Type.LOAD_MORE_GAMES_SUCCESS
+}
 export const loadMoreGamesSuccess: Message = {
-  text: "¡ Más Juegos Cargador Con Éxito !",
+  text: "¡ Más Juegos Cargados Con Éxito !",
   icon: "information-circle-outline",
   color: "success",
   type: Type.LOAD_MORE_GAMES_SUCCESS

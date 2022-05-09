@@ -230,14 +230,20 @@ export class GamesEffects {
         return this.gameService.getFilteredResultsGames(action.page, action.filter)
           .pipe(
             map((snapshotChanges: any) => {
-              if (snapshotChanges) {
+              console.log(snapshotChanges);
+
+              if (snapshotChanges != null && snapshotChanges?.length > 0) {
                 const page = this.transformSnapshotChanges(snapshotChanges, action.page.limit, action.page.type);
                 return gamesActions.loadFilteredGamesSuccess({ page: page })
               } else {
                 return gamesActions.loadFilteredGamesSuccess({ page: null })
               }
             }),
-            catchError(err => of(gamesActions.loadFilteredGamesSuccess({ page: null })))
+            catchError(err => {
+              console.log(err);
+
+              return of(gamesActions.loadFilteredGamesFail({ error: err }))
+            })
           )
       }
       )
@@ -250,14 +256,18 @@ export class GamesEffects {
         return this.gameService.getMoreFilteredResultsGames(action.page, action.filter)
           .pipe(
             map((snapshotChanges: any) => {
-              if (snapshotChanges) {
+              if (snapshotChanges != null && snapshotChanges?.length > 0) {
                 const page = this.transformSnapshotChanges(snapshotChanges, action.page.limit, action.page.type);
                 return gamesActions.loadMoreFilteredGamesSuccess({ page: page })
               } else {
                 return gamesActions.loadMoreFilteredGamesSuccess({ page: null })
               }
             }),
-            catchError(err => of(gamesActions.loadMoreFilteredGamesSuccess({ page: null })))
+            catchError(err => {
+              console.log(err);
+
+              return of(gamesActions.loadMoreFilteredGamesFail({ error: err }))
+            })
           )
       }
       )

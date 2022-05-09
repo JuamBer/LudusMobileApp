@@ -53,7 +53,7 @@ export class GameService {
   getPopularGames(page: Page<Game>) {
     return this.firestore.collection<Game[]>(environment.db_tables.games, ref => ref.orderBy('average_rating', 'desc').limit(page.limit)).snapshotChanges();
   }
-  getMorePopularGames(page: Page<Game>){
+  getMorePopularGames(page: Page<Game>) {
     return this.firestore.collection<Game[]>(environment.db_tables.games, ref => ref.orderBy('average_rating', 'desc').startAfter(page.ultimoDoc).limit(page.limit)).snapshotChanges();
   }
 
@@ -73,14 +73,24 @@ export class GameService {
 
 
   getFilteredResultsGames(page: Page<Game>, filter: Filter) {
+    console.log(filter);
     return this.firestore.collection<Game[]>(environment.db_tables.games,
+
+
       (ref: any) => {
-        ref = ref.limit(page.limit);
+
+        if (page.limit) {
+          ref = ref.limit(page.limit);
+        }
 
         if (filter.text != null) {
           const search: string = capitalize(filter.text);
 
-          ref = ref.orderBy('name').startAt(search).endAt(search + '\uf8ff');
+          if (filter.players != null) {
+            ref = ref.orderBy('max_players');
+          }
+
+          ref = ref.orderBy('name').startAt(filter.text).endAt(filter.text + '\uf8ff');
         }
 
         // LIMITACIÓN FIREBASE:
@@ -88,21 +98,23 @@ export class GameService {
         //if (filter.types.length > 0){
         // ref = ref.where('id_type', 'in', filter.types)
         //}
+        if (filter.players != null) {
+          const option: string = filter.players.substring(0, 1);
 
+          if (option == '+') {
+            ref = ref.where('max_players', '>=', 8)
+          } else {
+            const num_players: number = parseInt(option);
+            console.log(num_players);
+
+            ref = ref.where('max_players', '>=', num_players)
+          }
+        }
         if (filter.genders.length > 0) {
           ref = ref.where('ids_genders', 'array-contains-any', filter.genders)
         }
 
-        if (filter.players != null) {
-          const option: string = filter.players.substring(0,1);
 
-          if (option == '+'){
-            ref = ref.where('max_players', '>=',8)
-          }else{
-            const num_players: number = parseInt(option);
-            ref = ref.where('max_players', '>=', num_players)
-          }
-        }
 
         if (filter.complexity != null) {
           ref = ref.where('id_complexity', '==', filter.complexity)
@@ -196,15 +208,15 @@ export class GameService {
   }
 
 
-  async updateAverageRating(game: Game, review: Review, type: "create" | "update" | "delete", oldReview?: Review): Promise<void>{
+  async updateAverageRating(game: Game, review: Review, type: "create" | "update" | "delete", oldReview?: Review): Promise<void> {
     try {
       let newNumberOfRating: number = game.number_of_ratings;
       switch (type) {
         case "create":
-          newNumberOfRating = newNumberOfRating+1;
+          newNumberOfRating = newNumberOfRating + 1;
           break;
         case "delete":
-          newNumberOfRating = newNumberOfRating-1;
+          newNumberOfRating = newNumberOfRating - 1;
           break;
       }
       const newAverageRating: number = this.calculateNewAverageRating(game, review, type, oldReview);
@@ -222,7 +234,7 @@ export class GameService {
 
   }
 
-  calculateNewAverageRating(game: Game, review: Review, type: "create" | "update" | "delete", oldReview?: Review){
+  calculateNewAverageRating(game: Game, review: Review, type: "create" | "update" | "delete", oldReview?: Review) {
     let res: number = 0;
 
     switch (type) {
@@ -230,7 +242,7 @@ export class GameService {
         res = (((game.average_rating * game.number_of_ratings) + review.rating) / (game.number_of_ratings + 1));
         break;
       case "update":
-        res = (((game.average_rating * game.number_of_ratings) - oldReview.rating + review.rating ) / (game.number_of_ratings));
+        res = (((game.average_rating * game.number_of_ratings) - oldReview.rating + review.rating) / (game.number_of_ratings));
         break;
       case "delete":
         res = (((game.average_rating * game.number_of_ratings) - review.rating) / (game.number_of_ratings - 1));
