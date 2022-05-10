@@ -79,19 +79,7 @@ export class GameService {
 
       (ref: any) => {
 
-        if (page.limit) {
-          ref = ref.limit(page.limit);
-        }
 
-        if (filter.text != null) {
-          const search: string = capitalize(filter.text);
-
-          if (filter.players != null) {
-            ref = ref.orderBy('max_players');
-          }
-
-          ref = ref.orderBy('name').startAt(filter.text).endAt(filter.text + '\uf8ff');
-        }
 
         // LIMITACIÓN FIREBASE:
         // No puede usar tanto in como array-contains-any en la misma consulta.
@@ -105,16 +93,12 @@ export class GameService {
             ref = ref.where('max_players', '>=', 8)
           } else {
             const num_players: number = parseInt(option);
-            console.log(num_players);
-
             ref = ref.where('max_players', '>=', num_players)
           }
         }
         if (filter.genders.length > 0) {
           ref = ref.where('ids_genders', 'array-contains-any', filter.genders)
         }
-
-
 
         if (filter.complexity != null) {
           ref = ref.where('id_complexity', '==', filter.complexity)
@@ -132,6 +116,19 @@ export class GameService {
         //  }
         //}
 
+
+
+        if (filter.text != null) {
+          if (filter.players != null) {
+            ref = ref.orderBy('max_players').orderBy('name').startAt(filter.text).endAt(filter.text + '\uf8ff');
+          }else{
+            ref = ref.orderBy('name').startAt(filter.text).endAt(filter.text + '\uf8ff');
+          }
+        }
+
+        if (page.limit) {
+          ref = ref.limit(page.limit);
+        }
 
         return ref
       }).snapshotChanges();
