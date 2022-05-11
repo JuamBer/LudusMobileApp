@@ -15,7 +15,7 @@
               (click)="openGameSettings(game); $event.stopPropagation()">
             </ion-icon>
             <ion-popover *ngIf="type=='admin'"
-              trigger="{{id_game}}"
+              trigger="{{id_game}}" mode="ios"
               translucent="false" triggerAction="hover" dismissOnSelect="true">
               <ng-template>
                 <app-game-settings [game]="game"></app-game-settings>
