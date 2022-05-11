@@ -11,10 +11,12 @@
             <h4>{{ game.name }}</h4>
             <ion-icon name="bookmark" *ngIf="type=='favs'" (click)="removeGameToFavs(game); $event.stopPropagation()">
             </ion-icon>
-            <ion-icon id="settings{{id_game}}" name="ellipsis-vertical-outline" *ngIf="type=='admin'"
+            <ion-icon id="{{id_game}}" name="ellipsis-vertical-outline" *ngIf="type=='admin'"
               (click)="openGameSettings(game); $event.stopPropagation()">
             </ion-icon>
-            <ion-popover trigger="settings{{id_game}}" translucent="false" triggerAction="hover" dismissOnSelect="true">
+            <ion-popover *ngIf="type=='admin'"
+              trigger="{{id_game}}"
+              translucent="false" triggerAction="hover" dismissOnSelect="true">
               <ng-template>
                 <app-game-settings [game]="game"></app-game-settings>
               </ng-template>
