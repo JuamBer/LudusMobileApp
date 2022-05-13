@@ -142,6 +142,63 @@ export const authReducer = createReducer(initialState,
     message: messages.errorMessage
   })),
 
+  //create
+  on(authActions.createGame, (state, { game }) => ({
+    ...state,
+    message: messages.loadingMessage
+  })),
+  on(authActions.createGameSuccess, (state, { game }) => {
+    return {
+      ...state,
+      user: {
+        ...state.user,
+        ids_games: [
+          ...state.user.ids_games,
+          game.id
+        ]
+      },
+      message: { ...messages.createGameSuccess }
+    }
+  }),
+  on(authActions.createGameFail, (state, { error }) => ({
+    ...state,
+    message: messages.errorMessage
+  })),
+  //update
+  on(authActions.updateGame, (state, { game }) => ({
+    ...state,
+    message: messages.loadingMessage
+  })),
+  on(authActions.updateGameSuccess, (state, { game }) => {
+    return {
+      ...state,
+      message: { ...messages.updateGameSuccess }
+    }
+  }),
+  on(authActions.createGameFail, (state, { error }) => ({
+    ...state,
+    message: messages.errorMessage
+  })),
+  //delete
+  on(authActions.deleteGame, (state, { game }) => ({
+    ...state,
+    message: messages.loadingMessage
+  })),
+  on(authActions.deleteGameSuccess, (state, { game }) => {
+    return {
+      ...state,
+      user: {
+        ...state.user,
+        ids_games: state.user.ids_games.filter(item => item != game.id)
+      },
+      message: { ...messages.createGameSuccess }
+    }
+  }),
+  on(authActions.deleteGameFail, (state, { error }) => ({
+    ...state,
+    message: messages.errorMessage
+  })),
+
 
   on(authActions.addGameToFavsSuccess, (state, { id }) => {
     return {

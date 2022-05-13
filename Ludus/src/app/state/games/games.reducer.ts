@@ -3,7 +3,7 @@ import { Filter } from 'src/models/Filter.model';
 import { Game } from 'src/models/Game';
 import { Message } from 'src/models/Message.model';
 import { Page, PageType } from 'src/models/Page.model';
-import * as authActions from './games.actions';
+import * as gamesActions from './games.actions';
 import * as messages from 'src/utils/messages';
 
 export interface State {
@@ -56,19 +56,19 @@ export const initialState: State = {
 }
 
 export const gamesReducer = createReducer(initialState,
-  on(authActions.updateAverageRatingSuccess, (state, { game }) => ({ ...state, game: game })),
+  on(gamesActions.updateAverageRatingSuccess, (state, { game }) => ({ ...state, game: game })),
 
-  on(authActions.loadSpecialGame1Success, (state, { game }) => ({ ...state, special_game1: game })),
-  on(authActions.loadSpecialGame2Success, (state, { game }) => ({ ...state, special_game2: game })),
+  on(gamesActions.loadSpecialGame1Success, (state, { game }) => ({ ...state, special_game1: game })),
+  on(gamesActions.loadSpecialGame2Success, (state, { game }) => ({ ...state, special_game2: game })),
 
 
-  on(authActions.loadGameSuccess, (state, { game }) => ({ ...state, game: game })),
-  on(authActions.loadGamesSuccess, (state, { games }) => ({ ...state, games: games })),
+  on(gamesActions.loadGameSuccess, (state, { game }) => ({ ...state, game: game })),
+  on(gamesActions.loadGamesSuccess, (state, { games }) => ({ ...state, games: games })),
 
   //LOAD CARD GAMES
-  on(authActions.loadCardGamesSuccess, (state, { page }) => ({ ...state, card_games: page })),
-  on(authActions.loadMoreCardGames, (state, { page }) => ({ ...state, message: messages.loadingMessage })),
-  on(authActions.loadMoreCardGamesSuccess, (state, { page }) => (
+  on(gamesActions.loadCardGamesSuccess, (state, { page }) => ({ ...state, card_games: page })),
+  on(gamesActions.loadMoreCardGames, (state, { page }) => ({ ...state, message: messages.loadingMessage })),
+  on(gamesActions.loadMoreCardGamesSuccess, (state, { page }) => (
     {
       ...state,
       card_games: {
@@ -78,9 +78,9 @@ export const gamesReducer = createReducer(initialState,
       message: messages.loadMoreGamesSuccess
     })),
   //LOAD POPULAR GAMES
-  on(authActions.loadPopularGamesSuccess, (state, { page }) => ({ ...state, popular_games: page })),
-  on(authActions.loadMorePopularGames, (state, { page }) => ({ ...state, message: messages.loadingMessage })),
-  on(authActions.loadMorePopularGamesSuccess, (state, { page }) => (
+  on(gamesActions.loadPopularGamesSuccess, (state, { page }) => ({ ...state, popular_games: page })),
+  on(gamesActions.loadMorePopularGames, (state, { page }) => ({ ...state, message: messages.loadingMessage })),
+  on(gamesActions.loadMorePopularGamesSuccess, (state, { page }) => (
     {
       ...state,
       popular_games: {
@@ -90,9 +90,9 @@ export const gamesReducer = createReducer(initialState,
       message: messages.loadMoreGamesSuccess
     })),
   //LOAD QUICK GAMES
-  on(authActions.loadQuickGamesSuccess, (state, { page }) => ({ ...state, quick_games: page })),
-  on(authActions.loadMoreQuickGames, (state, { page }) => ({ ...state, message: messages.loadingMessage })),
-  on(authActions.loadMoreQuickGamesSuccess, (state, { page }) => (
+  on(gamesActions.loadQuickGamesSuccess, (state, { page }) => ({ ...state, quick_games: page })),
+  on(gamesActions.loadMoreQuickGames, (state, { page }) => ({ ...state, message: messages.loadingMessage })),
+  on(gamesActions.loadMoreQuickGamesSuccess, (state, { page }) => (
     {
       ...state,
       quick_games: {
@@ -102,8 +102,8 @@ export const gamesReducer = createReducer(initialState,
       message: messages.loadMoreGamesSuccess
     })),
   //LOAD FILTERED GAMES
-  on(authActions.loadFilteredGames, (state, { filter }) => ({ ...state, filter: filter, message: messages.loadingMessage })),
-  on(authActions.loadFilteredGamesSuccess, (state, { page }) => {
+  on(gamesActions.loadFilteredGames, (state, { filter }) => ({ ...state, filter: filter, message: messages.loadingMessage })),
+  on(gamesActions.loadFilteredGamesSuccess, (state, { page }) => {
     if (page != null) {
       return {
         ...state,
@@ -123,13 +123,13 @@ export const gamesReducer = createReducer(initialState,
       }
     }
   }),
-  on(authActions.loadFilteredGamesFail, (state, { error }) => (
+  on(gamesActions.loadFilteredGamesFail, (state, { error }) => (
     {
       ...state,
       message: messages.errorMessage
     })),
-  on(authActions.loadMoreFilteredGames, (state, { page }) => ({ ...state, message: messages.loadingMessage })),
-  on(authActions.loadMoreFilteredGamesSuccess, (state, { page }) => {
+  on(gamesActions.loadMoreFilteredGames, (state, { page }) => ({ ...state, message: messages.loadingMessage })),
+  on(gamesActions.loadMoreFilteredGamesSuccess, (state, { page }) => {
     if (page != null) {
       return {
         ...state,
@@ -149,13 +149,13 @@ export const gamesReducer = createReducer(initialState,
       }
     }
   }),
-  on(authActions.loadMoreCardGamesFail, (state, { error }) => (
+  on(gamesActions.loadMoreCardGamesFail, (state, { error }) => (
     {
       ...state,
       message: messages.errorMessage
     })),
 
-  on(authActions.unSetFilteredGames, (state) => ({
+  on(gamesActions.unSetFilteredGames, (state) => ({
     ...state,
     filter: {
       genders: [],
@@ -165,8 +165,39 @@ export const gamesReducer = createReducer(initialState,
     },
     search_results_games: null,
   })),
-  on(authActions.unSetFilteredResultsGames, (state) => ({
+  on(gamesActions.unSetFilteredResultsGames, (state) => ({
     ...state,
     search_results_games: null,
+  })),
+
+  //update
+  on(gamesActions.updateGame, (state, { game }) => ({
+    ...state,
+    message: messages.loadingMessage
+  })),
+  on(gamesActions.updateGameSuccess, (state, { game }) => {
+    return {
+      ...state,
+      message: { ...messages.updateGameSuccess }
+    }
+  }),
+  on(gamesActions.createGameFail, (state, { error }) => ({
+    ...state,
+    message: messages.errorMessage
+  })),
+  //delete
+  on(gamesActions.deleteGame, (state, { game }) => ({
+    ...state,
+    message: messages.loadingMessage
+  })),
+  on(gamesActions.deleteGameSuccess, (state, { game }) => {
+    return {
+      ...state,
+      message: { ...messages.deleteGameSuccess }
+    }
+  }),
+  on(gamesActions.deleteGameFail, (state, { error }) => ({
+    ...state,
+    message: messages.errorMessage
   })),
 );

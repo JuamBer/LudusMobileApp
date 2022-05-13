@@ -115,3 +115,24 @@ export const loadMoreGamesSuccess: Message = {
   color: "success",
   type: Type.LOAD_MORE_GAMES_SUCCESS
 }
+
+//GAMES
+export const createGameSuccess: Message = {
+  text: "¡ Juegos Publicado Con Éxito !",
+  icon: "information-circle-outline",
+  color: "success",
+  type: Type.CREATE_GAME_SUCCESS
+}
+export const updateGameSuccess: Message = {
+  text: "¡ Juego Actualizado Con Éxito !",
+  icon: "information-circle-outline",
+  color: "success",
+  type: Type.UPDATE_GAME_SUCCESS
+}
+export const deleteGameSuccess: Message = {
+  text: "¡ Juego Eliminado Con Éxito !",
+  icon: "information-circle-outline",
+  color: "success",
+  type: Type.DELETE_GAME_SUCCESS
+}
+
