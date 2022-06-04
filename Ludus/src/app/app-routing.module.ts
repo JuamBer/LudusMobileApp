@@ -6,8 +6,8 @@ import { AngularFireAuthGuard, hasCustomClaim, redirectUnauthorizedTo, redirectL
 //ENVIRONMENTS
 import { environment } from 'src/environments/environment';
 
-const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo([environment.routes.login]);
-const redirectLoggedInToToHome = () => redirectLoggedInTo([environment.routes.home]);
+const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo([environment.routes.home]);
+const redirectLoggedInToToHome = () => redirectLoggedInTo([environment.routes.favs]);
 
 
 const routes: Routes = [

@@ -56,7 +56,7 @@ export class AppComponent implements OnInit, OnDestroy{
 
           switch (message.type) {
             case Type.LOGIN_SUCCESS:
-              this.router.navigate([environment.routes.admin_add_game])
+              this.router.navigate([environment.routes.favs])
               break;
             case Type.LOGIN_ERROR:
               this.router.navigate([environment.routes.login])

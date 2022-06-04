@@ -19,7 +19,6 @@ export class FavsPage implements OnInit, OnDestroy {
 
   user: User;
   suscriptions: Subscription[] = [];
-  ids_favs_games$: Observable<string[]> = this.store.select(store => store.auth.user.favs_games);
 
   constructor(
     private store: Store<AppState>

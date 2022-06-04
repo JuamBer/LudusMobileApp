@@ -65,7 +65,7 @@ export class AuthEffects {
     this.actions$.pipe(
       ofType(authActions.loginUserWithGoogle),
       mergeMap(res =>
-        this.authService.loginWithGoogle().then(
+        this.authService.googleLogin().then(
           (res: any) => {
             const userLogged: User = {
               id: res.user.uid,
@@ -204,6 +204,7 @@ export class AuthEffects {
         return from(this.userService.deleteGame(action.id_user, action.game))
           .pipe(
             map((res) => authActions.deleteGameSuccess({ id_user: action.id_user, game: action.game })),
+            map((res) => authActions.removeGameToFavs({ id_user: action.id_user, game: action.game })),
             catchError(err => of(authActions.deleteGameFail({ error: err })))
           )
       }

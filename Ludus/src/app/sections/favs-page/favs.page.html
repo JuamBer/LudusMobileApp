@@ -1,7 +1,7 @@
 
 <ion-content [fullscreen]="true">
   <div class="favs">
-    <app-grid-game-list [type]="'favs'" [title]="'Juegos Guardados'" [ids_games]="ids_favs_games$ | async">
+    <app-grid-game-list [type]="'favs'" [title]="'Juegos Guardados'" [ids_games]="user.favs_games">
     </app-grid-game-list>
   </div>
 </ion-content>

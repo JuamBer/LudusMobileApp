@@ -37,6 +37,40 @@ export class AuthService {
     return await this.auth.signOut();
   }
 
+  async googleLogin(): Promise<any> {
+    try {
+      const provider = new firebase.auth.GoogleAuthProvider();
+
+      await firebase.auth().signInWithRedirect(provider).then(async () => {
+        await firebase.auth().getRedirectResult().then(result => {
+          const user: User = {
+            id: result.user.uid,
+            name: result.user.displayName,
+            email: result.user.email,
+            favs_games: []
+          };
+
+          this.firestore.collection(environment.db_tables.users).doc(user.id).get().toPromise().then(
+            (res) => {
+              if (!res.exists) {
+                this.updateMyUserTable(user);
+              }
+            }
+          ).catch(err => console.error(err))
+
+          console.log(user);
+
+          return result;
+        }).catch(function (error) {
+          console.log(error.message);
+          return error;
+        });
+      });
+    } catch (error) {
+      return error
+    }
+  }
+
   async loginWithGoogle() {
     return await this.authWithGoogle(new GoogleAuthProvider());
   }
