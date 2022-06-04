@@ -65,7 +65,7 @@ export class AuthEffects {
     this.actions$.pipe(
       ofType(authActions.loginUserWithGoogle),
       mergeMap(res =>
-        this.authService.googleLogin().then(
+        this.authService.loginWithGoogle().then(
           (res: any) => {
             const userLogged: User = {
               id: res.user.uid,
