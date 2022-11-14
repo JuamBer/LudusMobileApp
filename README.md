@@ -1,5 +1,6 @@
 # Ludus Chatarum Mobile App
 
+## Descargar -  [Play Store](https://play.google.com/store/apps/details?id=ludus.es&gl=ES)
 
 ## Tecnologías 🚀
 
